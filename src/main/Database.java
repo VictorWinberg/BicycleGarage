@@ -13,7 +13,7 @@ public class Database {
 
 	private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private final String DB_URL = "jdbc:mysql://sql4.freesqldatabase.com:3306/sql474777";
-
+	
 	private final String USER = "sql474777";
 	private final String PASS = "cS9!pG3*";
 
@@ -65,11 +65,11 @@ public class Database {
 		stmt.executeUpdate(sql);
 	}
 
-	public void insert(String name, String mail) throws SQLException {
+	public void insert(String name, String mail, String table) throws SQLException {
 		if (find(name) != -1) {
 			System.out.println(name + " finns redan.");
 		} else {
-			String sql = "INSERT INTO users (id, name, mail) "
+			String sql = "INSERT INTO " + table + " (id, name, mail) "
 					+ "VALUES (default, '" + name + "', '" + mail + "')";
 			stmt.executeUpdate(sql);
 			System.out.println(name + " med mail " + mail + " tillagd");
@@ -143,14 +143,19 @@ public class Database {
 
 //			db.update("INSERT INTO UsersOfAnton (id, first, age) "
 //					+ "VALUES (2, 'AntonPlz', 1337)");
-			db.update("DROP TABLE ANTONS");
+//			db.update("DROP TABLE ANTONS");
 
-//			db.query("SELECT * FROM UsersOfAnton");
-//			db.extract();
+//			db.update("CREATE TABLE users2nd AS "
+//					+ "SELECT * "
+//					+ "FROM users");
+			db.query("SELECT * FROM users2nd");
+			db.extract();
 
 			// db.execute("SELECT * FROM users");
 			// db.extract();
-			// db.insert("Emma", "mail");
+			
+//			db.query("SELECT * FROM users2nd");
+//			db.extract();
 			// db.execute("SELECT * FROM users");
 			// db.extract();
 			// db.remove("Emma");
@@ -160,13 +165,16 @@ public class Database {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				db.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
+		
+//		for (int i = 0; i < 3000; i++) {
+//			try {
+//				db.query("SELECT * FROM users2nd");
+//				db.insert("Emma" + i, "mail", "users2nd");
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}				
+//		}
 		System.out.println("Klart.");
 	}
 }
