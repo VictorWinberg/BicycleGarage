@@ -1,0 +1,21 @@
+Jag har två tables i en databas
+users:
+id | name | mail
+1 | Victor | victor@swag.com
+2 | Catta | catta@plz.help
+3 | Anton | anton@fuck.me
+cyklar:
+id | barcode
+2 | 001234
+1 | 120245
+2 | 493223
+Hur får jag ut:
+User: Catta
+har cyklar: Blå, Rosa
+
+
+"SELECT id FROM users WHERE name = Catta|mail = Catta"
+
+int userid = ...id ovan
+
+"SELECT barcode FROM cyklar WHERE id = userid"

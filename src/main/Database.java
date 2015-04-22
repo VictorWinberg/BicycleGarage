@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 public class Database {
 
@@ -20,125 +22,151 @@ public class Database {
 	private PreparedStatement prepstmt = null;
 	private ResultSet rs = null;
 
-	public Database() {
-		try {
-			// Registrera JBDC drivrutin
-			Class.forName(JDBC_DRIVER);
+	private String sql;
 
-			// Anslut
-			System.out.println("Ansluter till databas " + DB_URL);
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	public Database() throws ClassNotFoundException, SQLException {
+		// Registrera JBDC drivrutin
+		Class.forName(JDBC_DRIVER);
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		// Anslut
+		System.out.println("Ansluter till databas " + DB_URL);
+		conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+		// Villkorssats
+		System.out.println("Skapar villkorssats...");
+		stmt = conn.createStatement();
+
 	}
 
-	public void readDB(String sql) {
-		try {
-			// Exekverar villkorssats
-			System.out.println("Skapar villkorssats...");
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void createUserTable(String named) throws SQLException {
+		System.out.println("Skapar användartabell...");
+		sql = "CREATE TABLE " + named + " (id INTEGER not NULL, "
+				+ " first VARCHAR(255), " + " last VARCHAR(255), "
+				+ " age INTEGER, " + " PRIMARY KEY ( id ))";
+
+		stmt.executeUpdate(sql);
 	}
 
-	public void insert(String name, String mail) {
+	public void createBicyclesTable(String named) throws SQLException {
+		System.out.println("Skapar cykeltabell...");
+		sql = "CREATE TABLE " + named + " (id INTEGER not NULL, "
+				+ " first VARCHAR(255), " + " last VARCHAR(255), "
+				+ " age INTEGER, " + " PRIMARY KEY ( id ))";
+		stmt.executeQuery(sql);
+	}
+
+	public void query(String sql) throws SQLException {
+		// Exekverar sql-query
+		rs = stmt.executeQuery(sql);
+	}
+	
+	public void update(String sql) throws SQLException {
+		// Exekverar sql-update
+		stmt.executeUpdate(sql);
+	}
+
+	public void insert(String name, String mail) throws SQLException {
 		if (find(name) != -1) {
 			System.out.println(name + " finns redan.");
 		} else {
 			String sql = "INSERT INTO users (id, name, mail) "
 					+ "VALUES (default, '" + name + "', '" + mail + "')";
-			try {
-				stmt.executeUpdate(sql);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			stmt.executeUpdate(sql);
+			System.out.println(name + " med mail " + mail + " tillagd");
 		}
 	}
 
-	public boolean remove(String name) {
+	public boolean remove(String name) throws SQLException {
 		System.out.println("Försöker ta bort " + name);
 		int id = find(name);
 		if (id == -1) {
 			System.out.println("Hittas ej");
 			return false;
 		}
-		String sql = "DELETE FROM users " + "WHERE id = " + id;
-		try {
-			stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		sql = "DELETE FROM users " + "WHERE id = " + id;
+		stmt.executeUpdate(sql);
 		System.out.println(name + " med id " + id + " är borttagen.");
 		return true;
 	}
 
-	private int find(String name) {
+	private int find(String name) throws SQLException {
 		// Hitta användare och retunera id
 		int i = -1;
-		try {
-			while (rs.next()) {
-				// Hämta kolumnnamn
-				String rsname = rs.getString("name");
-				if (name.equals(rsname))
-					i = rs.getInt("id");
-			}
-			rs.beforeFirst();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		while (rs.next()) {
+			// Hämta kolumnnamn
+			String rsname = rs.getString("name");
+			if (name.equals(rsname))
+				i = rs.getInt("id");
 		}
+		rs.beforeFirst();
 		return i;
 	}
 
-	public void extract() {
-		try {
-			// Hämta data från resultat
-			while (rs.next()) {
-				// Hämta kolumnnamn
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String mail = rs.getString("mail");
+	public void extract() throws SQLException {
+		// Hämta data från resultat
+		while (rs.next()) {
+			ResultSetMetaData rsmd = rs.getMetaData();
+			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+				if (i > 1) {
+					System.out.print(" | ");
+				}
 
-				// Visa värden
-				System.out.print("ID: " + id);
-				System.out.print(", Name: " + name);
-				System.out.println(", Mail: " + mail);
+				int type = rsmd.getColumnType(i);
+				if (type == Types.VARCHAR || type == Types.CHAR) {
+					System.out.print(rs.getString(i));
+				} else {
+					System.out.print(rs.getLong(i));
+				}
 			}
-			rs.beforeFirst();
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+			System.out.println();
 		}
+		rs.beforeFirst();
 	}
 
-	public void close() {
-		try {
-			if (rs != null)
-				rs.close();
-			if (stmt != null)
-				stmt.close();
-			if (conn != null)
-				conn.close();
-			System.out.println("Resultatuppställning, villkorssats och anslutning stängd");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void close() throws SQLException {
+		if (rs != null)
+			rs.close();
+		if (stmt != null)
+			stmt.close();
+		if (conn != null)
+			conn.close();
+		System.out.println("ResultatSet, villkorssats och anslutning stängd");
 	}
 
 	public static void main(String[] args) {
-		Database db = new Database();
-		db.readDB("SELECT * FROM users");
-		db.extract();
-		db.insert("Emma", "mail");
-		db.remove("Emma");
-		db.readDB("SELECT * FROM users");
-		db.extract();
-//		db.close();
+		Database db = null;
+		try {
+			db = new Database();
 
+//			db.createUserTable("UsersOfAnton");
+
+//			db.update("INSERT INTO UsersOfAnton (id, first, age) "
+//					+ "VALUES (2, 'AntonPlz', 1337)");
+			db.update("DROP TABLE ANTONS");
+
+//			db.query("SELECT * FROM UsersOfAnton");
+//			db.extract();
+
+			// db.execute("SELECT * FROM users");
+			// db.extract();
+			// db.insert("Emma", "mail");
+			// db.execute("SELECT * FROM users");
+			// db.extract();
+			// db.remove("Emma");
+			// db.execute("SELECT * FROM users");
+			// db.extract();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				db.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		System.out.println("Klart.");
 	}
 }
