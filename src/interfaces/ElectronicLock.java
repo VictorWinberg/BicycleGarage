@@ -2,6 +2,6 @@ package interfaces;
 
 public interface ElectronicLock {
 	
-	/* Öppnar låset i timeOpen sekunder. */
+	/* Ã–ppnar lÃ¥set i timeOpen sekunder. */
 	public void open(int timeOpen);
 }

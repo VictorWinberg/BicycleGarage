@@ -1,4 +1,4 @@
-Jag har två tables i en databas
+Jag har tvÃ¥ tables i en databas
 users:
 id | name | mail
 1 | Victor | victor@swag.com
@@ -9,9 +9,9 @@ id | barcode
 2 | 001234
 1 | 120245
 2 | 493223
-Hur får jag ut:
+Hur fÃ¥r jag ut:
 User: Catta
-har cyklar: Blå, Rosa
+har cyklar: BlÃ¥, Rosa
 
 
 "SELECT id FROM users WHERE name = Catta|mail = Catta"

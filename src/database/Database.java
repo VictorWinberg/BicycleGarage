@@ -39,7 +39,7 @@ public class Database {
 	}
 
 	public void createUserTable(String named) throws SQLException {
-		System.out.println("Skapar användartabell...");
+		System.out.println("Skapar anvÃ¤ndartabell...");
 		sql = "CREATE TABLE " + named + " (id INTEGER not NULL, "
 				+ " first VARCHAR(255), " + " last VARCHAR(255), "
 				+ " age INTEGER, " + " PRIMARY KEY ( id ))";
@@ -77,7 +77,7 @@ public class Database {
 	}
 
 	public boolean remove(String name) throws SQLException {
-		System.out.println("Försöker ta bort " + name);
+		System.out.println("FÃ¶rsÃ¶ker ta bort " + name);
 		int id = find(name);
 		if (id == -1) {
 			System.out.println("Hittas ej");
@@ -85,15 +85,15 @@ public class Database {
 		}
 		sql = "DELETE FROM users " + "WHERE id = " + id;
 		stmt.executeUpdate(sql);
-		System.out.println(name + " med id " + id + " är borttagen.");
+		System.out.println(name + " med id " + id + " Ã¤r borttagen.");
 		return true;
 	}
 
 	private int find(String name) throws SQLException {
-		// Hitta användare och retunera id
+		// Hitta anvÃ¤ndare och retunera id
 		int i = -1;
 		while (rs.next()) {
-			// Hämta kolumnnamn
+			// HÃ¤mta kolumnnamn
 			String rsname = rs.getString("name");
 			if (name.equals(rsname))
 				i = rs.getInt("id");
@@ -103,7 +103,7 @@ public class Database {
 	}
 
 	public void extract() throws SQLException {
-		// Hämta data från resultat
+		// HÃ¤mta data frÃ¥n resultat
 		while (rs.next()) {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
@@ -131,7 +131,7 @@ public class Database {
 			stmt.close();
 		if (conn != null)
 			conn.close();
-		System.out.println("ResultatSet, villkorssats och anslutning stängd");
+		System.out.println("ResultatSet, villkorssats och anslutning stÃ¤ngd");
 	}
 
 	public static void main(String[] args) {

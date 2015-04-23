@@ -1,11 +1,11 @@
 package testdrivers;
 
 /**
- * Denna klass simulerar en streckkodsläsare vid entrédörren.
- * Den kan användas när BicycleGarageManager testas.
+ * Denna klass simulerar en streckkodslÃ¤sare vid entrÃ©dÃ¶rren.
+Â * Den kan anvÃ¤ndas nÃ¤r BicycleGarageManager testas.
  * 
  * @version 1.0
- * @author Martin Höst 
+ * @author Martin HÃ¶st 
  */
 public class BarcodeReaderEntryTestDriver extends BarcodeReaderTestDriver {
 	

@@ -1,8 +1,8 @@
 package testdrivers;
 
 /**
- * Denna klass simulerar en streckkodsläsare vid cykelutgången.
- * Den kan användas när BicycleGarageManager testas.
+ * Denna klass simulerar en streckkodslÃ¤sare vid cykelutgÃ¥ngen.
+Â * Den kan anvÃ¤ndas nÃ¤r BicycleGarageManager testas.
  * 
  * @version 1.0
  * @author Martin Host 

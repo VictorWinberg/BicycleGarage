@@ -6,10 +6,10 @@ import javax.swing.*;
 
 /**
  * Denna klass simulerar en streckkodsskrivare.
- * Den kan användas när BicycleGarageManager testas.
+Â * Den kan anvÃ¤ndas nÃ¤r BicycleGarageManager testas.
  * 
  * @version 1.1
- * @author Martin Höst 
+ * @author Martin HÃ¶st 
  */
 public class BarcodePrinterTestDriver implements BarcodePrinter {
 
@@ -35,7 +35,7 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 	
 	/**
 	 * Skriver ut ett bicycleID som en streckkod.
-	 * @param BicycleID en sträng med 5 tecken, varje tecken kan vara '0', '1', ... "9".
+	 * @param BicycleID en strÃ¤ng med 5 tecken, varje tecken kan vara '0', '1', ... "9".
 	 */
 	public void printBarcode(String bicycleID) {
 		textArea.append("Event " + ++serialNr + ": Printing " + bicycleID + "\n");

@@ -14,11 +14,11 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 
 /**
- * Detta är en abstrakt klass som representerar de gemensamma delarna för alla
- * streckkodsläsare.
+ * Detta Ã¤r en abstrakt klass som representerar de gemensamma delarna fÃ¶r alla
+Â * streckkodslÃ¤sare.
  * 
  * @version 1.0
- * @author Martin Höst 
+ * @author Martin HÃ¶st 
  */
 abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionListener {
 	
@@ -28,9 +28,9 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionLi
 	private JButton scanButton;
 	
 	/**
-	* Registrerar cykelgarage manager så att streckkodsläsaren
-	* vet vilken manager som ska anropas när en användare har 
-	* använt läsaren.
+	* Registrerar cykelgarage manager sÃ¥ att streckkodslÃ¤saren
+	* vet vilken manager som ska anropas nÃ¤r en anvÃ¤ndare har 
+	* anvÃ¤nt lÃ¤saren.
 	* @param manager Cykelgarage manager
 	*/
 	public void register(BicycleGarageManager manager) {
@@ -39,7 +39,7 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionLi
 	
 	/** 
 	 * Skapar en BarcodeReaderTestDriver.
-	 * @param WindowName text som ska skrivas i fönstert.
+	 * @param WindowName text som ska skrivas i fÃ¶nstert.
 	 */
 	public BarcodeReaderTestDriver(String windowName) {
 		frame = new JFrame(windowName);
@@ -63,13 +63,13 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionLi
 	
 	/**
 	 * Denna abstrakta metod implementeras av underklasser.
-	 * Subklasser kallar antingen på managerns entryBarcode
+	 * Subklasser kallar antingen pÃ¥ managerns entryBarcode
 	 * eller exitBarcode.
 	 * @param Kod den skannade koden. */
 	abstract void informManager(String code);
 	
 	/**
-	 * Hanterar den händelse när "scan-knappen" trycks.
+	 * Hanterar den hÃ¤ndelse nÃ¤r "scan-knappen" trycks.
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String code = scannedCode.getText();

@@ -14,10 +14,10 @@ import main.BicycleGarageManager;
 
 /**
  * Denna klass simulerar en pinkodsterminal.
- * Den kan användas när BicycleGarageManager testas.
+Â * Den kan anvÃ¤ndas nÃ¤r BicycleGarageManager testas.
  * 
  * @version 1.0
- * @author Martin Höst 
+ * @author Martin HÃ¶st 
  */
 public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListener {
 	
@@ -27,8 +27,8 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	private Timer redTimer, greenTimer;
 
 	/**
-	 * Registrerar cykelgarage manager så att pinkodsterminalen
-	 * vet vilken manager som ska anropas när en användare har
+	 * Registrerar cykelgarage manager sÃ¥ att pinkodsterminalen
+	 * vet vilken manager som ska anropas nÃ¤r en anvÃ¤ndare har
 	 * tryckt en tangent.
 	 * @param manager cykelgarage manager
 	 */
@@ -37,9 +37,9 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	}
 
 	/** 
-	 * Slå på LED i lightTime sekunder.
+	 * SlÃ¥ pÃ¥ LED i lightTime sekunder.
 	 * @param colour PinCodeTerminal.RED_LED eller PinCodeTerminal.GREEN_LED 
-	 * @param lightTime Slå på LED i lightTime sekunder
+	 * @param lightTime SlÃ¥ pÃ¥ LED i lightTime sekunder
 	 */
 	public void lightLED(int colour, int lightTime) {
 		try {
@@ -104,7 +104,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	}
 
 	/** 
-	 * Hanterar händelser när en knapp har tryckts.
+	 * Hanterar hÃ¤ndelser nÃ¤r en knapp har tryckts.
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String theActionCommand = e.getActionCommand();
