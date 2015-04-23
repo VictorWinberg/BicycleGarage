@@ -1,5 +1,3 @@
-//TEST
-
 package interfaces;
 
 public interface BarcodePrinter {
