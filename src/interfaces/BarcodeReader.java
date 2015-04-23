@@ -4,9 +4,8 @@ import main.BicycleGarageManager;
 
 public interface BarcodeReader {
 	
-	/* Register bicycle garage manager so that the bar code
-	 * reader knows which manager to call when a user has used 
-	 * the reader. 
-	 */
+	/* Registrera cykelgarage manager så att strecksläsaren
+	* vet vilken manager som ska anropas när en användare har 
+	* använt läsaren. */
 	public void register(BicycleGarageManager manager);	
 }

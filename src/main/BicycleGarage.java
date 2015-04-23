@@ -6,8 +6,8 @@ import interfaces.*;
 public class BicycleGarage {
     public BicycleGarage() {
         BicycleGarageManager manager = new BicycleGarageManager();
-        ElectronicLock entryLock = new ElectronicLockTestDriver("Entry lock");
-        ElectronicLock exitLock = new ElectronicLockTestDriver("Exit lock");
+        ElectronicLock entryLock = new ElectronicLockTestDriver("Entrélås");
+        ElectronicLock exitLock = new ElectronicLockTestDriver("Utgångslås");
         BarcodePrinter printer = new BarcodePrinterTestDriver();
         PinCodeTerminal terminal = new PinCodeTerminalTestDriver();
         manager.registerHardwareDrivers(printer, entryLock, exitLock, terminal);

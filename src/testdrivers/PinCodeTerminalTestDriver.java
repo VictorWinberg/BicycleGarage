@@ -13,8 +13,8 @@ import interfaces.PinCodeTerminal;
 import main.BicycleGarageManager;
 
 /**
- * This class simulates a pin code terminal. 
- * It can be used when BicycleGarageManager is tested.
+ * Denna klass simulerar en pinkodsterminal.
+ * Den kan användas när BicycleGarageManager testas.
  * 
  * @version 1.0
  * @author Martin Höst 
@@ -27,19 +27,19 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	private Timer redTimer, greenTimer;
 
 	/**
-	 * Register bicycle garage manager so that the pin code
-	 * terminal knows which manager to call when a user has 
-	 * pressed a key.
-	 * @param manager The bicycle garage manager
+	 * Registrerar cykelgarage manager så att pinkodsterminalen
+	 * vet vilken manager som ska anropas när en användare har
+	 * tryckt en tangent.
+	 * @param manager cykelgarage manager
 	 */
 	public void register(BicycleGarageManager manager) {
 		this.manager = manager;
 	}
 
 	/** 
-	 * Turn on LED for lightTime seconds.
-	 * @param colour PinCodeTerminal.RED_LED or PinCodeTerminal.GREEN_LED 
-	 * @param lightTime Turn on LED for lightTime seconds
+	 * Slå på LED i lightTime sekunder.
+	 * @param colour PinCodeTerminal.RED_LED eller PinCodeTerminal.GREEN_LED 
+	 * @param lightTime Slå på LED i lightTime sekunder
 	 */
 	public void lightLED(int colour, int lightTime) {
 		try {
@@ -60,7 +60,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	}
 	
 	/** 
-	 * Create a PinCodeTestDriver.
+	 * Skapar en PinCodeTestDriver.
 	 */
 	public PinCodeTerminalTestDriver() {
 		JFrame frame = new JFrame("Pin code terminal");
@@ -104,7 +104,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	}
 
 	/** 
-	 * Handles events when a button has been pressed.
+	 * Hanterar händelser när en knapp har tryckts.
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String theActionCommand = e.getActionCommand();

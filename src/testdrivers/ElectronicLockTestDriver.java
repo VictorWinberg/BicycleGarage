@@ -10,8 +10,8 @@ import javax.swing.Timer;
 import java.awt.event.*;
 
 /**
- * This class simulates an electronic lock. 
- * It can be used when BicycleGarageManager is tested.
+ * Denna klass simulerar ett elektroniskt lås.
+ * Den kan användas när BicycleGarageManager testas.
  * 
  * @version 1.1
  * @author Martin Host 
@@ -22,8 +22,8 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 	private Timer timer;
 	
 	/**
-	 * Create an ElectronicLockTestDriver
-	 * @param doorIdentifier a string identifying the door, e.g. "entry" or "exit"
+	 * Skapa ett ElectronicLockTestDriver
+	 * @param doorIdentifier en sträng som identifierar dörren, t.ex. "entré" eller "utgång"
 	 */
 	public ElectronicLockTestDriver(String doorIdentifier) {
 		JFrame frame = new JFrame(doorIdentifier);
@@ -45,8 +45,8 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 	}
 
 	/**
-	 *  Open the lock.
-	 *  @param timeOpen time it should be open (s) 
+	 *  Öppnar låset.
+	 *  @param timeOpen den tid det ska vara öppet (s) 
 	 */
 	public void open(int timeOpen) {
 		state.setText("OPEN");

@@ -2,8 +2,8 @@ package interfaces;
 
 public interface BarcodePrinter {
 	
-	/* Print a bicycleID as a barcode.
-	 * Bicycle ID should be a string of 5 characters, where every 
-	 * character can be '0', '1',... '9'. */
+	/* Skriver ut ett bicycleID som en streckkod.
+	* Cykel ID:t bör vara en sträng med 5 tecken, där 
+	* varje tecken kan vara '0', '1', ... "9". */
 	public void printBarcode(String bicycleID);
 }
