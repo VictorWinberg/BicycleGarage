@@ -1,11 +1,11 @@
 package testdrivers;
 
 /**
- * Denna klass simulerar en streckkodsläsare vid cykelutgången.
- * Den kan användas när BicycleGarageManager testas.
+ * Denna klass simulerar en streckkodsläsare vid cykelutgången.  * Den kan
+ * användas när BicycleGarageManager testas.
  * 
  * @version 1.0
- * @author Martin Host 
+ * @author Martin Host
  */
 public class BarcodeReaderExitTestDriver extends BarcodeReaderTestDriver {
 
@@ -13,15 +13,20 @@ public class BarcodeReaderExitTestDriver extends BarcodeReaderTestDriver {
 	 * Konstruerar en instans av BarcodeReaderExitTestDriver.
 	 */
 	public BarcodeReaderExitTestDriver() {
-		super("Exit door barcode reader");
+		super("Utgångsläsare");
 	}
 
 	/**
 	 * Implementering av abstrakt metod informManager.
+	 * 
 	 * @see Abstrakt klass BarcodeReaderTestDriver
 	 */
+	@Override
 	void informManager(String code) {
 		manager.exitBarcode(code);
 	}
-
+	
+	public static void main(String[] args) {
+		new BarcodeReaderExitTestDriver();
+	}
 }

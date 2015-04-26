@@ -2,7 +2,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -13,13 +13,13 @@ public class Database {
 
 	private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private final String DB_URL = "jdbc:mysql://sql4.freesqldatabase.com:3306/sql474777";
-	
+
 	private final String USER = "sql474777";
 	private final String PASS = "cS9!pG3*";
 
 	private Connection conn = null;
 	private Statement stmt = null;
-	private PreparedStatement prepstmt = null;
+//	private PreparedStatement prepstmt = null;
 	private ResultSet rs = null;
 
 	private String sql;
@@ -59,13 +59,14 @@ public class Database {
 		// Exekverar sql-query
 		rs = stmt.executeQuery(sql);
 	}
-	
+
 	public void update(String sql) throws SQLException {
 		// Exekverar sql-update
 		stmt.executeUpdate(sql);
 	}
 
-	public void insert(String name, String mail, String table) throws SQLException {
+	public void insert(String name, String mail, String table)
+			throws SQLException {
 		if (find(name) != -1) {
 			System.out.println(name + " finns redan.");
 		} else {
@@ -139,23 +140,23 @@ public class Database {
 		try {
 			db = new Database();
 
-//			db.createUserTable("UsersOfAnton");
+			// db.createUserTable("UsersOfAnton");
 
-//			db.update("INSERT INTO UsersOfAnton (id, first, age) "
-//					+ "VALUES (2, 'AntonPlz', 1337)");
-//			db.update("DROP TABLE ANTONS");
+			// db.update("INSERT INTO UsersOfAnton (id, first, age) "
+			// + "VALUES (2, 'AntonPlz', 1337)");
+			// db.update("DROP TABLE ANTONS");
 
-//			db.update("CREATE TABLE users2nd AS "
-//					+ "SELECT * "
-//					+ "FROM users");
+			// db.update("CREATE TABLE users2nd AS "
+			// + "SELECT * "
+			// + "FROM users");
 			db.query("SELECT * FROM users2nd");
 			db.extract();
 
 			// db.execute("SELECT * FROM users");
 			// db.extract();
-			
-//			db.query("SELECT * FROM users2nd");
-//			db.extract();
+
+			// db.query("SELECT * FROM users2nd");
+			// db.extract();
 			// db.execute("SELECT * FROM users");
 			// db.extract();
 			// db.remove("Emma");
@@ -165,16 +166,16 @@ public class Database {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} 
-		
-//		for (int i = 0; i < 3000; i++) {
-//			try {
-//				db.query("SELECT * FROM users2nd");
-//				db.insert("Emma" + i, "mail", "users2nd");
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}				
-//		}
+		}
+
+		// for (int i = 0; i < 3000; i++) {
+		// try {
+		// db.query("SELECT * FROM users2nd");
+		// db.insert("Emma" + i, "mail", "users2nd");
+		// } catch (SQLException e) {
+		// e.printStackTrace();
+		// }
+		// }
 		System.out.println("Klart.");
 	}
 }
