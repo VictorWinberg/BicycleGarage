@@ -2,7 +2,6 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -19,7 +18,6 @@ public class Database {
 
 	private Connection conn = null;
 	private Statement stmt = null;
-//	private PreparedStatement prepstmt = null;
 	private ResultSet rs = null;
 
 	private String sql;
@@ -35,23 +33,24 @@ public class Database {
 		// Villkorssats
 		System.out.println("Skapar villkorssats...");
 		stmt = conn.createStatement();
-
 	}
 
-	public void createUserTable(String named) throws SQLException {
+	public void createUserTable() throws SQLException {
 		System.out.println("Skapar användartabell...");
-		sql = "CREATE TABLE " + named + " (id INTEGER not NULL, "
-				+ " first VARCHAR(255), " + " last VARCHAR(255), "
-				+ " age INTEGER, " + " PRIMARY KEY ( id ))";
-
+		sql = "CREATE TABLE  users ("
+				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT ,"
+				+ "name VARCHAR( 25 ) NOT NULL ,"
+				+ "date DATETIME NOT NULL ,"
+				+ "PRIMARY KEY (  id ))";
 		stmt.executeUpdate(sql);
 	}
 
-	public void createBicyclesTable(String named) throws SQLException {
+	public void createBicyclesTable() throws SQLException {
 		System.out.println("Skapar cykeltabell...");
-		sql = "CREATE TABLE " + named + " (id INTEGER not NULL, "
-				+ " first VARCHAR(255), " + " last VARCHAR(255), "
-				+ " age INTEGER, " + " PRIMARY KEY ( id ))";
+		sql = "CREATE TABLE  bicycles ("
+				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT ,"
+				+ "barcode INT( 11 ) NOT NULL ,"
+				+ "PRIMARY KEY (  id ))";
 		stmt.executeQuery(sql);
 	}
 
