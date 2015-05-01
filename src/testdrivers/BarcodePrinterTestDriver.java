@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
- * Denna klass simulerar en streckkodsskrivare.  * Den kan användas när
+ * Denna klass simulerar en streckkodsskrivare. Den kan användas när
  * BicycleGarageManager testas.
  * 
  * @version 1.1

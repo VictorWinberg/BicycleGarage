@@ -1,11 +1,13 @@
 package gui.panels;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.SoftBevelBorder;
-
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
@@ -37,8 +39,13 @@ public class UserManagerPanel extends JPanel {
 				{ "Joe", "Brown", "Pool", new Integer(10), new Boolean(false) } };
 		JTable table = new JTable(data, columnNames);
 		add(table.getTableHeader(), BorderLayout.NORTH);
+		table.setEnabled(false);
+//		table.setFillsViewportHeight(true);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(manager.getWidth() - 40, manager.getHeight() - 40));
 		add(scrollPane, BorderLayout.CENTER);
-		table.setFillsViewportHeight(true);
+		JButton a = new JButton("a");
+		add(a, BorderLayout.SOUTH);
 	}
 }

@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 /**
- * Denna klass simulerar ett elektroniskt lås.  * Den kan användas när
+ * Denna klass simulerar ett elektroniskt lås. Den kan användas när
  * BicycleGarageManager testas.
  * 
  * @version 1.1

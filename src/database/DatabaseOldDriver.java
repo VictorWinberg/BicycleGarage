@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
-public class Database {
+public class DatabaseOldDriver {
 
 	private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private final String DB_URL = "jdbc:mysql://sql4.freesqldatabase.com:3306/sql474777";
@@ -22,7 +22,7 @@ public class Database {
 
 	private String sql;
 
-	public Database() throws ClassNotFoundException, SQLException {
+	public DatabaseOldDriver() throws ClassNotFoundException, SQLException {
 		// Registrera JBDC drivrutin
 		Class.forName(JDBC_DRIVER);
 
@@ -38,20 +38,30 @@ public class Database {
 	public void createUserTable() throws SQLException {
 		System.out.println("Skapar användartabell...");
 		sql = "CREATE TABLE  users ("
-				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT ,"
-				+ "name VARCHAR( 25 ) NOT NULL ,"
-				+ "date DATETIME NOT NULL ,"
-				+ "PRIMARY KEY (  id ))";
+				+ "personnr VARCHAR( 11 ) NOT NULL ,"
+				+ "first_name VARCHAR( 25 ) NOT NULL ,"
+				+ "last_name VARCHAR( 25 ) NOT NULL ,"
+				+ "mail VARCHAR( 25 ) NOT NULL ,"
+				+ "phonenr INT( 10 ) NOT NULL ,"
+				+ "pin INT( 6 ) NOT NULL ,"
+				+ "slots INT( 3 ) NOT NULL ,"
+				+ "PRIMARY KEY (  personnr ))";
 		stmt.executeUpdate(sql);
 	}
 
 	public void createBicyclesTable() throws SQLException {
 		System.out.println("Skapar cykeltabell...");
 		sql = "CREATE TABLE  bicycles ("
-				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT ,"
-				+ "barcode INT( 11 ) NOT NULL ,"
-				+ "PRIMARY KEY (  id ))";
-		stmt.executeQuery(sql);
+				+ "user_personnr VARCHAR( 11 ) NOT NULL ,"
+				+ "barcode INT( 13 ) NOT NULL ,"
+				+ "PRIMARY KEY (  user_personnr ))";
+		stmt.executeUpdate(sql);
+	}
+	
+	public void dropTable(String name) throws SQLException {
+		System.out.println("Tar bort tabellen " + name);
+		sql = "DROP TABLE " + name;
+		stmt.executeUpdate(sql);
 	}
 
 	public void query(String sql) throws SQLException {
@@ -135,10 +145,12 @@ public class Database {
 	}
 
 	public static void main(String[] args) {
-		Database db = null;
+		DatabaseOldDriver db = null;
 		try {
-			db = new Database();
+			db = new DatabaseOldDriver();
 
+//			db.dropTable("users");
+//			db.createUserTable();
 			// db.createUserTable("UsersOfAnton");
 
 			// db.update("INSERT INTO UsersOfAnton (id, first, age) "
@@ -148,7 +160,7 @@ public class Database {
 			// db.update("CREATE TABLE users2nd AS "
 			// + "SELECT * "
 			// + "FROM users");
-			db.query("SELECT * FROM users2nd");
+			db.query("SELECT * FROM users");
 			db.extract();
 
 			// db.execute("SELECT * FROM users");

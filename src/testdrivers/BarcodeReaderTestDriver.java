@@ -17,7 +17,7 @@ import main.BicycleGarageManager;
 
 /**
  * Detta är en abstrakt klass som representerar de gemensamma delarna för alla
- *  * streckkodsläsare.
+ * streckkodsläsare.
  * 
  * @version 1.0
  * @author Martin Höst

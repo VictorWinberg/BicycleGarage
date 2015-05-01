@@ -17,7 +17,7 @@ import javax.swing.Timer;
 import main.BicycleGarageManager;
 
 /**
- * Denna klass simulerar en pinkodsterminal.  * Den kan användas när
+ * Denna klass simulerar en pinkodsterminal. Den kan användas när
  * BicycleGarageManager testas.
  * 
  * @version 1.0
