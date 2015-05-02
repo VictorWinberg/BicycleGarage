@@ -9,7 +9,7 @@ import main.BicycleGarageManager;
 public class ExitButton extends JModifiedButton implements ActionListener {
 
 	public ExitButton(BicycleGarageManager manager) {
-		super("8======0");
+		super("Avsluta");
 		setToolTipText("Avslutar operatörsgränssnittet");
 		addActionListener(this);
 	}
