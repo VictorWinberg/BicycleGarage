@@ -41,6 +41,10 @@ public interface Database {
 	 * @return true ifall cykeln bicycle togs bort, annars false */
 	public boolean deleteBicycle(Bicycle bicycle);
 	
+	/** Hämtar en specifik användare med input
+	 * @return User användare */
+	public User getUser(String input);
+	
 	/** Hämtar alla användare till ett ResultSet
 	 * @return ResultSet med användare */
 	public ResultSet extractUsers();

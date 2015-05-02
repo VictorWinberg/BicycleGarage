@@ -25,7 +25,7 @@ public class DatabaseDriver implements Database {
 	private String sql;
 
 	public DatabaseDriver() throws ClassNotFoundException, SQLException {
-		// Registrera JBDC drivrutin
+		// Registrera JDBC drivrutin
 		Class.forName(JDBC_DRIVER);
 
 		// Anslut
@@ -49,8 +49,10 @@ public class DatabaseDriver implements Database {
 				+ "first_name VARCHAR( 25 ) NOT NULL ,"
 				+ "last_name VARCHAR( 25 ) NOT NULL ,"
 				+ "mail VARCHAR( 25 ) NOT NULL ,"
-				+ "phonenr INT( 10 ) NOT NULL ,"
-				+ "pin INT( 6 ) NOT NULL ,"
+				+ "phonenr VARCHAR( 10 ) NOT NULL ,"
+				+ "pin VARCHAR( 6 ) NOT NULL ,"
+				+ "reservedSlots INT ( 4 ) NOT NULL ,"
+				+ "freeSlots INT ( 4 ) NOT NULL ,"
 				+ "PRIMARY KEY (  personnr ))";
 		try {
 			stmt.executeUpdate(sql);
@@ -108,15 +110,17 @@ public class DatabaseDriver implements Database {
 			+ "'" + user.getFirstName() + "', "
 			+ "'" + user.getLastName() + "', "
 			+ "'" + user.getMail() + "', "
-			+ user.getPhonenr() + ", "
-			+ user.getPIN() + ", "
+			+ "'" + user.getPhonenr() + "', "
+			+ "'" + user.getPIN() + "', "
+			+ user.getReserverdSlots() + ", "
+			+ user.getFreeSlots()
 			+ ")";
 		try {
 			stmt.executeUpdate(sql);
 			System.out.println("tillagd.");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("inte tillagd, finns redan.");
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -125,6 +129,19 @@ public class DatabaseDriver implements Database {
 	public boolean deleteUser(User user) {
 		System.out.print("Användare " + user.getFirstName() + " ");
 		sql = "DELETE FROM users WHERE personnr = '" + user.getPersonnr() + "'";
+		try {
+			stmt.executeUpdate(sql);
+			System.out.println("borttagen.");
+			return true;
+		} catch (SQLException e) {
+			System.out.println("inte borttagen, finns inte.");
+			return false;
+		}
+	}
+	
+	public boolean deleteUser(String personnr) {
+		System.out.print("Användare med personnummer " + personnr + " ");
+		sql = "DELETE FROM users WHERE personnr = '" + personnr + "'";
 		try {
 			stmt.executeUpdate(sql);
 			System.out.println("borttagen.");
@@ -146,6 +163,57 @@ public class DatabaseDriver implements Database {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public User getUser(String personnr) {
+		User user = null;
+		ResultSet rs = extractUsers();
+		try {
+			while (rs.next()) {
+				if(rs.getString(1).equals(personnr)) {
+					user = new User(rs.getString(1), 
+							rs.getString(2), 
+							rs.getString(3), 
+							rs.getString(4), 
+							rs.getString(5), 
+							rs.getString(6), 
+							rs.getInt(7), 
+							rs.getInt(8));
+					rs.beforeFirst();
+					return user;
+				}
+			}
+			rs.beforeFirst();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	public User getUserWithPIN(String pin) {
+		User user = null;
+		ResultSet rs = extractUsers();
+		try {
+			while (rs.next()) {
+				if(rs.getString(6).equals(pin)) {
+					user = new User(rs.getString(1), 
+							rs.getString(2), 
+							rs.getString(3), 
+							rs.getString(4), 
+							rs.getString(5), 
+							rs.getString(6), 
+							rs.getInt(7), 
+							rs.getInt(8));
+					rs.beforeFirst();
+					return user;
+				}
+			}
+			rs.beforeFirst();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 
 	@Override
 	public ResultSet extractUsers() {
@@ -160,8 +228,13 @@ public class DatabaseDriver implements Database {
 
 	@Override
 	public ResultSet extractBicycles() {
-		// TODO Auto-generated method stub
-		return null;
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("SELECT * FROM bicycles");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	
 	public static void main(String[] args) {
@@ -169,12 +242,23 @@ public class DatabaseDriver implements Database {
 		try {
 			db = new DatabaseDriver();
 		} catch (ClassNotFoundException e) {
-			System.out.println("JBDC drivrutin hittades ej");
+			System.out.println("JDBC drivrutin hittades ej");
 		} catch (SQLException e) {
 			System.out.println("Gick ej att ansluta till databas");
 		}
-		User victor = new User("950407-1337", "Victor", "Winberg", "cool@swag.com", "0707133700");
-		db.insertUser(victor);
+//		db.dropTables();
+//		db.createTables();
+		
+		User u = db.getUserWithPIN("754532");
+		if(u != null){
+			System.out.println(u.toString());
+//			db.deleteUser(u);
+		} else System.out.println("User not found");
+		
+//		User victor = new User("950407-1337", "Victor", "Winberg", "cool@swag.com", "0707133700");
+//		victor.generatePIN();
+//		db.insertUser(victor);
+		
 		ResultSet rs = db.extractUsers();
 		if(rs != null) {
 			try {
@@ -204,6 +288,5 @@ public class DatabaseDriver implements Database {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 }
