@@ -39,7 +39,7 @@ public class UserManagerPanel extends JPanel {
 				{ "Joe", "Brown", "Pool", new Integer(10), new Boolean(false) } };
 		JTable table = new JTable(data, columnNames);
 		add(table.getTableHeader(), BorderLayout.NORTH);
-		table.setEnabled(false);
+//		table.setEnabled(false);
 //		table.setFillsViewportHeight(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		JScrollPane scrollPane = new JScrollPane(table);

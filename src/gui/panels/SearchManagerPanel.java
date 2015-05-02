@@ -7,9 +7,9 @@ import javax.swing.border.SoftBevelBorder;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class VacancyManagerPanel extends JPanel {
+public class SearchManagerPanel extends JPanel {
 
-	public VacancyManagerPanel(BicycleGarageManager manager) {
+	public SearchManagerPanel(BicycleGarageManager manager) {
 		setBorder(new SoftBevelBorder(1));
 		add(new JLabel("Hantera platser osv."));
 	}

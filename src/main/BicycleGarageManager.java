@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class BicycleGarageManager extends JFrame {
 
 	private NavigationPanel navPanel;
-	private JPanel panel, mainPanel, userPanel, bicyclePanel, vacancyPanel;
+	private JPanel panel, mainPanel, userPanel, bicyclePanel, searchPanel;
 
 	public BicycleGarageManager() {
 		super("Operatörsgränssnittet");
@@ -29,7 +29,7 @@ public class BicycleGarageManager extends JFrame {
 		mainPanel = new MainManagerPanel(this);
 		userPanel = new UserManagerPanel(this);
 		bicyclePanel = new BicycleManagerPanel(this);
-		vacancyPanel = new VacancyManagerPanel(this);
+		searchPanel = new SearchManagerPanel(this);
 
 		changeState(ViewState.START_STATE);
 
@@ -56,8 +56,8 @@ public class BicycleGarageManager extends JFrame {
 			panel.add(bicyclePanel);
 			navPanel.setTitle("Cyklelpanel");
 			break;
-		case VACANCY_STATE:
-			panel.add(vacancyPanel);
+		case SEARCH_STATE:
+			panel.add(searchPanel);
 			navPanel.setTitle("Platspanel");
 			break;
 		}

@@ -22,6 +22,6 @@ public class VacancyManagerButton extends JModifiedButton implements
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.changeState(ViewState.VACANCY_STATE);
+		manager.changeState(ViewState.SEARCH_STATE);
 	}
 }

@@ -120,10 +120,10 @@
   </class>  
   <enumeration id="14" language="java" name="gui.ViewState" project="BicycleGarage" 
     file="/BicycleGarage/src/gui/ViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="350" y="58"/>    
+    <position height="-1" width="-1" x="353" y="17"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </enumeration>  
@@ -181,8 +181,8 @@
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="gui.panels.VacancyManagerPanel" project="BicycleGarage" 
-    file="/BicycleGarage/src/gui/panels/VacancyManagerPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="21" language="java" name="gui.panels.SearchManagerPanel" project="BicycleGarage" 
+    file="/BicycleGarage/src/gui/panels/SearchManagerPanel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="87" y="217"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
