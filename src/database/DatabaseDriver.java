@@ -51,7 +51,6 @@ public class DatabaseDriver implements Database {
 				+ "mail VARCHAR( 25 ) NOT NULL ,"
 				+ "phonenr INT( 10 ) NOT NULL ,"
 				+ "pin INT( 6 ) NOT NULL ,"
-				+ "slots INT( 3 ) NOT NULL ,"
 				+ "PRIMARY KEY (  personnr ))";
 		try {
 			stmt.executeUpdate(sql);
@@ -111,7 +110,6 @@ public class DatabaseDriver implements Database {
 			+ "'" + user.getMail() + "', "
 			+ user.getPhonenr() + ", "
 			+ user.getPIN() + ", "
-			+ user.getSlots()
 			+ ")";
 		try {
 			stmt.executeUpdate(sql);

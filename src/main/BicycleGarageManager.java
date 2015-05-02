@@ -58,7 +58,7 @@ public class BicycleGarageManager extends JFrame {
 			break;
 		case SEARCH_STATE:
 			panel.add(searchPanel);
-			navPanel.setTitle("Platspanel");
+			navPanel.setTitle("Sökpanel");
 			break;
 		}
 		panel.revalidate();

@@ -11,6 +11,6 @@ public class SearchManagerPanel extends JPanel {
 
 	public SearchManagerPanel(BicycleGarageManager manager) {
 		setBorder(new SoftBevelBorder(1));
-		add(new JLabel("Hantera platser osv."));
+		add(new JLabel("Asfet sökfunktion osv #SWAG."));
 	}
 }

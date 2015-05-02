@@ -8,15 +8,15 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class VacancyManagerButton extends JModifiedButton implements
+public class SearchManagerButton extends JModifiedButton implements
 		ActionListener {
 
 	private BicycleGarageManager manager;
 
-	public VacancyManagerButton(BicycleGarageManager manager) {
-		super("Platser");
+	public SearchManagerButton(BicycleGarageManager manager) {
+		super("Sök");
 		this.manager = manager;
-		setToolTipText("Hanterar platser");
+		setToolTipText("Sökfunktion");
 		addActionListener(this);
 	}
 

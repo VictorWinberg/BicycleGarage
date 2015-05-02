@@ -24,7 +24,7 @@ public class NavigationPanel extends JPanel {
 		panel.add(new MainManagerButton(manager));
 		panel.add(new UserManagerButton(manager));
 		panel.add(new BicycleManagerButton(manager));
-		panel.add(new VacancyManagerButton(manager));
+		panel.add(new SearchManagerButton(manager));
 		add(panel, BorderLayout.SOUTH);
 	}
 
