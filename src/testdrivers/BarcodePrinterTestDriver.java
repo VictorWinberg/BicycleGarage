@@ -41,7 +41,7 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 	/**
 	 * Skriver ut ett bicycleID som en streckkod.
 	 * 
-	 * @param BicycleID
+	 * @param bicycleID
 	 *            en sträng med 5 tecken, varje tecken kan vara '0', '1', ...
 	 *            "9".
 	 */

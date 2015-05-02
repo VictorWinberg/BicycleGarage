@@ -44,7 +44,7 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader,
 	/**
 	 * Skapar en BarcodeReaderTestDriver.
 	 * 
-	 * @param WindowName
+	 * @param windowName
 	 *            text som ska skrivas i fönstert.
 	 */
 	public BarcodeReaderTestDriver(String windowName) {
@@ -72,7 +72,7 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader,
 	 * Denna abstrakta metod implementeras av underklasser. Subklasser kallar
 	 * antingen på managerns entryBarcode eller exitBarcode.
 	 * 
-	 * @param Kod
+	 * @param code
 	 *            den skannade koden.
 	 */
 	abstract void informManager(String code);

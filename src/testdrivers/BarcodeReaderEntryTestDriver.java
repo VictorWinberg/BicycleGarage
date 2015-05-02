@@ -19,7 +19,7 @@ public class BarcodeReaderEntryTestDriver extends BarcodeReaderTestDriver {
 	/**
 	 * Implementering av abstrakt metod informManager.
 	 * 
-	 * @see Abstrakt klass BarcodeReaderTestDriver
+	 * @see BarcodeReaderTestDriver
 	 */
 	@Override
 	void informManager(String code) {
