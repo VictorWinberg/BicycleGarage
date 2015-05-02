@@ -10,9 +10,22 @@ import javax.swing.JTable;
 import javax.swing.border.SoftBevelBorder;
 import main.BicycleGarageManager;
 
+/**
+ * Denna panel öppnas när man klickar på “Användare” i operatörsgränssnittet och
+ * här visas en tabell på vilka användare som är registrerade i systemet. Det
+ * går även att ändra information om användare efter att man har klickat på dem.
+ * Denna klass kopplar också panelen till den cykelgaragemanager man anger.
+ *
+ */
 @SuppressWarnings("serial")
 public class UserManagerPanel extends JPanel {
 
+	/**
+	 * Skapar en användarmanagerpanel som hanterar användare
+	 * 
+	 * @param manager
+	 *            cykelgaragemanager
+	 */
 	public UserManagerPanel(BicycleGarageManager manager) {
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
@@ -39,11 +52,12 @@ public class UserManagerPanel extends JPanel {
 				{ "Joe", "Brown", "Pool", new Integer(10), new Boolean(false) } };
 		JTable table = new JTable(data, columnNames);
 		add(table.getTableHeader(), BorderLayout.NORTH);
-//		table.setEnabled(false);
-//		table.setFillsViewportHeight(true);
+		// table.setEnabled(false);
+		// table.setFillsViewportHeight(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(manager.getWidth() - 40, manager.getHeight() - 40));
+		scrollPane.setPreferredSize(new Dimension(manager.getWidth() - 40,
+				manager.getHeight() - 40));
 		add(scrollPane, BorderLayout.CENTER);
 		JButton a = new JButton("a");
 		add(a, BorderLayout.SOUTH);
