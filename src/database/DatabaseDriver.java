@@ -136,13 +136,13 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
-	public boolean insertBike(Bike bike) {
+	public boolean insertBicycle(Bicycle bicycle) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteBike(Bike bike) {
+	public boolean deleteBicycle(Bicycle bicycle) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -159,7 +159,7 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
-	public ResultSet extractBikes() {
+	public ResultSet extractBicycles() {
 		// TODO Auto-generated method stub
 		return null;
 	}

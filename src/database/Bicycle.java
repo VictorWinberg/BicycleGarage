@@ -1,10 +1,10 @@
 package database;
 
-public class Bike {
+public class Bicycle {
 	private String personnr, barcode;
 	private boolean isParked;
 	
-	public Bike(String personnr) {
+	public Bicycle(String personnr) {
 		this.personnr = personnr;
 		isParked = false;
 		String chars = "0123456789";

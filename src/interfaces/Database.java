@@ -2,7 +2,7 @@ package interfaces;
 
 import java.sql.ResultSet;
 
-import database.Bike;
+import database.Bicycle;
 import database.User;
 
 public interface Database {
@@ -29,17 +29,17 @@ public interface Database {
 	 * @return false ifall användaren user inte finns, annars true */
 	public boolean deleteUser(User user);
 
-	/** Lägger till cykeln bike.
-	 * @param bike
+	/** Lägger till cykeln bicycle.
+	 * @param bicycle
 	 *            ny cykel
-	 * @return false ifall cykeln bike redan finns, annars true */
-	public boolean insertBike(Bike bike);
+	 * @return false ifall cykeln bicycle redan finns, annars true */
+	public boolean insertBicycle(Bicycle bicycle);
 
-	/** Tar bort cykeln bike
-	 * @param bike
-	 *            befintlig cykel bike
-	 * @return false ifall cykeln bike inte finns, annars true */
-	public boolean deleteBike(Bike bike);
+	/** Tar bort cykeln bicycle
+	 * @param bicycle
+	 *            befintlig cykel bicycle
+	 * @return false ifall cykeln bicycle inte finns, annars true */
+	public boolean deleteBicycle(Bicycle bicycle);
 	
 	/** Extraherar alla användare till ett ResultSet
 	 * @return ResultSet med användare */
@@ -47,5 +47,5 @@ public interface Database {
 	
 	/** Extraherar alla cyklar till ett ResultSet
 	 * @return ResultSet med cyklar */
-	public ResultSet extractBikes();
+	public ResultSet extractBicycles();
 }
