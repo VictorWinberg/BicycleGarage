@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="main.BicycleGarage" project="BicycleGarage" 
     file="/BicycleGarage/src/main/BicycleGarage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="626" y="38"/>    
+    <position height="-1" width="-1" x="548" y="41"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -12,8 +12,8 @@
   </class>  
   <class id="2" language="java" name="main.BicycleGarageManager" project="BicycleGarage" 
     file="/BicycleGarage/src/main/BicycleGarageManager.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="522" y="222"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="166" width="315" x="289" y="118"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
@@ -21,7 +21,7 @@
   </class>  
   <interface id="3" language="java" name="interfaces.BarcodePrinter" project="BicycleGarage" 
     file="/BicycleGarage/src/interfaces/BarcodePrinter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="61" y="393"/>    
+    <position height="-1" width="-1" x="172" y="411"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -30,7 +30,7 @@
   </interface>  
   <interface id="4" language="java" name="interfaces.ElectronicLock" project="BicycleGarage" 
     file="/BicycleGarage/src/interfaces/ElectronicLock.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="241" y="393"/>    
+    <position height="-1" width="-1" x="356" y="381"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -39,7 +39,7 @@
   </interface>  
   <interface id="5" language="java" name="interfaces.Database" project="BicycleGarage" 
     file="/BicycleGarage/src/interfaces/Database.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="857" y="26"/>    
+    <position height="-1" width="-1" x="702" y="20"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -48,7 +48,7 @@
   </interface>  
   <interface id="6" language="java" name="interfaces.PinCodeTerminal" project="BicycleGarage" 
     file="/BicycleGarage/src/interfaces/PinCodeTerminal.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="585" y="414"/>    
+    <position height="-1" width="-1" x="573" y="384"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -57,7 +57,7 @@
   </interface>  
   <interface id="7" language="java" name="interfaces.BarcodeReader" project="BicycleGarage" 
     file="/BicycleGarage/src/interfaces/BarcodeReader.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="850" y="354"/>    
+    <position height="-1" width="-1" x="818" y="375"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -66,7 +66,7 @@
   </interface>  
   <class id="8" language="java" name="testdrivers.ElectronicLockTestDriver" project="BicycleGarage" 
     file="/BicycleGarage/src/testdrivers/ElectronicLockTestDriver.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="247" y="528"/>    
+    <position height="-1" width="-1" x="327" y="517"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="testdrivers.BarcodePrinterTestDriver" project="BicycleGarage" 
     file="/BicycleGarage/src/testdrivers/BarcodePrinterTestDriver.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="59" y="526"/>    
+    <position height="-1" width="-1" x="142" y="535"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="testdrivers.BarcodeReaderExitTestDriver" project="BicycleGarage" 
     file="/BicycleGarage/src/testdrivers/BarcodeReaderExitTestDriver.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="726" y="603"/>    
+    <position height="-1" width="-1" x="729" y="600"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -93,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="testdrivers.BarcodeReaderTestDriver" project="BicycleGarage" 
     file="/BicycleGarage/src/testdrivers/BarcodeReaderTestDriver.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="848" y="476"/>    
+    <position height="-1" width="-1" x="816" y="488"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="testdrivers.BarcodeReaderEntryTestDriver" project="BicycleGarage" 
     file="/BicycleGarage/src/testdrivers/BarcodeReaderEntryTestDriver.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="962" y="603"/>    
+    <position height="-1" width="-1" x="934" y="600"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="testdrivers.PinCodeTerminalTestDriver" project="BicycleGarage" 
     file="/BicycleGarage/src/testdrivers/PinCodeTerminalTestDriver.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="456" y="548"/>    
+    <position height="-1" width="-1" x="530" y="521"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -129,7 +129,7 @@
   </enumeration>  
   <class id="15" language="java" name="database.Bicycle" project="BicycleGarage" 
     file="/BicycleGarage/src/database/Bicycle.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="861" y="228"/>    
+    <position height="-1" width="-1" x="696" y="226"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -138,7 +138,7 @@
   </class>  
   <class id="16" language="java" name="database.DatabaseDriver" project="BicycleGarage" 
     file="/BicycleGarage/src/database/DatabaseDriver.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1041" y="25"/>    
+    <position height="-1" width="-1" x="904" y="25"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -147,7 +147,7 @@
   </class>  
   <class id="17" language="java" name="database.User" project="BicycleGarage" 
     file="/BicycleGarage/src/database/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1074" y="321"/>    
+    <position height="-1" width="-1" x="891" y="241"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -156,7 +156,7 @@
   </class>  
   <class id="18" language="java" name="gui.panels.UserManagerPanel" project="BicycleGarage" 
     file="/BicycleGarage/src/gui/panels/UserManagerPanel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="76" width="246" x="-34" y="109"/>    
+    <position height="76" width="246" x="10" y="109"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -165,7 +165,7 @@
   </class>  
   <class id="19" language="java" name="gui.panels.BicycleManagerPanel" project="BicycleGarage" 
     file="/BicycleGarage/src/gui/panels/BicycleManagerPanel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="76" width="245" x="-31" y="267"/>    
+    <position height="-1" width="-1" x="135" y="305"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -174,7 +174,7 @@
   </class>  
   <class id="20" language="java" name="gui.panels.NavigationPanel" project="BicycleGarage" 
     file="/BicycleGarage/src/gui/panels/NavigationPanel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="94" width="230" x="-34" y="-87"/>    
+    <position height="94" width="230" x="10" y="-87"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -183,7 +183,7 @@
   </class>  
   <class id="21" language="java" name="gui.panels.SearchManagerPanel" project="BicycleGarage" 
     file="/BicycleGarage/src/gui/panels/SearchManagerPanel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="76" width="256" x="-34" y="188"/>    
+    <position height="76" width="256" x="10" y="188"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -192,7 +192,7 @@
   </class>  
   <class id="22" language="java" name="gui.panels.MainManagerPanel" project="BicycleGarage" 
     file="/BicycleGarage/src/gui/panels/MainManagerPanel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="76" width="242" x="-34" y="28"/>    
+    <position height="76" width="242" x="10" y="28"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -206,10 +206,10 @@
   <association id="24">    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="25" name="terminal">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="18" width="45" x="479" y="312"/>      
       </attribute>      
       <multiplicity id="26" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-12" y="-30"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
@@ -228,12 +228,15 @@
     <end type="TARGET" refId="2"/>  
   </dependency>  
   <association id="30">    
+    <bendpoint x="694" y="415"/>    
+    <bendpoint x="693" y="324"/>    
+    <bendpoint x="639" y="322"/>    
     <end type="SOURCE" refId="11" navigable="false">      
       <attribute id="31" name="manager">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="5" y="-21"/>      
       </attribute>      
       <multiplicity id="32" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="16" width="23" x="593" y="294"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
@@ -250,10 +253,10 @@
   <association id="35">    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="36" name="printer">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="111" y="18"/>      
       </attribute>      
       <multiplicity id="37" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="111" y="18"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
@@ -264,13 +267,14 @@
     <end type="TARGET" refId="2"/>  
   </dependency>  
   <association id="39">    
-    <bendpoint x="258" y="91"/>    
+    <bendpoint x="273" y="90"/>    
+    <bendpoint x="272" y="20"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="40" name="navPanel">        
-        <position height="18" width="52" x="107" y="10"/>      
+        <position height="18" width="52" x="151" y="10"/>      
       </attribute>      
       <multiplicity id="41" minimum="0" maximum="1">        
-        <position height="16" width="23" x="163" y="10"/>      
+        <position height="16" width="23" x="207" y="10"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="20" navigable="true"/>    
@@ -279,10 +283,10 @@
   <association id="42">    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="43" name="entryLock">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="18" width="56" x="314" y="298"/>      
       </attribute>      
       <multiplicity id="44" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="16" width="23" x="376" y="300"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
@@ -293,12 +297,13 @@
     <end type="TARGET" refId="7"/>  
   </realization>  
   <association id="46">    
+    <bendpoint x="452" y="418"/>    
     <end type="SOURCE" refId="13" navigable="false">      
       <attribute id="47" name="manager">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="18" width="50" x="403" y="327"/>      
       </attribute>      
       <multiplicity id="48" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="16" width="23" x="453" y="328"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
@@ -327,10 +332,10 @@
   <association id="54">    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="55" name="exitLock">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="115" y="-12"/>      
       </attribute>      
       <multiplicity id="56" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="115" y="-12"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
@@ -353,6 +358,7 @@
     <end type="TARGET" refId="17"/>  
   </dependency>  
   <dependency id="61">    
+    <bendpoint x="270" y="103"/>    
     <end type="SOURCE" refId="22"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
