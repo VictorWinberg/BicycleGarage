@@ -14,7 +14,7 @@ public class UserManagerButton extends JModifiedButton implements
 	private BicycleGarageManager manager;
 
 	public UserManagerButton(BicycleGarageManager manager) {
-		super("Användare");
+		super("Visa användare");
 		this.manager = manager;
 		setToolTipText("Hanterar användare");
 		addActionListener(this);
