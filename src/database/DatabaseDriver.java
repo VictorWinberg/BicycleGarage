@@ -9,19 +9,21 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.validator.routines.EmailValidator;
 
 public class DatabaseDriver implements Database {
 
-	private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	private final String DB_URL = "jdbc:mysql://sql4.freesqldatabase.com:3306/sql474777";
+	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	private static final String DB_URL = "jdbc:mysql://sql4.freesqldatabase.com:3306/sql474777";
 
-	private final String USER = "sql474777";
-	private final String PASS = "cS9!pG3*";
+	private static final String USER = "sql474777";
+	private static final String PASS = "cS9!pG3*";
 
 	private Connection conn = null;
 	private Statement stmt = null;
-	private ResultSet rs = null;
-
 	private String sql;
 
 	public DatabaseDriver() throws ClassNotFoundException, SQLException {
@@ -99,6 +101,15 @@ public class DatabaseDriver implements Database {
 			System.out.println("inte borttagen, finns inte.");
 		}
 		return dropped;
+	}
+	
+	public static User createUser(String personnr, String first_name, String last_name,
+			String mail, String phonenr) {
+		User newUser = null;
+		if(EmailValidator.getInstance().isValid(mail) && isSSNValid(personnr)) {
+			newUser = new User(personnr, first_name, last_name, mail, phonenr);
+		}
+		return newUser;
 	}
 	
 	@Override
@@ -246,47 +257,98 @@ public class DatabaseDriver implements Database {
 		} catch (SQLException e) {
 			System.out.println("Gick ej att ansluta till databas");
 		}
+		
+//		int nbr = 0;
+//		for (int i = 0; i < 100; i++) {
+//			String ssn = "950123-45"+i;
+//			if(isSSNValid(ssn)){
+//				System.out.println(ssn);
+//				nbr++;
+//			}
+//		}
+//		System.out.println(nbr);
+		
 //		db.dropTables();
 //		db.createTables();
 		
-		User u = db.getUserWithPIN("754532");
-		if(u != null){
-			System.out.println(u.toString());
+//		User u = db.getUserWithPIN("754532");
+//		if(u != null){
+//			System.out.println(u.toString());
 //			db.deleteUser(u);
-		} else System.out.println("User not found");
+//		} else System.out.println("User not found");
 		
 //		User victor = new User("950407-1337", "Victor", "Winberg", "cool@swag.com", "0707133700");
 //		victor.generatePIN();
 //		db.insertUser(victor);
 		
-		ResultSet rs = db.extractUsers();
-		if(rs != null) {
-			try {
-				ResultSetMetaData rsmd = rs.getMetaData();
-				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					if (i > 1) {
-						System.out.print(" | ");
-					}
-					System.out.print(rsmd.getColumnName(i) + " " + rsmd.getColumnTypeName(i));
-					
-				}
-				while (rs.next()) {
-					System.out.println();
-					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-						if (i > 1) {
-							System.out.print(" | ");
-						}
-						int type = rsmd.getColumnType(i);
-						if (type == Types.VARCHAR || type == Types.CHAR) {
-							System.out.print(rs.getString(i));
-						} else {
-							System.out.print(rs.getLong(i));
-						}
-					}
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+//		ResultSet rs = db.extractUsers();
+//		if(rs != null) {
+//			try {
+//				ResultSetMetaData rsmd = rs.getMetaData();
+//				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+//					if (i > 1) {
+//						System.out.print(" | ");
+//					}
+//					System.out.print(rsmd.getColumnName(i) + " " + rsmd.getColumnTypeName(i));
+//					
+//				}
+//				while (rs.next()) {
+//					System.out.println();
+//					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+//						if (i > 1) {
+//							System.out.print(" | ");
+//						}
+//						int type = rsmd.getColumnType(i);
+//						if (type == Types.VARCHAR || type == Types.CHAR) {
+//							System.out.print(rs.getString(i));
+//						} else {
+//							System.out.print(rs.getLong(i));
+//						}
+//					}
+//				}
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
+	
+	private static boolean isSSNValid(String ssn){  
+		boolean isValid = false;  
+
+		// Initiera reg ex för SSN.
+		String expression = "^\\d{6}[- ]\\d{4}$"; 
+		CharSequence inputStr = ssn;
+		Pattern pattern = Pattern.compile(expression);  
+		Matcher matcher = pattern.matcher(inputStr); 
+		
+		if(matcher.matches() && check(ssn)){  
+			isValid = true;  
+		}
+		return isValid;  
+	}  
+
+	private static boolean check(String ssn) {
+		StringBuilder sb = new StringBuilder(ssn);
+		sb.deleteCharAt(6);
+		int[] digits = new int[10];
+		for (int i = 0; i < sb.length(); i++) {
+			digits[i] = Character.digit(sb.charAt(i), 10);
+		}
+		
+		int sum = 0;
+		int length = digits.length;
+		for (int i = 0; i < length; i++) {
+
+			// siffrorna i omvänd ordning
+			int digit = digits[length - i - 1];
+
+			// vart 2:e nummer multipliceras med 2
+			if (i % 2 == 1) {
+				digit *= 2;
+			}
+			sum += digit > 9 ? digit - 9 : digit;
+		}
+		return sum % 10 == 0;
+	}
+
 }
