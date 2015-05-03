@@ -3,7 +3,20 @@ package main;
 import interfaces.*;
 import testdrivers.*;
 
+/**
+ * Detta är huvudprogrammet som körs när programmet startas. Den skapar ett
+ * BicycleGarageManager-objekt samt alla testdrivrutinobjekt och länkar ihop
+ * dessa.
+ * 
+ * @author Victor Winberg, Anton Göransson, Povel Larsson, Erik Danielsson, Emma
+ *         Asklund, Tobias Olsson
+ *
+ */
 public class BicycleGarage {
+	/**
+	 * Skapar ett BicycleGarageManager-objekt samt alla testdrivrutinobjekt
+	 * och länkar ihop dessa.
+	 */
 	public BicycleGarage() {
 		BicycleGarageManager manager = new BicycleGarageManager();
 		ElectronicLock entryLock = new ElectronicLockTestDriver("Entrélås");

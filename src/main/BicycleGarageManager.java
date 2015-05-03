@@ -11,6 +11,14 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * Denna klass skapar operatörsgränssnittet. Den länkar ihop de fem
+ * panelklasserna och använder sig av olika “states”, t.ex. startläge och
+ * användarläge. Här registrerar man även de olika testdrivrutinerna.
+ * 
+ * @author Victor Winberg, Anton Göransson, Povel Larsson, Erik Danielsson, Emma
+ *         Asklund, Tobias Olsson
+ */
 @SuppressWarnings("serial")
 public class BicycleGarageManager extends JFrame {
 
@@ -40,7 +48,10 @@ public class BicycleGarageManager extends JFrame {
 		pack();
 		setVisible(true);
 	}
-
+	/**
+	 * Byter operatörsgränsnittets panel till läge state.
+	 * @param state Ett ViewState läge
+	 */
 	public void changeState(ViewState state) {
 		panel.removeAll();
 		switch (state) {
@@ -69,7 +80,7 @@ public class BicycleGarageManager extends JFrame {
 	private ElectronicLock entryLock, exitLock;
 	private PinCodeTerminal terminal;
 
-	/*
+	/**
 	 * Registrerar hårdvara så att BicycleGarageManager vet vilka drivrutiner
 	 * som är tillgängliga.
 	 */
@@ -82,7 +93,7 @@ public class BicycleGarageManager extends JFrame {
 		this.terminal = terminal;
 	}
 
-	/*
+	/**
 	 * Kommer att kallas när en användare har använt strecksläsaren vid
 	 * entrédörren. Cykel ID bör vara en sträng med 5 tecken, där varje tecken
 	 * kan vara '0', '1', ... "9".
@@ -91,7 +102,7 @@ public class BicycleGarageManager extends JFrame {
 		printer.printBarcode(bicycleID);
 	}
 
-	/*
+	/**
 	 * Kommer att kallas när en användare har använt strecksläsaren vid
 	 * cykelutgången. Cykel ID bör vara en sträng med 5 tecken, där varje tecken
 	 * kan vara '0', '1', ... "9".
@@ -100,7 +111,7 @@ public class BicycleGarageManager extends JFrame {
 		printer.printBarcode(bicycleID);
 	}
 
-	/*
+	/**
 	 * Kommer att kallas när en användare har tryckt på en tangent på knappsats
 	 * på entrédörren. Följande tecken kan vara intryckta: "0", "1", ... "9",
 	 * "*", "#".
