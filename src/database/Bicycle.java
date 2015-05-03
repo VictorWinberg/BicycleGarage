@@ -1,24 +1,24 @@
 package database;
 
 public class Bicycle {
-	private String personnr, barcode;
-	private boolean isParked;
+	private String barcode;
+	private User user;
+	private boolean deposited;
 	
-	public Bicycle(String personnr) {
-		this.personnr = personnr;
-		isParked = false;
-		String chars = "0123456789";
-		StringBuilder sb = new StringBuilder();
-		while (sb.length() < 5) {
-			int index = (int) (Math.random() * chars.length());
-			sb.append(chars.charAt(index));
-		}
-		barcode = sb.toString();
+	/** Redan definierad cykel */
+	public Bicycle(String barcode, User user, boolean deposited) {
+		this.barcode = barcode;
+		this.user = user;
+		this.deposited = deposited;
 	}
 	
-	public String getOwnerPersonnr() { return personnr; }
-	public String getBarcode() { return barcode; }
-	public void park() { isParked = true; }
-	public void unpark() { isParked = false; }
-	public boolean isParked() { return isParked; }
+	public String getBarcode() 		{ return barcode; }
+	public User getOwner() 			{ return user; }
+	public boolean isDeposited() 	{ return deposited; }
+	public String toString() {
+		return user.getPersonnr() + " | " + barcode + " | " + deposited;
+	}
+
+	public void deposit() 			{ deposited = true; }
+	public void withdraw() 			{ deposited = false; }
 }
