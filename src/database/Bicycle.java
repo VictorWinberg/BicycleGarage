@@ -16,7 +16,7 @@ public class Bicycle {
 		barcode = sb.toString();
 	}
 	
-	public String getUserPersonnr() { return personnr; }
+	public String getOwnerPersonnr() { return personnr; }
 	public String getBarcode() { return barcode; }
 	public void park() { isParked = true; }
 	public void unpark() { isParked = false; }
