@@ -31,7 +31,7 @@ public class DatabaseDriver implements Database {
 		Class.forName(JDBC_DRIVER);
 
 		// Anslut
-		System.out.print("Databasen "+ DB_URL);
+		System.out.print("Databasen " + DB_URL);
 		conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		System.out.println(" ansluten.");
 
@@ -46,8 +46,7 @@ public class DatabaseDriver implements Database {
 		boolean created = false;
 		System.out.println();
 		System.out.print("Användartabell ");
-		sql = "CREATE TABLE  users ("
-				+ "personnr VARCHAR( 11 ) NOT NULL ,"
+		sql = "CREATE TABLE  users (" + "personnr VARCHAR( 11 ) NOT NULL ,"
 				+ "first_name VARCHAR( 25 ) NOT NULL ,"
 				+ "last_name VARCHAR( 25 ) NOT NULL ,"
 				+ "mail VARCHAR( 25 ) NOT NULL ,"
@@ -61,7 +60,7 @@ public class DatabaseDriver implements Database {
 			System.out.println("skapad.");
 			created = true;
 		} catch (SQLException e) {
-			System.out.println("inte skapad, finns redan.");			
+			System.out.println("inte skapad, finns redan.");
 		}
 		System.out.print("Cykeltabell ");
 		sql = "CREATE TABLE  bicycles ("
@@ -102,42 +101,62 @@ public class DatabaseDriver implements Database {
 		}
 		return dropped;
 	}
-	
-	public static User createUser(String personnr, String first_name, String last_name,
-			String mail, String phonenr) {
+
+	public User createUser(String personnr, String first_name,
+			String last_name, String mail, String phonenr) {
 		User newUser = null;
-		if(EmailValidator.getInstance().isValid(mail) && isSSNValid(personnr)) {
+		if (EmailValidator.getInstance().isValid(mail) && isSSNValid(personnr)) {
 			newUser = new User(personnr, first_name, last_name, mail, phonenr);
+			boolean uniquePIN = false;
+			String chars = "0123456789";
+			while (uniquePIN == false) {
+				StringBuilder sb = new StringBuilder();
+				while (sb.length() < 6) {
+					int index = (int) (Math.random() * chars.length());
+					sb.append(chars.charAt(index));
+				}
+				String pin = sb.toString();
+				if (getUserWithPIN(pin) == null) {
+					uniquePIN = true;
+					newUser.setPIN(pin);
+				}
+			}
 		}
 		return newUser;
 	}
-	
+
 	@Override
 	public boolean insertUser(User user) {
+		if (user == null) {
+			System.out
+					.println("Användare user som skulle läggas till är null.");
+			return false;
+		}
 		System.out.print("Användare " + user.getFirstName() + " ");
-		sql = "INSERT INTO users "
-			+ "VALUES ("
-			+ "'" + user.getPersonnr() + "', "
-			+ "'" + user.getFirstName() + "', "
-			+ "'" + user.getLastName() + "', "
-			+ "'" + user.getMail() + "', "
-			+ "'" + user.getPhonenr() + "', "
-			+ "'" + user.getPIN() + "', "
-			+ user.getReserverdSlots() + ", "
-			+ user.getFreeSlots()
-			+ ")";
+		sql = "INSERT INTO users " + "VALUES (" + "'" + user.getPersonnr()
+				+ "', " + "'" + user.getFirstName() + "', " + "'"
+				+ user.getLastName() + "', " + "'" + user.getMail() + "', "
+				+ "'" + user.getPhonenr() + "', " + "'" + user.getPIN() + "', "
+				+ user.getReserverdSlots() + ", " + user.getFreeSlots() + ")";
 		try {
 			stmt.executeUpdate(sql);
 			System.out.println("tillagd.");
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("inte tillagd. SQL Message: " + e.getMessage());
 			return false;
 		}
 	}
 
 	@Override
 	public boolean deleteUser(User user) {
+		if (user == null) {
+			System.out.println("Användare user som skulle tas bort är null.");
+			return false;
+		} else if(getUser(user.getPersonnr()) == null) {
+			System.out.println("Användare " + user.getFirstName() + " inte borttagen, finns inte.");
+			return false;
+		}
 		System.out.print("Användare " + user.getFirstName() + " ");
 		sql = "DELETE FROM users WHERE personnr = '" + user.getPersonnr() + "'";
 		try {
@@ -145,12 +164,20 @@ public class DatabaseDriver implements Database {
 			System.out.println("borttagen.");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("inte borttagen, finns inte.");
+			System.out
+					.println("inte borttagen. SQL Message: " + e.getMessage());
 			return false;
 		}
 	}
-	
+
 	public boolean deleteUser(String personnr) {
+		if (personnr == null) {
+			System.out.println("Användare med personnr som skulle tas bort är null.");
+			return false;
+		} else if(getUser(personnr) == null) {
+			System.out.println("Användare med personnummer " + personnr + " inte borttagen, finns inte.");
+			return false;
+		}
 		System.out.print("Användare med personnummer " + personnr + " ");
 		sql = "DELETE FROM users WHERE personnr = '" + personnr + "'";
 		try {
@@ -158,9 +185,64 @@ public class DatabaseDriver implements Database {
 			System.out.println("borttagen.");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("inte borttagen, finns inte.");
+			System.out
+					.println("inte borttagen. SQL Message: " + e.getMessage());
 			return false;
 		}
+	}
+
+	@Override
+	public User getUser(String personnr) {
+		if (personnr == null) {
+			System.out
+					.println("Användare med personnr som skulle hittas är null.");
+			return null;
+		}
+		User user = null;
+		ResultSet rs = extractUsers();
+		if (rs == null)
+			return null;
+		try {
+			while (rs.next()) {
+				if (rs.getString(1).equals(personnr)) {
+					user = new User(rs.getString(1), rs.getString(2),
+							rs.getString(3), rs.getString(4), rs.getString(5),
+							rs.getString(6), rs.getInt(7), rs.getInt(8));
+					rs.beforeFirst();
+					return user;
+				}
+			}
+			rs.beforeFirst();
+		} catch (SQLException e) {
+			System.out.println("SQL Message 1: " + e.getMessage());
+		}
+		return user;
+	}
+
+	public User getUserWithPIN(String pin) {
+		if (pin == null) {
+			System.out.println("Användare med pin som skulle hittas är null.");
+			return null;
+		}
+		User user = null;
+		ResultSet rs = extractUsers();
+		if (rs == null)
+			return null;
+		try {
+			while (rs.next()) {
+				if (rs.getString(6).equals(pin)) {
+					user = new User(rs.getString(1), rs.getString(2),
+							rs.getString(3), rs.getString(4), rs.getString(5),
+							rs.getString(6), rs.getInt(7), rs.getInt(8));
+					rs.beforeFirst();
+					return user;
+				}
+			}
+			rs.beforeFirst();
+		} catch (SQLException e) {
+			System.out.println("SQL Message 2: " + e.getMessage());
+		}
+		return user;
 	}
 
 	@Override
@@ -174,57 +256,6 @@ public class DatabaseDriver implements Database {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	@Override
-	public User getUser(String personnr) {
-		User user = null;
-		ResultSet rs = extractUsers();
-		try {
-			while (rs.next()) {
-				if(rs.getString(1).equals(personnr)) {
-					user = new User(rs.getString(1), 
-							rs.getString(2), 
-							rs.getString(3), 
-							rs.getString(4), 
-							rs.getString(5), 
-							rs.getString(6), 
-							rs.getInt(7), 
-							rs.getInt(8));
-					rs.beforeFirst();
-					return user;
-				}
-			}
-			rs.beforeFirst();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return user;
-	}
-	
-	public User getUserWithPIN(String pin) {
-		User user = null;
-		ResultSet rs = extractUsers();
-		try {
-			while (rs.next()) {
-				if(rs.getString(6).equals(pin)) {
-					user = new User(rs.getString(1), 
-							rs.getString(2), 
-							rs.getString(3), 
-							rs.getString(4), 
-							rs.getString(5), 
-							rs.getString(6), 
-							rs.getInt(7), 
-							rs.getInt(8));
-					rs.beforeFirst();
-					return user;
-				}
-			}
-			rs.beforeFirst();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return user;
-	}
 
 	@Override
 	public ResultSet extractUsers() {
@@ -232,7 +263,8 @@ public class DatabaseDriver implements Database {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM users");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Användartabell saknas. SQL Message: "
+					+ e.getMessage());
 		}
 		return rs;
 	}
@@ -243,112 +275,124 @@ public class DatabaseDriver implements Database {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM bicycles");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Cykeltabell saknas. SQL Message: "
+					+ e.getMessage());
 		}
 		return rs;
 	}
-	
-	public static void main(String[] args) {
-		DatabaseDriver db = null;
-		try {
-			db = new DatabaseDriver();
-		} catch (ClassNotFoundException e) {
-			System.out.println("JDBC drivrutin hittades ej");
-		} catch (SQLException e) {
-			System.out.println("Gick ej att ansluta till databas");
-		}
-		
-//		int nbr = 0;
-//		for (int i = 0; i < 100; i++) {
-//			String ssn = "950123-45"+i;
-//			if(isSSNValid(ssn)){
-//				System.out.println(ssn);
-//				nbr++;
-//			}
-//		}
-//		System.out.println(nbr);
-		
-//		db.dropTables();
-//		db.createTables();
-		
-//		User u = db.getUserWithPIN("754532");
-//		if(u != null){
-//			System.out.println(u.toString());
-//			db.deleteUser(u);
-//		} else System.out.println("User not found");
-		
-//		User victor = new User("950407-1337", "Victor", "Winberg", "cool@swag.com", "0707133700");
-//		victor.generatePIN();
-//		db.insertUser(victor);
-		
-//		ResultSet rs = db.extractUsers();
-//		if(rs != null) {
-//			try {
-//				ResultSetMetaData rsmd = rs.getMetaData();
-//				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-//					if (i > 1) {
-//						System.out.print(" | ");
-//					}
-//					System.out.print(rsmd.getColumnName(i) + " " + rsmd.getColumnTypeName(i));
-//					
-//				}
-//				while (rs.next()) {
-//					System.out.println();
-//					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-//						if (i > 1) {
-//							System.out.print(" | ");
-//						}
-//						int type = rsmd.getColumnType(i);
-//						if (type == Types.VARCHAR || type == Types.CHAR) {
-//							System.out.print(rs.getString(i));
-//						} else {
-//							System.out.print(rs.getLong(i));
-//						}
-//					}
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-	}
-	
-	private static boolean isSSNValid(String ssn){  
-		boolean isValid = false;  
+
+	private static boolean isSSNValid(String ssn) {
+		boolean isValid = false;
 
 		// Initiera reg ex för SSN.
-		String expression = "^\\d{6}[- ]\\d{4}$"; 
+		String expression = "^\\d{6}[- ]\\d{4}$";
 		CharSequence inputStr = ssn;
-		Pattern pattern = Pattern.compile(expression);  
-		Matcher matcher = pattern.matcher(inputStr); 
-		
-		if(matcher.matches() && check(ssn)){  
-			isValid = true;  
-		}
-		return isValid;  
-	}  
+		Pattern pattern = Pattern.compile(expression);
+		Matcher matcher = pattern.matcher(inputStr);
+
+		if (matcher.matches() && check(ssn))
+			isValid = true;
+		return isValid;
+	}
 
 	private static boolean check(String ssn) {
 		StringBuilder sb = new StringBuilder(ssn);
 		sb.deleteCharAt(6);
 		int[] digits = new int[10];
-		for (int i = 0; i < sb.length(); i++) {
+		for (int i = 0; i < sb.length(); i++)
 			digits[i] = Character.digit(sb.charAt(i), 10);
-		}
-		
+
 		int sum = 0;
 		int length = digits.length;
 		for (int i = 0; i < length; i++) {
-
 			// siffrorna i omvänd ordning
 			int digit = digits[length - i - 1];
 
 			// vart 2:e nummer multipliceras med 2
-			if (i % 2 == 1) {
+			if (i % 2 == 1)
 				digit *= 2;
-			}
 			sum += digit > 9 ? digit - 9 : digit;
 		}
 		return sum % 10 == 0;
 	}
 
+	public static void main(String[] args) {
+		DatabaseDriver db = null;
+		try {
+			db = new DatabaseDriver();
+		} catch (ClassNotFoundException e) {
+			System.out.println("JDBC drivrutin hittades ej. SQL Message: "
+					+ e.getMessage());
+		} catch (SQLException e) {
+			System.out
+					.println("Gick ej att ansluta till databas. SQL Message: "
+							+ e.getMessage());
+		}
+
+//		 int nbr = 0;
+//		 for (int i = 0; i < 100; i++) {
+//		 String ssn = "950123-45"+i;
+//		 if(isSSNValid(ssn)){
+//		 System.out.println(ssn);
+//		 nbr++;
+//		 }
+//		 }
+//		 System.out.println(nbr);
+
+//		db.createTables();
+//		db.dropTables();
+
+//		User u = db.getUserWithPIN("754532");
+//		if(u != null){
+//			System.out.println(u.toString());
+//			db.deleteUser(u);
+//		} else System.out.println("User not found");
+
+		User victor = db.createUser("950407-0856", "Victor", "Winberg",
+				"cool@swag.com", "0707133700");
+		db.insertUser(victor);
+		
+		User fake = db.createUser("950123-4562", "Fake", "Fakesson",
+				"swag@lol.se", "0707123456");
+		if (fake != null)
+			db.insertUser(fake);
+		else
+			System.out.println("User fake inte skapad");
+
+//		if(db.getUserWithPIN("553587") != null)
+//			System.out.println("PIN 553587 finns");
+//		else System.out.println("PIN 553587 finns inte");
+		
+		System.out.println();
+		ResultSet rs = db.extractUsers();
+		if (rs != null) {
+			try {
+				ResultSetMetaData rsmd = rs.getMetaData();
+				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+					if (i > 1) {
+						System.out.print(" | ");
+					}
+					System.out.print(rsmd.getColumnName(i) + " "
+							+ rsmd.getColumnTypeName(i));
+
+				}
+				while (rs.next()) {
+					System.out.println();
+					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+						if (i > 1) {
+							System.out.print(" | ");
+						}
+						int type = rsmd.getColumnType(i);
+						if (type == Types.VARCHAR || type == Types.CHAR) {
+							System.out.print(rs.getString(i));
+						} else {
+							System.out.print(rs.getLong(i));
+						}
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

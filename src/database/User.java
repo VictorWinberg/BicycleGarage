@@ -27,25 +27,16 @@ public class User {
 		this.freeSlots = freeSlots;
 	}
 	
-	public String getPersonnr() { return personnr; }
-	public String getFirstName() { return first_name; }
-	public String getLastName() { return last_name; }
-	public String getMail() { return mail; }
-	public String getPhonenr() { return phonenr; }
-	public String getPIN() { return pin; }
-	public int getReserverdSlots() { return reservedSlots; }
-	public int getFreeSlots() { return freeSlots; }
+	public String getPersonnr() 	{ return personnr; }
+	public String getFirstName() 	{ return first_name; }
+	public String getLastName() 	{ return last_name; }
+	public String getMail() 		{ return mail; }
+	public String getPhonenr() 		{ return phonenr; }
+	public void setPIN(String pin) 	{ this.pin = pin; }
+	public String getPIN() 			{ return pin; }
+	public int getReserverdSlots() 	{ return reservedSlots; }
+	public int getFreeSlots() 		{ return freeSlots; }
 	
-	public String generatePIN() {
-		String chars = "0123456789";
-		StringBuilder sb = new StringBuilder();
-		while (sb.length() < 6) {
-			int index = (int) (Math.random() * chars.length());
-			sb.append(chars.charAt(index));
-		}
-		pin = sb.toString();
-		return pin;
-	}
 	
 	public String toString() {
 		return personnr + " | " + first_name + " | " + 
@@ -56,7 +47,7 @@ public class User {
 	public static void main(String[] args) {
 		while(true) {
 			User u = new User("950407-1234", "Victor", "Winberg", "mail@swag.com", "0707123456");
-			System.out.println(u.getPIN());
+			System.out.println(u.toString());
 		}
 	}
 }
