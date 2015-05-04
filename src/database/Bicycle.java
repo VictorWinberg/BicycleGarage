@@ -15,6 +15,7 @@ public class Bicycle {
 	public String getBarcode() 		{ return barcode; }
 	public User getOwner() 			{ return user; }
 	public boolean isDeposited() 	{ return deposited; }
+	@Override
 	public String toString() {
 		return user.getPersonnr() + " | " + barcode + " | " + deposited;
 	}

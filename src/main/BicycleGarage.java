@@ -1,5 +1,6 @@
 package main;
 
+import gui.ProgressBar;
 import interfaces.*;
 import testdrivers.*;
 

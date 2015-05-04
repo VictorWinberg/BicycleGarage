@@ -23,8 +23,21 @@ public class User {
 	public String getMail() 		{ return mail; }
 	public String getPhonenr() 		{ return phonenr; }
 	public String getPIN() 			{ return pin; }
+	public int addReserverdSlot() {
+		return ++reservedSlots;
+	}
+	public int removeReservedSlot() {
+		return --reservedSlots;
+	}
 	public int getReserverdSlots() 	{ return reservedSlots; }
+	public int addFreeSlot() {
+		return ++freeSlots;
+	}
+	public int removeFreeSlot() {
+		return --freeSlots;
+	}
 	public int getFreeSlots() 		{ return freeSlots; }
+	@Override
 	public String toString() {
 		return personnr + " | " + first_name + " | " + 
 		last_name + " | " + mail + " | " + phonenr + " | " + 

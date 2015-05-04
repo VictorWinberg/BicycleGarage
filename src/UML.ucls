@@ -39,11 +39,11 @@
   </interface>  
   <interface id="5" language="java" name="interfaces.Database" project="BicycleGarage" 
     file="/BicycleGarage/src/interfaces/Database.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="702" y="20"/>    
+    <position height="-1" width="-1" x="695" y="-122"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
   <interface id="6" language="java" name="interfaces.PinCodeTerminal" project="BicycleGarage" 
@@ -129,7 +129,7 @@
   </enumeration>  
   <class id="15" language="java" name="database.Bicycle" project="BicycleGarage" 
     file="/BicycleGarage/src/database/Bicycle.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="696" y="226"/>    
+    <position height="-1" width="-1" x="1034" y="341"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -138,7 +138,7 @@
   </class>  
   <class id="16" language="java" name="database.DatabaseDriver" project="BicycleGarage" 
     file="/BicycleGarage/src/database/DatabaseDriver.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="904" y="25"/>    
+    <position height="-1" width="-1" x="989" y="35"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -147,8 +147,8 @@
   </class>  
   <class id="17" language="java" name="database.User" project="BicycleGarage" 
     file="/BicycleGarage/src/database/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="891" y="241"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="310" width="204" x="611" y="-16"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
@@ -199,10 +199,10 @@
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <realization id="23">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
   <association id="24">    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="25" name="terminal">        
@@ -217,29 +217,26 @@
   </association>  
   <dependency id="27">    
     <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="28">    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <generalization id="28">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <dependency id="29">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
+  <realization id="29">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
   <association id="30">    
-    <bendpoint x="694" y="415"/>    
-    <bendpoint x="693" y="324"/>    
-    <bendpoint x="639" y="322"/>    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="31" name="manager">        
-        <position height="0" width="0" x="5" y="-21"/>      
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="31" name="entryLock">        
+        <position height="18" width="56" x="314" y="298"/>      
       </attribute>      
       <multiplicity id="32" minimum="0" maximum="1">        
-        <position height="16" width="23" x="593" y="294"/>      
+        <position height="16" width="23" x="376" y="300"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <dependency id="33">    
@@ -247,7 +244,7 @@
     <end type="TARGET" refId="2"/>  
   </dependency>  
   <dependency id="34">    
-    <end type="SOURCE" refId="20"/>    
+    <end type="SOURCE" refId="18"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
   <association id="35">    
@@ -266,102 +263,105 @@
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <association id="39">    
+  <realization id="39">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <dependency id="40">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="41">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <realization id="42">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="43">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <dependency id="44">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="45">    
+    <bendpoint x="694" y="415"/>    
+    <bendpoint x="693" y="324"/>    
+    <bendpoint x="639" y="322"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="46" name="manager">        
+        <position height="0" width="0" x="5" y="-21"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="1">        
+        <position height="16" width="23" x="593" y="294"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
     <bendpoint x="273" y="90"/>    
     <bendpoint x="272" y="20"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="40" name="navPanel">        
+      <attribute id="49" name="navPanel">        
         <position height="18" width="52" x="151" y="10"/>      
       </attribute>      
-      <multiplicity id="41" minimum="0" maximum="1">        
+      <multiplicity id="50" minimum="0" maximum="1">        
         <position height="16" width="23" x="207" y="10"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="42">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="43" name="entryLock">        
-        <position height="18" width="56" x="314" y="298"/>      
-      </attribute>      
-      <multiplicity id="44" minimum="0" maximum="1">        
-        <position height="16" width="23" x="376" y="300"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="45">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="46">    
+  <generalization id="51">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <dependency id="52">    
+    <bendpoint x="270" y="103"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <dependency id="54">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <association id="55">    
     <bendpoint x="452" y="418"/>    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="47" name="manager">        
+      <attribute id="56" name="manager">        
         <position height="18" width="50" x="403" y="327"/>      
       </attribute>      
-      <multiplicity id="48" minimum="0" maximum="1">        
+      <multiplicity id="57" minimum="0" maximum="1">        
         <position height="16" width="23" x="453" y="328"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="49">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <dependency id="50">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="14"/>  
-  </dependency>  
-  <realization id="51">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <dependency id="52">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <generalization id="53">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <association id="54">    
+  <association id="58">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="55" name="exitLock">        
+      <attribute id="59" name="exitLock">        
         <position height="0" width="0" x="115" y="-12"/>      
       </attribute>      
-      <multiplicity id="56" minimum="0" maximum="1">        
+      <multiplicity id="60" minimum="0" maximum="1">        
         <position height="0" width="0" x="115" y="-12"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="57">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="15"/>  
-  </dependency>  
-  <realization id="58">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="6"/>  
+  <realization id="61">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
   </realization>  
-  <dependency id="59">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="60">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <dependency id="61">    
-    <bendpoint x="270" y="103"/>    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="false"/>    
