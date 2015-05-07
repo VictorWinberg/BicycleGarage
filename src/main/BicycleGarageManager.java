@@ -23,18 +23,18 @@ import database.DatabaseDriver;
  *         Asklund, Tobias Olsson
  */
 @SuppressWarnings("serial")
-public class BicycleGarageManager extends JFrame {
+public class BicycleGarageManager {
 
 	private NavigationPanel navPanel;
 	private JPanel panel, mainPanel, userPanel, bicyclePanel, searchPanel;
 	private Database db;
 
 	public BicycleGarageManager() {
-		super("Operatörsgränssnittet");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(800, 600));
-		setMinimumSize(new Dimension(600, 300));
-		setLayout(new BorderLayout(0, 10));
+		JFrame frame = new JFrame("Operatörsgränssnittet");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(800, 600));
+		frame.setMinimumSize(new Dimension(600, 300));
+		frame.setLayout(new BorderLayout(0, 10));
 
 		panel = new JPanel();
 		navPanel = new NavigationPanel(this);
@@ -42,7 +42,7 @@ public class BicycleGarageManager extends JFrame {
 		userPanel = new UserManagerPanel(this);
 		bicyclePanel = new BicycleManagerPanel(this);
 		searchPanel = new SearchManagerPanel(this);
-		
+
 		try {
 			db = new DatabaseDriver();
 		} catch (ClassNotFoundException | SQLException e) {
@@ -51,16 +51,19 @@ public class BicycleGarageManager extends JFrame {
 
 		changeState(ViewState.START_STATE);
 
-		add(navPanel, BorderLayout.NORTH);
-		add(panel, BorderLayout.CENTER);
-		add(new ExitButton(this), BorderLayout.SOUTH);
+		frame.add(navPanel, BorderLayout.NORTH);
+		frame.add(panel, BorderLayout.CENTER);
+		frame.add(new ExitButton(this), BorderLayout.SOUTH);
 
-		pack();
-		setVisible(true);
+		frame.pack();
+		frame.setVisible(true);
 	}
+
 	/**
 	 * Byter operatörsgränsnittets panel till läge state.
-	 * @param state Ett ViewState läge
+	 * 
+	 * @param state
+	 *            Ett ViewState läge
 	 */
 	public void changeState(ViewState state) {
 		panel.removeAll();
@@ -85,9 +88,12 @@ public class BicycleGarageManager extends JFrame {
 		panel.revalidate();
 		panel.repaint();
 	}
-	
-	/** Hämtar en cykelmanagerns databas
-	 * @return Database databas, annars null */
+
+	/**
+	 * Hämtar en cykelmanagerns databas
+	 * 
+	 * @return Database databas, annars null
+	 */
 	public Database getDB() {
 		return db;
 	}
@@ -120,7 +126,7 @@ public class BicycleGarageManager extends JFrame {
 
 	/**
 	 * Kommer att kallas när en användare har använt strecksläsaren vid
-	 * cykelutgången. Cykel ID bör vara en sträng med 5 tecken, där varje tecken
+	 * cykelutgången. bicycleID bör vara en sträng med 5 tecken, där varje tecken
 	 * kan vara '0', '1', ... "9".
 	 */
 	public void exitBarcode(String bicycleID) {

@@ -53,7 +53,7 @@ public interface Database {
 	 * @return User användare, annars null */
 	public User getUserWithPIN(String pin);
 	
-	/** Lista med cyklar som tillhör användare user
+	/** Hämtar lista med cyklar som tillhör användare user
 	 * @param user Sökt användare
 	 * @return Lista med eller utan cyklar, null om användaren inte finns */
 	public List<Bicycle> getBicycles(User user);
@@ -84,7 +84,7 @@ public interface Database {
 	 * @return true om cykeln bicycle uppdaterades, annars false */
 	boolean updateBicycle(Bicycle bicycle);
 	
-	/** Specifik cykel Bicycle med streckkod barcode
+	/** Hämtar en specifik cykel Bicycle med streckkod barcode
 	 * @param barcode streckkod
 	 * @return Cykel med angiven streckkod, annars null */
 	public Bicycle getBicycle(String barcode);
@@ -93,7 +93,7 @@ public interface Database {
 	 * @return ResultSet med cyklar */
 	public ResultSet extractBicycles();
 
-	/** Rensar inaktiva användare
+	/** Rensar alla inaktiva användare
 	 * @return true om någon användare tagits bort, annars false */
 	boolean clearInactiveUsers();
 }
