@@ -7,9 +7,12 @@ import interfaces.*;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import database.DatabaseDriver;
 
 /**
  * Denna klass skapar operatörsgränssnittet. Den länkar ihop de fem
@@ -24,6 +27,7 @@ public class BicycleGarageManager extends JFrame {
 
 	private NavigationPanel navPanel;
 	private JPanel panel, mainPanel, userPanel, bicyclePanel, searchPanel;
+	private Database db;
 
 	public BicycleGarageManager() {
 		super("Operatörsgränssnittet");
@@ -38,6 +42,12 @@ public class BicycleGarageManager extends JFrame {
 		userPanel = new UserManagerPanel(this);
 		bicyclePanel = new BicycleManagerPanel(this);
 		searchPanel = new SearchManagerPanel(this);
+		
+		try {
+			db = new DatabaseDriver();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 
 		changeState(ViewState.START_STATE);
 
@@ -74,6 +84,12 @@ public class BicycleGarageManager extends JFrame {
 		}
 		panel.revalidate();
 		panel.repaint();
+	}
+	
+	/** Hämtar en cykelmanagerns databas
+	 * @return Database databas, annars null */
+	public Database getDB() {
+		return db;
 	}
 
 	private BarcodePrinter printer;
