@@ -104,14 +104,14 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 			public void actionPerformed(ActionEvent e) { // Inner class with
 															// code
 				redTimer.stop(); // to be executed when the timer
-				redPanel.setBackground(Color.WHITE);; // event happens
+				redPanel.setBackground(new Color(238, 238, 238));; // event happens
 			}
 		});
 		greenTimer = new Timer(1000, new ActionListener() { // Inner class as
 															// above
 					public void actionPerformed(ActionEvent e) {
 						greenTimer.stop();
-						greenPanel.setBackground(Color.WHITE);;
+						greenPanel.setBackground(new Color(238, 238, 238));;
 					}
 				});
 	}
