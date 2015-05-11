@@ -46,6 +46,9 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 	 *            "9".
 	 */
 	public void printBarcode(String bicycleID) {
+		if(bicycleID.length() != 5 || bicycleID.matches("[0-9]+")){
+			throw new IllegalArgumentException("Streckkoden är inte giltlig");
+		}
 		textArea.append("Event " + ++serialNr + ": "
 				+ "Skriver ut " + bicycleID + "\n");
 	}
