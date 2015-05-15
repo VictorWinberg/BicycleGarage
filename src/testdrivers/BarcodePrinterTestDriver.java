@@ -1,8 +1,8 @@
 package testdrivers;
 
-import java.awt.Dimension;
-
 import interfaces.BarcodePrinter;
+
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;

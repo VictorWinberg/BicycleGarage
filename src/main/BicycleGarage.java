@@ -1,8 +1,14 @@
 package main;
 
-import gui.ProgressBar;
-import interfaces.*;
-import testdrivers.*;
+import interfaces.BarcodePrinter;
+import interfaces.BarcodeReader;
+import interfaces.ElectronicLock;
+import interfaces.PinCodeTerminal;
+import testdrivers.BarcodePrinterTestDriver;
+import testdrivers.BarcodeReaderEntryTestDriver;
+import testdrivers.BarcodeReaderExitTestDriver;
+import testdrivers.ElectronicLockTestDriver;
+import testdrivers.PinCodeTerminalTestDriver;
 
 /**
  * Detta är huvudprogrammet som körs när programmet startas. Den skapar ett

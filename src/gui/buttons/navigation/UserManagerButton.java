@@ -1,6 +1,7 @@
-package gui.buttons;
+package gui.buttons.navigation;
 
 import gui.ViewState;
+import gui.buttons.JModifiedButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +14,8 @@ public class UserManagerButton extends JModifiedButton implements
 
 	private BicycleGarageManager manager;
 
-	public UserManagerButton(BicycleGarageManager manager) {
-		super("Visa användare");
+	public UserManagerButton(BicycleGarageManager manager, double size) {
+		super("Visa användare", size);
 		this.manager = manager;
 		setToolTipText("Hanterar användare");
 		addActionListener(this);

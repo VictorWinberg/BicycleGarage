@@ -8,18 +8,21 @@ import javax.swing.JButton;
 @SuppressWarnings("serial")
 public class JModifiedButton extends JButton {
 
-	public JModifiedButton(String text) {
+	private double sizeModifier;
+	
+	public JModifiedButton(String text, double sizeModifier) {
 		super(text);
+		this.sizeModifier = sizeModifier;
 	}
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension((int) (super.getPreferredSize().getWidth() * 1.5),
-				(int) (super.getPreferredSize().getHeight() * 1.5));
+		return new Dimension((int) (super.getPreferredSize().getWidth() * sizeModifier),
+				(int) (super.getPreferredSize().getHeight() * sizeModifier));
 	}
 
 	@Override
 	public Font getFont() {
-		return new Font(Font.SANS_SERIF, Font.BOLD, 13);
+		return new Font(Font.SANS_SERIF, Font.BOLD, (int)(12 * sizeModifier));
 	}
 }

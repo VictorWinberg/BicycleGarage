@@ -1,4 +1,9 @@
-package gui.panels;
+package gui.panels.managers;
+
+import gui.buttons.managers.RegisterBicycleButton;
+import gui.buttons.managers.UnregisterBicycleButton;
+
+import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +29,11 @@ public class BicycleManagerPanel extends JPanel {
 	 */
 	public BicycleManagerPanel(BicycleGarageManager manager) {
 		setBorder(new SoftBevelBorder(1));
-		add(new JLabel("Hantera cyklar osv."));
+		setLayout(new BorderLayout());
+		JPanel panel = new JPanel();
+		panel.add(new RegisterBicycleButton(manager, 1.1));
+		panel.add(new UnregisterBicycleButton(manager, 1.1));
+		add(panel, BorderLayout.NORTH);
+		add(new JLabel("Hantera cyklar osv."), BorderLayout.CENTER);
 	}
 }

@@ -1,9 +1,20 @@
 package main;
 
+import gui.FormState;
 import gui.ViewState;
-import gui.buttons.ExitButton;
-import gui.panels.*;
-import interfaces.*;
+import gui.panels.forms.RegisterBicycleForm;
+import gui.panels.forms.RegisterUserForm;
+import gui.panels.forms.UnregisterBicycleForm;
+import gui.panels.forms.UnregisterUserForm;
+import gui.panels.managers.BicycleManagerPanel;
+import gui.panels.managers.MainManagerPanel;
+import gui.panels.managers.NavigationPanel;
+import gui.panels.managers.SearchManagerPanel;
+import gui.panels.managers.UserManagerPanel;
+import interfaces.BarcodePrinter;
+import interfaces.Database;
+import interfaces.ElectronicLock;
+import interfaces.PinCodeTerminal;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -22,15 +33,16 @@ import database.DatabaseDriver;
  * @author Victor Winberg, Anton Göransson, Povel Larsson, Erik Danielsson, Emma
  *         Asklund, Tobias Olsson
  */
-@SuppressWarnings("serial")
 public class BicycleGarageManager {
 
+	private JFrame frame;
 	private NavigationPanel navPanel;
 	private JPanel panel, mainPanel, userPanel, bicyclePanel, searchPanel;
+//	private JLabel info;
 	private Database db;
 
 	public BicycleGarageManager() {
-		JFrame frame = new JFrame("Operatörsgränssnittet");
+		frame = new JFrame("Operatörsgränssnittet");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(800, 600));
 		frame.setMinimumSize(new Dimension(600, 300));
@@ -53,7 +65,10 @@ public class BicycleGarageManager {
 
 		frame.add(navPanel, BorderLayout.NORTH);
 		frame.add(panel, BorderLayout.CENTER);
-		frame.add(new ExitButton(this), BorderLayout.SOUTH);
+		
+//		info = new JLabel("Informationsflöde?");
+//		info.setHorizontalAlignment(SwingConstants.CENTER);
+//		frame.add(info, BorderLayout.SOUTH);
 
 		frame.pack();
 		frame.setVisible(true);
@@ -71,18 +86,22 @@ public class BicycleGarageManager {
 		case START_STATE:
 			panel.add(mainPanel);
 			navPanel.setTitle("Huvudmeny");
+//			setInfoText("Huvudmenyn öppnad");
 			break;
 		case USER_STATE:
 			panel.add(userPanel);
 			navPanel.setTitle("Användarpanel");
+//			setInfoText("Användarpanelen öppnad");
 			break;
 		case BICYCLE_STATE:
 			panel.add(bicyclePanel);
 			navPanel.setTitle("Cyklelpanel");
+//			setInfoText("Cykelpanelen öppnad");
 			break;
 		case SEARCH_STATE:
 			panel.add(searchPanel);
 			navPanel.setTitle("Sökpanel");
+//			setInfoText("Sökpanelen öppnad");
 			break;
 		}
 		panel.revalidate();
@@ -96,6 +115,44 @@ public class BicycleGarageManager {
 	 */
 	public Database getDB() {
 		return db;
+	}
+	
+//	/** 
+//	 * Sätter informationsflödets text
+//	 * 
+//	 * @param text informationsflödets text
+//	 */
+//	public void setInfoText(String text) {
+//		if(info != null)
+//			info.setText(text);
+//	}
+
+	/**
+	 * Öppnar ett formulär-fönster med läge state.
+	 * 
+	 * @param state
+	 *            Ett FormState läge
+	 */
+	public void form(FormState state) {
+		enable(false);
+		switch (state) {
+		case REGISTER_USER: 
+			new RegisterUserForm(this); 
+			break;
+		case UNREGISTER_USER:
+			new UnregisterUserForm(this);
+			break;
+		case REGISTER_BICYCLE:
+			new RegisterBicycleForm(this);
+			break;
+		case UNREGISTER_BICYCLE:
+			new UnregisterBicycleForm(this);
+			break;
+		}
+	}
+
+	public void enable(boolean b) {
+		frame.enable(b);
 	}
 
 	private BarcodePrinter printer;

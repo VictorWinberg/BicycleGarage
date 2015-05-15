@@ -1,10 +1,14 @@
-package gui.panels;
+package gui.panels.managers;
 
 import gui.JTitle;
-import gui.buttons.*;
+import gui.buttons.navigation.BicycleManagerButton;
+import gui.buttons.navigation.MainManagerButton;
+import gui.buttons.navigation.SearchManagerButton;
+import gui.buttons.navigation.UserManagerButton;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+
 import javax.swing.JPanel;
 
 import main.BicycleGarageManager;
@@ -27,10 +31,10 @@ public class NavigationPanel extends JPanel {
 		add(title, BorderLayout.CENTER);
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
-		panel.add(new MainManagerButton(manager));
-		panel.add(new UserManagerButton(manager));
-		panel.add(new BicycleManagerButton(manager));
-		panel.add(new SearchManagerButton(manager));
+		panel.add(new MainManagerButton(manager, 1.3));
+		panel.add(new UserManagerButton(manager, 1.3));
+		panel.add(new BicycleManagerButton(manager, 1.3));
+		panel.add(new SearchManagerButton(manager, 1.3));
 		add(panel, BorderLayout.SOUTH);
 	}
 

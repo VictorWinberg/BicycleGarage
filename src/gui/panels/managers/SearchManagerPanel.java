@@ -1,4 +1,4 @@
-package gui.panels;
+package gui.panels.managers;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
