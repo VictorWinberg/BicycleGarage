@@ -101,7 +101,7 @@ public class DatabaseDriver implements Database {
 	@Override
 	public User createUser(String personnr, String first_name,
 			String last_name, String mail, String phonenr) {
-		if (EmailValidator.getInstance().isValid(mail) && isSSNValid(personnr)) {
+		if (EmailValidator.getInstance().isValid(mail) && isPNRValid(personnr)) {
 			String chars = "0123456789";
 			while (true) {
 				StringBuilder sb = new StringBuilder();
@@ -431,22 +431,22 @@ public class DatabaseDriver implements Database {
 		return cleared;
 	}
 	
-	private static boolean isSSNValid(String ssn) {
+	private static boolean isPNRValid(String pnr) {
 		boolean isValid = false;
 
-		// Initiera reg ex för SSN.
+		// Initiera reg ex för PNR.
 		String expression = "^\\d{6}[- ]\\d{4}$";
-		CharSequence inputStr = ssn;
+		CharSequence inputStr = pnr;
 		Pattern pattern = Pattern.compile(expression);
 		Matcher matcher = pattern.matcher(inputStr);
 
-		if (matcher.matches() && check(ssn))
+		if (matcher.matches() && check(pnr))
 			isValid = true;
 		return isValid;
 	}
 
-	private static boolean check(String ssn) {
-		StringBuilder sb = new StringBuilder(ssn);
+	private static boolean check(String pnr) {
+		StringBuilder sb = new StringBuilder(pnr);
 		sb.deleteCharAt(6);
 		int[] digits = new int[10];
 		for (int i = 0; i < sb.length(); i++)
@@ -480,9 +480,9 @@ public class DatabaseDriver implements Database {
 
 		int nbr = 0;
 		for (int i = 0; i < 100; i++) {
-			String ssn = "001122-33"+i;
-			if(isSSNValid(ssn)){
-				System.out.println(ssn);
+			String pnr = "001122-33"+i;
+			if(isPNRValid(pnr)){
+				System.out.println(pnr);
 				nbr++;
 			}
 		}
