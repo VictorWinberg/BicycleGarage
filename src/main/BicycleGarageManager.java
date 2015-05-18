@@ -40,7 +40,9 @@ public class BicycleGarageManager {
 
 	private JFrame frame;
 	private NavigationPanel navPanel;
-	private JPanel panel, mainPanel, userPanel, bicyclePanel, searchPanel;
+	private JPanel panel, mainPanel, searchPanel;
+	private UserManagerPanel userPanel;
+	private BicycleManagerPanel bicyclePanel;
 	private Database db;
 
 	public BicycleGarageManager() {
@@ -95,7 +97,7 @@ public class BicycleGarageManager {
 		panel.removeAll();
 		switch (state) {
 		case START_STATE: panel.add(mainPanel); navPanel.setTitle("Huvudmeny"); break;
-		case USER_STATE: panel.add(userPanel); navPanel.setTitle("Användarpanel"); break;
+		case USER_STATE: panel.add(userPanel); navPanel.setTitle("Användarpanel"); userPanel.update(); break;
 		case BICYCLE_STATE: panel.add(bicyclePanel); navPanel.setTitle("Cyklelpanel"); break;
 		case SEARCH_STATE: panel.add(searchPanel); navPanel.setTitle("Sökpanel"); break;
 		}
