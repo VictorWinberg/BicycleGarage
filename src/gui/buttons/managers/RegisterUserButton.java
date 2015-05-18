@@ -1,7 +1,7 @@
 package gui.buttons.managers;
 
-import gui.FormState;
 import gui.buttons.JModifiedButton;
+import gui.panels.FormState;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

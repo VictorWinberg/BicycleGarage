@@ -2,8 +2,11 @@ package gui.panels.managers;
 
 import gui.buttons.managers.RegisterBicycleButton;
 import gui.buttons.managers.UnregisterBicycleButton;
+import interfaces.Database;
 
 import java.awt.BorderLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,7 +23,7 @@ import main.BicycleGarageManager;
  */
 @SuppressWarnings("serial")
 public class BicycleManagerPanel extends JPanel {
-
+	
 	/**
 	 * Skapar en cykelmanagerpanel som hanterar cyklar
 	 * 

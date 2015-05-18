@@ -497,18 +497,18 @@ public class DatabaseDriver implements Database {
 //			db.deleteUser(u);
 //		} else System.out.println("User not found");
 
-//		User victor = db.createUser("950407-0856", "Victor", "Winberg",
-//				"cool@swag.com", "0707133700");
-//		db.insertUser(victor);
-//		
-//		User pelle = db.createUser("950102-0300", "Pelle", "Nilsson",
-//				"pelle@nilsson.se", "0707001122");
-//		db.insertUser(pelle);
-//		
-//		User notfake = db.createUser("950123-4562", "Fake", "Fakesson",
-//				"swag@lol.se", "0707123456");
-//		db.insertUser(notfake);
-//		
+		User victor = db.createUser("950407-0856", "Victor", "Winberg",
+				"cool@swag.com", "0707133700");
+		db.insertUser(victor);
+		
+		User pelle = db.createUser("950102-0300", "Pelle", "Nilsson",
+				"pelle@nilsson.se", "0707001122");
+		db.insertUser(pelle);
+		
+		User notfake = db.createUser("950123-4562", "Fake", "Fakesson",
+				"swag@lol.se", "0707123456");
+		db.insertUser(notfake);
+		
 //		User u = db.getUser("950123-4562");
 //		if(u != null) {
 //			Bicycle bicycle = db.createBicycle(u);

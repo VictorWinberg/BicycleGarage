@@ -1,7 +1,7 @@
 package gui.buttons.navigation;
 
-import gui.ViewState;
 import gui.buttons.JModifiedButton;
+import gui.panels.ViewState;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,4 +1,4 @@
-package gui;
+package gui.panels;
 
 public enum FormState {
 	REGISTER_USER, UNREGISTER_USER, REGISTER_BICYCLE, UNREGISTER_BICYCLE

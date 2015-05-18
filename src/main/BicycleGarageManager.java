@@ -1,7 +1,7 @@
 package main;
 
-import gui.FormState;
-import gui.ViewState;
+import gui.panels.FormState;
+import gui.panels.ViewState;
 import gui.panels.forms.RegisterBicycleForm;
 import gui.panels.forms.RegisterUserForm;
 import gui.panels.forms.UnregisterBicycleForm;
@@ -45,7 +45,7 @@ public class BicycleGarageManager {
 
 	public BicycleGarageManager() {
 		frame = new JFrame("Operatörsgränssnittet");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(800, 600));
 		frame.setMinimumSize(new Dimension(600, 300));
 		frame.setLayout(new BorderLayout(0, 10));
@@ -57,10 +57,16 @@ public class BicycleGarageManager {
 						"Är du säker på att du vill stänga applikationen?",
 						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.WARNING_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
-					frame.dispose();
+					System.exit(0);
 				}
 			}
 		});
+
+		try {
+			db = new DatabaseDriver();
+		} catch (ClassNotFoundException | SQLException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 
 		panel = new JPanel();
 		navPanel = new NavigationPanel(this);
@@ -68,12 +74,6 @@ public class BicycleGarageManager {
 		userPanel = new UserManagerPanel(this);
 		bicyclePanel = new BicycleManagerPanel(this);
 		searchPanel = new SearchManagerPanel(this);
-
-		try {
-			db = new DatabaseDriver();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
 
 		changeState(ViewState.START_STATE);
 
@@ -94,22 +94,10 @@ public class BicycleGarageManager {
 	public void changeState(ViewState state) {
 		panel.removeAll();
 		switch (state) {
-		case START_STATE:
-			panel.add(mainPanel);
-			navPanel.setTitle("Huvudmeny");
-			break;
-		case USER_STATE:
-			panel.add(userPanel);
-			navPanel.setTitle("Användarpanel");
-			break;
-		case BICYCLE_STATE:
-			panel.add(bicyclePanel);
-			navPanel.setTitle("Cyklelpanel");
-			break;
-		case SEARCH_STATE:
-			panel.add(searchPanel);
-			navPanel.setTitle("Sökpanel");
-			break;
+		case START_STATE: panel.add(mainPanel); navPanel.setTitle("Huvudmeny"); break;
+		case USER_STATE: panel.add(userPanel); navPanel.setTitle("Användarpanel"); break;
+		case BICYCLE_STATE: panel.add(bicyclePanel); navPanel.setTitle("Cyklelpanel"); break;
+		case SEARCH_STATE: panel.add(searchPanel); navPanel.setTitle("Sökpanel"); break;
 		}
 		panel.revalidate();
 		panel.repaint();
@@ -121,7 +109,7 @@ public class BicycleGarageManager {
 	 * @return Database databas, annars null
 	 */
 	public Database getDB() {
-		return db;
+		return db; 
 	}
 
 	/**
@@ -133,18 +121,10 @@ public class BicycleGarageManager {
 	public void form(FormState state) {
 		enable(false);
 		switch (state) {
-		case REGISTER_USER: 
-			new RegisterUserForm(this); 
-			break;
-		case UNREGISTER_USER:
-			new UnregisterUserForm(this);
-			break;
-		case REGISTER_BICYCLE:
-			new RegisterBicycleForm(this);
-			break;
-		case UNREGISTER_BICYCLE:
-			new UnregisterBicycleForm(this);
-			break;
+		case REGISTER_USER: new RegisterUserForm(this);  break;
+		case UNREGISTER_USER: new UnregisterUserForm(this); break;
+		case REGISTER_BICYCLE: new RegisterBicycleForm(this); break;
+		case UNREGISTER_BICYCLE: new UnregisterBicycleForm(this); break;
 		}
 	}
 

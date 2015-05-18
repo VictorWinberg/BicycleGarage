@@ -32,7 +32,7 @@ public abstract class Form {
 				if (JOptionPane.showOptionDialog(null,
 						"Är du säker på att du vill stänga formuläret?",
 						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
-						JOptionPane.WARNING_MESSAGE, null, options, options[1]) == JOptionPane.YES_OPTION) {
+						JOptionPane.WARNING_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
 					manager.enable(true);
 					frame.dispose();
 				}
@@ -76,7 +76,7 @@ public abstract class Form {
 				if (JOptionPane.showOptionDialog(null,
 						sb.toString(),
 						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
-						JOptionPane.WARNING_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
+						JOptionPane.QUESTION_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
 					action(stringfield);
 					manager.enable(true);
 					frame.dispose();
