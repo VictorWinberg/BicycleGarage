@@ -29,10 +29,8 @@ public class RegisterUserForm extends Form {
 	public void action(String[] fields) {
 		System.out.println("Användareregistrering:");
 		Database db = manager.getDB();
-		// for (int i = 0; i < fields.length; i++)
 		User user = db.createUser(fields[0], fields[1], fields[2], fields[3],
 				fields[4]);
 		db.insertUser(user);
-		//System.out.println(fields[i]);
 	}
 }
