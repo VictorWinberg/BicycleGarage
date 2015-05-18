@@ -73,10 +73,11 @@ public abstract class Form {
 					sb.append("\n" + labels[i] + ": " + stringfield[i]);
 				}
 				String options[] = { "Ja, " + title.split(" ")[0], "Nej" };
-				if (action(stringfield) && JOptionPane.showOptionDialog(null,
+				if (check(stringfield) && JOptionPane.showOptionDialog(null,
 						sb.toString(),
 						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
+					action(stringfield);
 					manager.enable(true);
 					frame.dispose();
 				}
@@ -93,6 +94,7 @@ public abstract class Form {
 	
 	public abstract String[] getLabels();
 	public abstract int[] getWidths();
-	public abstract boolean action(String[] fields);
+	public abstract boolean check(String[] fields);
+	public abstract void action(String[] fields);
 	
 }

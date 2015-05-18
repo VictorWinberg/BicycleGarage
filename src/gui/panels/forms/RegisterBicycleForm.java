@@ -27,22 +27,28 @@ public class RegisterBicycleForm extends Form {
 		int[] widths = { 11, 15};
 		return widths;
 	}
-
+	
+	private Bicycle bc;
+	
 	@Override
-	public boolean action(String[] fields) {
+	public boolean check(String[] fields) {
 		Database db = manager.getDB();
 		User user = db.getUser(fields[0]);
 		User userPIN = db.getUserWithPIN(fields[1]);
 		if(user.equals(userPIN)){
 			try {
-				Bicycle bc = db.createBicycle(user);
-				db.insertBicycle(bc);
-				manager.changeState(ViewState.BICYCLE_STATE);
+				bc = db.createBicycle(user);
 				return true;
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
 			}
 		} else JOptionPane.showMessageDialog(null, "Felaktig PIN");
 		return false;
+	}
+
+	@Override
+	public void action(String[] fields) {
+		manager.getDB().insertBicycle(bc);
+		manager.changeState(ViewState.BICYCLE_STATE);
 	}
 }

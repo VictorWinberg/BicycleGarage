@@ -28,19 +28,24 @@ public class RegisterUserForm extends Form {
 		return widths;
 	}
 
+	private User user;
+	
 	@Override
-	public boolean action(String[] fields) {
-		System.out.println("Användareregistrering:");
+	public boolean check(String[] fields) {
 		Database db = manager.getDB();
 		try {
-			User user = db.createUser(fields[0], fields[1], fields[2], fields[3],
+			user = db.createUser(fields[0], fields[1], fields[2], fields[3],
 					fields[4]);
-			db.insertUser(user);
-			manager.changeState(ViewState.USER_STATE);
 			return true;
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			return false;
 		}
+	}
+	
+	@Override
+	public void action(String[] fields) {
+		manager.getDB().insertUser(user);
+		manager.changeState(ViewState.USER_STATE);
 	}
 }
