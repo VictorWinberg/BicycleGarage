@@ -25,14 +25,14 @@ public class ClearInactiveUsers extends JModifiedButton implements
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object[] options = { "Ja, rensa", "Nej" };
-		switch (JOptionPane.showOptionDialog(null, "Rensa inaktiva användare?",
-				"Rensa", JOptionPane.YES_NO_OPTION,
+		switch (JOptionPane.showOptionDialog(null, "Är du säker på att du vill rensa inaktiva användare?",
+				"Säkerhetsfråga", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0])) {
 		case 0:
 			if(manager.getDB().clearInactiveUsers())
-				JOptionPane.showMessageDialog(null, "Inaktiva användare borttagna", "Rensa", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Inaktiva användare borttagna", "Rensning av inaktiva användare", JOptionPane.INFORMATION_MESSAGE);
 			else
-				JOptionPane.showMessageDialog(null, "Inga inaktiva användare", "Rensa", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Inga inaktiva användare", "Rensning av inaktiva användare", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }

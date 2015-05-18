@@ -18,9 +18,12 @@ import interfaces.PinCodeTerminal;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import database.DatabaseDriver;
@@ -38,7 +41,6 @@ public class BicycleGarageManager {
 	private JFrame frame;
 	private NavigationPanel navPanel;
 	private JPanel panel, mainPanel, userPanel, bicyclePanel, searchPanel;
-//	private JLabel info;
 	private Database db;
 
 	public BicycleGarageManager() {
@@ -47,6 +49,18 @@ public class BicycleGarageManager {
 		frame.setPreferredSize(new Dimension(800, 600));
 		frame.setMinimumSize(new Dimension(600, 300));
 		frame.setLayout(new BorderLayout(0, 10));
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				String options[] = { "Ja, stäng", "Nej" };
+				if (JOptionPane.showOptionDialog(null,
+						"Är du säker på att du vill stänga applikationen?",
+						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.WARNING_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
+					frame.dispose();
+				}
+			}
+		});
 
 		panel = new JPanel();
 		navPanel = new NavigationPanel(this);
@@ -65,12 +79,9 @@ public class BicycleGarageManager {
 
 		frame.add(navPanel, BorderLayout.NORTH);
 		frame.add(panel, BorderLayout.CENTER);
-		
-//		info = new JLabel("Informationsflöde?");
-//		info.setHorizontalAlignment(SwingConstants.CENTER);
-//		frame.add(info, BorderLayout.SOUTH);
 
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
@@ -86,22 +97,18 @@ public class BicycleGarageManager {
 		case START_STATE:
 			panel.add(mainPanel);
 			navPanel.setTitle("Huvudmeny");
-//			setInfoText("Huvudmenyn öppnad");
 			break;
 		case USER_STATE:
 			panel.add(userPanel);
 			navPanel.setTitle("Användarpanel");
-//			setInfoText("Användarpanelen öppnad");
 			break;
 		case BICYCLE_STATE:
 			panel.add(bicyclePanel);
 			navPanel.setTitle("Cyklelpanel");
-//			setInfoText("Cykelpanelen öppnad");
 			break;
 		case SEARCH_STATE:
 			panel.add(searchPanel);
 			navPanel.setTitle("Sökpanel");
-//			setInfoText("Sökpanelen öppnad");
 			break;
 		}
 		panel.revalidate();
@@ -116,16 +123,6 @@ public class BicycleGarageManager {
 	public Database getDB() {
 		return db;
 	}
-	
-//	/** 
-//	 * Sätter informationsflödets text
-//	 * 
-//	 * @param text informationsflödets text
-//	 */
-//	public void setInfoText(String text) {
-//		if(info != null)
-//			info.setText(text);
-//	}
 
 	/**
 	 * Öppnar ett formulär-fönster med läge state.
@@ -151,6 +148,7 @@ public class BicycleGarageManager {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void enable(boolean b) {
 		frame.enable(b);
 	}
