@@ -29,12 +29,13 @@ public class UnregisterUserForm extends Form {
 	}
 
 	@Override
-	public void action(String[] fields) {
+	public boolean action(String[] fields) {
 		Database db = manager.getDB();
 		User user = db.getUser(fields[0]);
 		User user1 = db.getUserWithPIN(fields[1]);
-		if(user.equals(user1));
-		db.deleteUser(user);
+		if(user.equals(user1))
+			db.deleteUser(user);
 		manager.changeState(ViewState.USER_STATE);
+		return true;
 	}
 }

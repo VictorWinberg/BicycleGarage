@@ -113,8 +113,10 @@ public class DatabaseDriver implements Database {
 				if (getUserWithPIN(pin) == null)
 					return new User(personnr, first_name, last_name, mail, phonenr, pin, 0, 0);
 			}
-		} else throw new Exception(EmailValidator.getInstance().isValid(mail) ? 
-					"Ditt personnummer är felaktigt" : "Ditt personnummer och din mailadress är felaktig");
+		} else if(EmailValidator.getInstance().isValid(mail)) {
+			throw new Exception("Ditt personnummer är felaktigt");
+		} else throw new Exception(isPNRValid(personnr) ? 
+					"Din mailadress är felaktigt" : "Ditt personnummer och din mailadress är felaktig");
 	}
 
 	@Override
@@ -281,7 +283,7 @@ public class DatabaseDriver implements Database {
 	@Override
 	public Bicycle createBicycle(User user) throws Exception {
 		if(user == null)
-			 throw new Exception("Ditt personnummer är felaktigt");
+			 throw new Exception("Användaren är felaktigt");
 		String chars = "0123456789";
 		while (true) {
 			StringBuilder sb = new StringBuilder();
@@ -499,7 +501,7 @@ public class DatabaseDriver implements Database {
 //			db.deleteUser(u);
 //		} else System.out.println("User not found");
 
-		User victor = db.createUser("950407-0856", "Victor", "Winberg",
+		try{User victor = db.createUser("950407-0856", "Victor", "Winberg",
 				"cool@swag.com", "0707133700");
 		db.insertUser(victor);
 		
@@ -510,6 +512,9 @@ public class DatabaseDriver implements Database {
 		User notfake = db.createUser("950123-4562", "Fake", "Fakesson",
 				"swag@lol.se", "0707123456");
 		db.insertUser(notfake);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 //		User u = db.getUser("950123-4562");
 //		if(u != null) {

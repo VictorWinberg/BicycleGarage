@@ -26,10 +26,11 @@ public class UnregisterBicycleForm extends Form {
 	}
 
 	@Override
-	public void action(String[] fields) {
+	public boolean action(String[] fields) {
 		Database db = manager.getDB();
 		Bicycle bc = db.getBicycle(fields[0]);
 		db.deleteBicycle(bc);
 		manager.changeState(ViewState.BICYCLE_STATE);
+		return true;
 	}
 }

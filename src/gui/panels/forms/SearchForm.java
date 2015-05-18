@@ -37,7 +37,7 @@ public class SearchForm extends Form {
 	}
 
 	@Override
-	public void action(String[] fields) {
+	public boolean action(String[] fields) {
 		Database db = manager.getDB();
 		ResultSet rs = db.extractUsers();
 		Object[][] data = new Object[1][8];
@@ -65,8 +65,10 @@ public class SearchForm extends Form {
 //			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 			JScrollPane scrollPane = new JScrollPane(table);
 //			add(scrollPane, BorderLayout.SOUTH);
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 }

@@ -1,5 +1,7 @@
 package gui.panels.forms;
 
+import javax.swing.JOptionPane;
+
 import gui.panels.ViewState;
 import interfaces.Database;
 import database.User;
@@ -27,12 +29,18 @@ public class RegisterUserForm extends Form {
 	}
 
 	@Override
-	public void action(String[] fields) {
+	public boolean action(String[] fields) {
 		System.out.println("Användareregistrering:");
 		Database db = manager.getDB();
-		User user = db.createUser(fields[0], fields[1], fields[2], fields[3],
-				fields[4]);
-		db.insertUser(user);
-		manager.changeState(ViewState.USER_STATE);
+		try {
+			User user = db.createUser(fields[0], fields[1], fields[2], fields[3],
+					fields[4]);
+			db.insertUser(user);
+			manager.changeState(ViewState.USER_STATE);
+			return true;
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			return false;
+		}
 	}
 }
