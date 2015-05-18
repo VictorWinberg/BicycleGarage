@@ -24,9 +24,10 @@ public interface Database {
 	 * @param last_name Användarens efternamn
 	 * @param mail Användarens emailadress
 	 * @param phonenr Användarens telefonnummer
-	 * @return Ny användare User, om felaktig indata retuneras null */
+	 * @return Ny användare User, om felaktig indata retuneras null 
+	 * @throws Exception meddelande om mail eller personnummer är felaktig */
 	public User createUser(String personnr, String first_name, String last_name,
-			String mail, String phonenr);
+			String mail, String phonenr) throws Exception;
 
 	/** Lägger till användare user.
 	 *  @param user
@@ -64,8 +65,9 @@ public interface Database {
 	
 	/** Skapar en ny cykel
 	 * @param user
-	 * @return Ny cykel Bicycle, annars null */
-	public Bicycle createBicycle(User user);
+	 * @return Ny cykel Bicycle, annars null 
+	 * @throws Exception meddelande om användaren är felaktig */
+	public Bicycle createBicycle(User user) throws Exception;
 	
 	/** Lägger till cykeln bicycle.
 	 * @param bicycle

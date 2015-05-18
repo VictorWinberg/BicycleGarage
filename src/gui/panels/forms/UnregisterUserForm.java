@@ -1,5 +1,6 @@
 package gui.panels.forms;
 
+import gui.panels.ViewState;
 import interfaces.Database;
 
 import java.sql.ResultSet;
@@ -34,5 +35,6 @@ public class UnregisterUserForm extends Form {
 		User user1 = db.getUserWithPIN(fields[1]);
 		if(user.equals(user1));
 		db.deleteUser(user);
+		manager.changeState(ViewState.USER_STATE);
 	}
 }

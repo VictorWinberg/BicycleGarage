@@ -1,5 +1,6 @@
 package gui.panels.forms;
 
+import gui.panels.ViewState;
 import interfaces.Database;
 import main.BicycleGarageManager;
 import database.Bicycle;
@@ -29,5 +30,6 @@ public class UnregisterBicycleForm extends Form {
 		Database db = manager.getDB();
 		Bicycle bc = db.getBicycle(fields[0]);
 		db.deleteBicycle(bc);
+		manager.changeState(ViewState.BICYCLE_STATE);
 	}
 }

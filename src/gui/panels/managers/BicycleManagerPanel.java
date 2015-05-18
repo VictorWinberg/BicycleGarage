@@ -26,7 +26,9 @@ import main.BicycleGarageManager;
  */
 @SuppressWarnings("serial")
 public class BicycleManagerPanel extends JPanel {
+	
 	private BicycleGarageManager manager;
+	private JPanel northPanel;
 
 	/**
 	 * Skapar en cykelmanagerpanel som hanterar cyklar
@@ -38,18 +40,17 @@ public class BicycleManagerPanel extends JPanel {
 		this.manager = manager;
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
-		JPanel panel = new JPanel();
-
-		panel.add(new RegisterBicycleButton(manager, 1.1));
-		panel.add(new UnregisterBicycleButton(manager, 1.1));
-		add(panel, BorderLayout.NORTH);
-		add(new JLabel("Hantera cyklar osv."), BorderLayout.CENTER);
-		update();
+		northPanel = new JPanel();
+		northPanel.add(new RegisterBicycleButton(manager, 1.1));
+		northPanel.add(new UnregisterBicycleButton(manager, 1.1));
 		// "Lediga platser"
 
 	}
 
 	public void update() {
+		removeAll();
+		add(northPanel, BorderLayout.NORTH);
+		
 		Database db = manager.getDB();
 		try {
 			ResultSet bicycles = db.extractBicycles();

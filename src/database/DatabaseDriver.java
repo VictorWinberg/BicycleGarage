@@ -100,7 +100,7 @@ public class DatabaseDriver implements Database {
 
 	@Override
 	public User createUser(String personnr, String first_name,
-			String last_name, String mail, String phonenr) {
+			String last_name, String mail, String phonenr) throws Exception {
 		if (EmailValidator.getInstance().isValid(mail) && isPNRValid(personnr)) {
 			String chars = "0123456789";
 			while (true) {
@@ -113,8 +113,8 @@ public class DatabaseDriver implements Database {
 				if (getUserWithPIN(pin) == null)
 					return new User(personnr, first_name, last_name, mail, phonenr, pin, 0, 0);
 			}
-		}
-		return null;
+		} else throw new Exception(EmailValidator.getInstance().isValid(mail) ? 
+					"Ditt personnummer är felaktigt" : "Ditt personnummer och din mailadress är felaktig");
 	}
 
 	@Override
@@ -279,7 +279,9 @@ public class DatabaseDriver implements Database {
 	}
 	
 	@Override
-	public Bicycle createBicycle(User user) {
+	public Bicycle createBicycle(User user) throws Exception {
+		if(user == null)
+			 throw new Exception("Ditt personnummer är felaktigt");
 		String chars = "0123456789";
 		while (true) {
 			StringBuilder sb = new StringBuilder();

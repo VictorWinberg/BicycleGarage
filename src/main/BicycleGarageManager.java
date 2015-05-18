@@ -4,6 +4,7 @@ import gui.panels.FormState;
 import gui.panels.ViewState;
 import gui.panels.forms.RegisterBicycleForm;
 import gui.panels.forms.RegisterUserForm;
+import gui.panels.forms.SearchForm;
 import gui.panels.forms.UnregisterBicycleForm;
 import gui.panels.forms.UnregisterUserForm;
 import gui.panels.managers.BicycleManagerPanel;
@@ -98,7 +99,7 @@ public class BicycleGarageManager {
 		switch (state) {
 		case START_STATE: panel.add(mainPanel); navPanel.setTitle("Huvudmeny"); break;
 		case USER_STATE: panel.add(userPanel); navPanel.setTitle("Användarpanel"); userPanel.update(); break;
-		case BICYCLE_STATE: panel.add(bicyclePanel); navPanel.setTitle("Cyklelpanel"); break;
+		case BICYCLE_STATE: panel.add(bicyclePanel); navPanel.setTitle("Cykelpanel"); bicyclePanel.update(); break;
 		case SEARCH_STATE: panel.add(searchPanel); navPanel.setTitle("Sökpanel"); break;
 		}
 		panel.revalidate();
@@ -127,6 +128,7 @@ public class BicycleGarageManager {
 		case UNREGISTER_USER: new UnregisterUserForm(this); break;
 		case REGISTER_BICYCLE: new RegisterBicycleForm(this); break;
 		case UNREGISTER_BICYCLE: new UnregisterBicycleForm(this); break;
+		case SEARCH_USER: new SearchForm(this); break;
 		}
 	}
 

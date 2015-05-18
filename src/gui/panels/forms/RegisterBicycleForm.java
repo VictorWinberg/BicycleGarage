@@ -1,5 +1,6 @@
 package gui.panels.forms;
 
+import gui.panels.ViewState;
 import interfaces.Database;
 import main.BicycleGarageManager;
 import database.Bicycle;
@@ -29,11 +30,11 @@ public class RegisterBicycleForm extends Form {
 	public void action(String[] fields) {
 		Database db = manager.getDB();
 		User user = db.getUser(fields[0]);
-		User user1 = db.getUserWithPIN(fields[1]);
-		if(user.equals(user1)){
+		User userPIN = db.getUserWithPIN(fields[1]);
+		if(user.equals(userPIN)){
 			Bicycle bc = db.createBicycle(user);
 			db.insertBicycle(bc);
 		}
-		
+		manager.changeState(ViewState.BICYCLE_STATE);
 	}
 }

@@ -1,5 +1,6 @@
 package gui.panels.forms;
 
+import gui.panels.ViewState;
 import interfaces.Database;
 import database.User;
 import main.BicycleGarageManager;
@@ -32,5 +33,6 @@ public class RegisterUserForm extends Form {
 		User user = db.createUser(fields[0], fields[1], fields[2], fields[3],
 				fields[4]);
 		db.insertUser(user);
+		manager.changeState(ViewState.USER_STATE);
 	}
 }
