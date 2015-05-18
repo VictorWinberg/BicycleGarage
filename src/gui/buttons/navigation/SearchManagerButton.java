@@ -1,6 +1,7 @@
 package gui.buttons.navigation;
 
 import gui.buttons.JModifiedButton;
+import gui.panels.FormState;
 import gui.panels.ViewState;
 
 import java.awt.event.ActionEvent;
@@ -23,6 +24,6 @@ public class SearchManagerButton extends JModifiedButton implements
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.changeState(ViewState.SEARCH_STATE);
+		manager.form(FormState.SEARCH_USER);
 	}
 }

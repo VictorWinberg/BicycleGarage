@@ -4,6 +4,7 @@ import gui.panels.FormState;
 import gui.panels.ViewState;
 import gui.panels.forms.RegisterBicycleForm;
 import gui.panels.forms.RegisterUserForm;
+import gui.panels.forms.SearchForm;
 import gui.panels.forms.UnregisterBicycleForm;
 import gui.panels.forms.UnregisterUserForm;
 import gui.panels.managers.BicycleManagerPanel;
@@ -127,6 +128,7 @@ public class BicycleGarageManager {
 		case UNREGISTER_USER: new UnregisterUserForm(this); break;
 		case REGISTER_BICYCLE: new RegisterBicycleForm(this); break;
 		case UNREGISTER_BICYCLE: new UnregisterBicycleForm(this); break;
+		case SEARCH_USER: new SearchForm(this); break;
 		}
 	}
 
