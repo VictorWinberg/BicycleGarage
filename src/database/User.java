@@ -43,4 +43,11 @@ public class User {
 		last_name + " | " + mail + " | " + phonenr + " | " + 
 		pin + " | " + reservedSlots + " | " + freeSlots;
 	}
+	public boolean equals(Object o){
+		if( o instanceof User){
+			return personnr.equals(((User)o).personnr);
+		} else {
+			return false;
+		}
+	}
 }
