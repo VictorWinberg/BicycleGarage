@@ -6,7 +6,6 @@ import interfaces.Database;
 
 import java.awt.BorderLayout;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.swing.JPanel;
@@ -14,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.SoftBevelBorder;
 
-import database.User;
 import main.BicycleGarageManager;
 
 /**
@@ -27,6 +25,12 @@ import main.BicycleGarageManager;
 @SuppressWarnings("serial")
 public class UserManagerPanel extends JPanel {
 
+	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Mail",
+			"Telefonnummer", "PIN-kod", "Reserverade platser",
+			"Lediga platser" };
+	private BicycleGarageManager manager;
+	private JPanel northPanel;
+	
 	/**
 	 * Skapar en användarmanagerpanel som hanterar användare
 	 * 
@@ -34,42 +38,43 @@ public class UserManagerPanel extends JPanel {
 	 *            cykelgaragemanager
 	 */
 	public UserManagerPanel(BicycleGarageManager manager) {
+		this.manager = manager;
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
-		JPanel panel = new JPanel();
-		panel.add(new RegisterUserButton(manager, 1.1));
-		panel.add(new UnregisterUserButton(manager, 1.1));
-		add(panel, BorderLayout.NORTH);
+		northPanel = new JPanel();
+		northPanel.add(new RegisterUserButton(manager, 1.1));
+		northPanel.add(new UnregisterUserButton(manager, 1.1));
+	}
+	
+	public void update() {
+		removeAll();
+		add(northPanel, BorderLayout.NORTH);
+		
 		Database db = manager.getDB();
-		String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Mail",
-				"Telefonnummer", "PIN-kod", "Reserverade platser",
-				"Lediga platser" };
+		ResultSet users = db.extractUsers();
 		try {
-			ResultSet users = db.extractUsers();
-			ResultSetMetaData rmsd = users.getMetaData();
 			users.last();
 			Object[][] data = new Object[users.getRow()][8];
 			users.beforeFirst();
 			int j = 0;
 			while (users.next()) {
-				for (int i = 0; i < 6; i++) {
+				for (int i = 0; i < 6; i++)
 					data[j][i] = users.getString(i + 1);
-				}
 				data[j][6] = users.getInt(7);
 				data[j][7] = users.getInt(8);
 				j++;
 			}
 			JTable table = new JTable(data, columnNames);
 			add(table.getTableHeader(), BorderLayout.CENTER);
-			// table.setEnabled(false);
-			// table.setFillsViewportHeight(true);
-			// table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			
+			table.setEnabled(false);
+//			table.setFillsViewportHeight(true);
+//			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 			JScrollPane scrollPane = new JScrollPane(table);
 			add(scrollPane, BorderLayout.SOUTH);
-
-		} catch (SQLException e) {
+			
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
 }

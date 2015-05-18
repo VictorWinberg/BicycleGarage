@@ -3,8 +3,11 @@ package gui.buttons.navigation;
 import gui.buttons.JModifiedButton;
 import gui.panels.ViewState;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JLabel;
 
 import main.BicycleGarageManager;
 
