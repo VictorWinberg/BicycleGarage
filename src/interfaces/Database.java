@@ -98,4 +98,8 @@ public interface Database {
 	/** Rensar alla inaktiva användare
 	 * @return true om någon användare tagits bort, annars false */
 	boolean clearInactiveUsers();
+	
+	/** Kontrollerar om personnummert pnr är korrekt
+	 * @return true om personummert är korrekt, annars false */
+	public boolean isPNRValid(String pnr);
 }

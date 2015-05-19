@@ -101,7 +101,8 @@ public class DatabaseDriver implements Database {
 	@Override
 	public User createUser(String personnr, String first_name,
 			String last_name, String mail, String phonenr) throws Exception {
-		if (EmailValidator.getInstance().isValid(mail) && isPNRValid(personnr)) {
+		if (isPNRValid(personnr) && first_name.matches("[A-ö]{2,25}") && last_name.matches("[A-ö]{2,25}") && 
+			EmailValidator.getInstance().isValid(mail) && phonenr.matches("[0-9]{10}")) {
 			String chars = "0123456789";
 			while (true) {
 				StringBuilder sb = new StringBuilder();
@@ -113,10 +114,38 @@ public class DatabaseDriver implements Database {
 				if (getUserWithPIN(pin) == null)
 					return new User(personnr, first_name, last_name, mail, phonenr, pin, 0, 0);
 			}
-		} else if(EmailValidator.getInstance().isValid(mail)) {
-			throw new Exception("Ditt personnummer är felaktigt");
-		} else throw new Exception(isPNRValid(personnr) ? 
-					"Din mailadress är felaktigt" : "Ditt personnummer och din mailadress är felaktig");
+		} else {
+			StringBuilder sb = new StringBuilder("Felaktigt: ");
+			int length = sb.length();
+			if(!isPNRValid(personnr)) {
+				sb.append("Personnummer");
+			}
+			if(!first_name.matches("[A-ö]{2,25}")) {
+				if(sb.length() > length)
+					sb.append(", förnamn");
+				else
+					sb.append("Förnamn");
+			}
+			if(!last_name.matches("[A-ö]{2,25}")) {
+				if(sb.length() > length)
+					sb.append(", efternamn");
+				else
+					sb.append("Efternamn");
+			}
+			if(!EmailValidator.getInstance().isValid(mail)) {
+				if(sb.length() > length)
+					sb.append(", mailadress");
+				else
+					sb.append("Mailadress");
+			}
+			if(!phonenr.matches("[0-9]{10}")) {
+				if(sb.length() > length)
+					sb.append(", telefonnummer");
+				else
+					sb.append("Telefonnummer");
+			}
+			throw new Exception(sb.toString());
+		}
 	}
 
 	@Override
@@ -432,7 +461,7 @@ public class DatabaseDriver implements Database {
 		return cleared;
 	}
 	
-	private static boolean isPNRValid(String pnr) {
+	public boolean isPNRValid(String pnr) {
 		boolean isValid = false;
 
 		// Initiera reg ex för PNR.
@@ -446,7 +475,7 @@ public class DatabaseDriver implements Database {
 		return isValid;
 	}
 
-	private static boolean check(String pnr) {
+	private boolean check(String pnr) {
 		StringBuilder sb = new StringBuilder(pnr);
 		sb.deleteCharAt(6);
 		int[] digits = new int[10];
@@ -467,7 +496,7 @@ public class DatabaseDriver implements Database {
 		return sum % 10 == 0;
 	}
 
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		DatabaseDriver db = null;
 		try {
 			db = new DatabaseDriver();

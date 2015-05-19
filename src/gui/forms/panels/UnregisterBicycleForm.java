@@ -1,5 +1,7 @@
 package gui.forms.panels;
 
+import javax.swing.JOptionPane;
+
 import gui.managers.ViewState;
 import interfaces.Database;
 import main.BicycleGarageManager;
@@ -25,16 +27,21 @@ public class UnregisterBicycleForm extends Form {
 		return widths;
 	}
 	
+	private Bicycle bc;
+	
 	@Override
 	public boolean check(String[] fields) {
-		return true;
+		bc = manager.getDB().getBicycle(fields[0]);
+		if(bc == null) {
+			JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + fields[0] + " finns inte.");
+			return false;
+		} else
+			return true;
 	}
 
 	@Override
 	public void action(String[] fields) {
-		Database db = manager.getDB();
-		Bicycle bc = db.getBicycle(fields[0]);
-		db.deleteBicycle(bc);
+		manager.getDB().deleteBicycle(bc);
 		manager.changeState(ViewState.BICYCLE_STATE);
 	}
 }

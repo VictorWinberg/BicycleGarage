@@ -1,24 +1,19 @@
 package gui.forms.panels;
 
 import gui.managers.ViewState;
-import interfaces.Database;
-
 import javax.swing.JOptionPane;
 
 import main.BicycleGarageManager;
 import database.User;
 
 public class RegisterUserForm extends Form {
-	private BicycleGarageManager manager;
 
 	public RegisterUserForm(BicycleGarageManager manager) {
 		super(manager, "Registrera användare");
-		this.manager = manager;
 	}
 	
 	public RegisterUserForm(BicycleGarageManager manager, String altTitle) {
 		super(manager, altTitle);
-		this.manager = manager;
 	}
 
 	@Override
@@ -38,20 +33,23 @@ public class RegisterUserForm extends Form {
 	
 	@Override
 	public boolean check(String[] fields) {
-		Database db = manager.getDB();
 		try {
-			user = db.createUser(fields[0], fields[1], fields[2], fields[3],
-					fields[4]);
-			return true;
+			user = db.createUser(fields[0], fields[1], fields[2], fields[3], fields[4]);
+			if(db.getUser(fields[0]) == null) {
+				JOptionPane.showMessageDialog(null, "Användaren är redan registrerad", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
+		return true;
 	}
 	
 	@Override
 	public void action(String[] fields) {
-		manager.getDB().insertUser(user);
+		db.insertUser(user);
 		manager.changeState(ViewState.USER_STATE);
+		JOptionPane.showMessageDialog(null, "Ny användare skapad med PIN-koden " + user.getPIN());
 	}
 }

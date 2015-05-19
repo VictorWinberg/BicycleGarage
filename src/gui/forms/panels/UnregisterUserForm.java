@@ -1,16 +1,16 @@
 package gui.forms.panels;
 
+import javax.swing.JOptionPane;
+
 import gui.managers.ViewState;
 import interfaces.Database;
 import main.BicycleGarageManager;
 import database.User;
 
 public class UnregisterUserForm extends Form {
-	private BicycleGarageManager manager;
 
 	public UnregisterUserForm(BicycleGarageManager manager) {
 		super(manager, "Avregistrera användare");
-		this.manager = manager;
 	}
 
 	@Override
@@ -25,21 +25,33 @@ public class UnregisterUserForm extends Form {
 		return widths;
 	}
 	
+	private User user;
+	
 	@Override
 	public boolean check(String[] fields) {
-		Database db = manager.getDB();
-		User user = db.getUser(fields[0]);
-		User user1 = db.getUserWithPIN(fields[1]);
-		if(user.equals(user1))
-			return true;
-		else return false;
+		try {
+			db.createUser(fields[0], "firstname", "lastname", "name@example.com", "0707001122");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		user = db.getUser(fields[0]);
+		if(user == null) {
+			JOptionPane.showMessageDialog(null, "Personnumret saknar användare", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		User checkUser = db.getUserWithPIN(fields[1]);
+		if(!user.equals(checkUser)) {
+			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public void action(String[] fields) {
-		Database db = manager.getDB();
-		User user = db.getUser(fields[0]);
 		db.deleteUser(user);
 		manager.changeState(ViewState.USER_STATE);
+		JOptionPane.showMessageDialog(null, "Användaren är borttagen");
 	}
 }

@@ -166,7 +166,7 @@ public class BicycleGarageManager {
 		terminal.lightLED(1, 1);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		new BicycleGarageManager();
 	}
 }

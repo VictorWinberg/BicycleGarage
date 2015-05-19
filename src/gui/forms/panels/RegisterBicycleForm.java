@@ -10,11 +10,9 @@ import database.Bicycle;
 import database.User;
 
 public class RegisterBicycleForm extends Form {
-	private BicycleGarageManager manager;
 	
 	public RegisterBicycleForm(BicycleGarageManager manager) {
 		super(manager, "Registrera cykel");
-		this.manager = manager;
 	}
 
 	@Override
@@ -33,10 +31,9 @@ public class RegisterBicycleForm extends Form {
 	
 	@Override
 	public boolean check(String[] fields) {
-		Database db = manager.getDB();
 		User user = db.getUser(fields[0]);
-		User userPIN = db.getUserWithPIN(fields[1]);
-		if(user.equals(userPIN)){
+		User checkUser = db.getUserWithPIN(fields[1]);
+		if(user.equals(checkUser)){
 			try {
 				bc = db.createBicycle(user);
 				return true;
@@ -49,7 +46,7 @@ public class RegisterBicycleForm extends Form {
 
 	@Override
 	public void action(String[] fields) {
-		manager.getDB().insertBicycle(bc);
+		db.insertBicycle(bc);
 		manager.changeState(ViewState.BICYCLE_STATE);
 	}
 }
