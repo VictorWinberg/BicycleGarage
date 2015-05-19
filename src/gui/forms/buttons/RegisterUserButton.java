@@ -1,7 +1,7 @@
-package gui.buttons.forms;
+package gui.forms.buttons;
 
-import gui.buttons.JModifiedButton;
-import gui.panels.forms.SearchForm;
+import gui.JModifiedButton;
+import gui.forms.panels.RegisterUserForm;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,21 +9,20 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class SearchButton extends JModifiedButton implements
+public class RegisterUserButton extends JModifiedButton implements
 		ActionListener {
 
 	private BicycleGarageManager manager;
 
-	public SearchButton(BicycleGarageManager manager, double size) {
-		super("Sök", size);
+	public RegisterUserButton(BicycleGarageManager manager, double size) {
+		super("Registrera användare", size);
 		this.manager = manager;
-		setToolTipText("Sökfunktion");
 		addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		manager.enable(false);
-		new SearchForm(manager);
+		new RegisterUserForm(manager);
 	}
 }

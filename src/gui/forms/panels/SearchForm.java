@@ -1,4 +1,4 @@
-package gui.panels.forms;
+package gui.forms.panels;
 
 import interfaces.Database;
 

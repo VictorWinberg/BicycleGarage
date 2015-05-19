@@ -1,4 +1,4 @@
-package gui.buttons;
+package gui;
 
 import java.awt.Dimension;
 import java.awt.Font;

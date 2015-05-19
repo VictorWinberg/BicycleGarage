@@ -1,6 +1,6 @@
-package gui.buttons.forms;
+package gui.forms.buttons;
 
-import gui.buttons.JModifiedButton;
+import gui.JModifiedButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

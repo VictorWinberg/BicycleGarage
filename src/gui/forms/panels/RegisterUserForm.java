@@ -1,6 +1,6 @@
-package gui.panels.forms;
+package gui.forms.panels;
 
-import gui.panels.ViewState;
+import gui.ViewState;
 import interfaces.Database;
 
 import javax.swing.JOptionPane;

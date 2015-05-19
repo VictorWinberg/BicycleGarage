@@ -1,4 +1,4 @@
-package gui.panels.forms;
+package gui.forms.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

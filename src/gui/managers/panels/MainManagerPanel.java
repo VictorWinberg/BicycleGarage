@@ -1,12 +1,12 @@
-package gui.panels.managers;
+package gui.managers.panels;
 
-import gui.buttons.forms.ClearInactiveUsers;
-import gui.buttons.forms.EditUserButton;
-import gui.buttons.forms.RegisterBicycleButton;
-import gui.buttons.forms.RegisterUserButton;
-import gui.buttons.forms.UnregisterBicycleButton;
-import gui.buttons.forms.UnregisterUserButton;
-import gui.buttons.managers.ExitButton;
+import gui.forms.buttons.ClearInactiveUsers;
+import gui.forms.buttons.EditUserButton;
+import gui.forms.buttons.RegisterBicycleButton;
+import gui.forms.buttons.RegisterUserButton;
+import gui.forms.buttons.UnregisterBicycleButton;
+import gui.forms.buttons.UnregisterUserButton;
+import gui.managers.buttons.ExitButton;
 
 import java.awt.GridLayout;
 

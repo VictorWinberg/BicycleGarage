@@ -1,7 +1,7 @@
-package gui.panels.managers;
+package gui.managers.panels;
 
-import gui.buttons.forms.RegisterBicycleButton;
-import gui.buttons.forms.UnregisterBicycleButton;
+import gui.forms.buttons.RegisterBicycleButton;
+import gui.forms.buttons.UnregisterBicycleButton;
 import interfaces.Database;
 
 import java.awt.BorderLayout;
