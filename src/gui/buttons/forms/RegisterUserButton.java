@@ -1,7 +1,7 @@
-package gui.buttons.managers;
+package gui.buttons.forms;
 
 import gui.buttons.JModifiedButton;
-import gui.panels.FormState;
+import gui.panels.forms.RegisterUserForm;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,19 +9,20 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class RegisterBicycleButton extends JModifiedButton implements
+public class RegisterUserButton extends JModifiedButton implements
 		ActionListener {
 
 	private BicycleGarageManager manager;
 
-	public RegisterBicycleButton(BicycleGarageManager manager, double size) {
-		super("Registrera cykel", size);
+	public RegisterUserButton(BicycleGarageManager manager, double size) {
+		super("Registrera användare", size);
 		this.manager = manager;
 		addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.form(FormState.REGISTER_BICYCLE);
+		manager.enable(false);
+		new RegisterUserForm(manager);
 	}
 }

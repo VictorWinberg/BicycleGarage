@@ -1,4 +1,4 @@
-package gui.buttons.managers;
+package gui.buttons.forms;
 
 import gui.buttons.JModifiedButton;
 

@@ -1,4 +1,4 @@
-package gui.buttons.navigation;
+package gui.buttons.managers;
 
 import gui.buttons.JModifiedButton;
 

@@ -1,17 +1,23 @@
 package gui.panels.forms;
 
-import javax.swing.JOptionPane;
-
 import gui.panels.ViewState;
 import interfaces.Database;
-import database.User;
+
+import javax.swing.JOptionPane;
+
 import main.BicycleGarageManager;
+import database.User;
 
 public class RegisterUserForm extends Form {
 	private BicycleGarageManager manager;
 
 	public RegisterUserForm(BicycleGarageManager manager) {
 		super(manager, "Registrera användare");
+		this.manager = manager;
+	}
+	
+	public RegisterUserForm(BicycleGarageManager manager, String altTitle) {
+		super(manager, altTitle);
 		this.manager = manager;
 	}
 

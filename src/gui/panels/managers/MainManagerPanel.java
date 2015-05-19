@@ -1,11 +1,12 @@
 package gui.panels.managers;
 
-import gui.buttons.managers.ClearInactiveUsers;
-import gui.buttons.managers.RegisterBicycleButton;
-import gui.buttons.managers.RegisterUserButton;
-import gui.buttons.managers.UnregisterBicycleButton;
-import gui.buttons.managers.UnregisterUserButton;
-import gui.buttons.navigation.ExitButton;
+import gui.buttons.forms.ClearInactiveUsers;
+import gui.buttons.forms.EditUserButton;
+import gui.buttons.forms.RegisterBicycleButton;
+import gui.buttons.forms.RegisterUserButton;
+import gui.buttons.forms.UnregisterBicycleButton;
+import gui.buttons.forms.UnregisterUserButton;
+import gui.buttons.managers.ExitButton;
 
 import java.awt.GridLayout;
 
@@ -33,6 +34,7 @@ public class MainManagerPanel extends JPanel {
 	public MainManagerPanel(BicycleGarageManager manager) {
 		setLayout(new GridLayout(8, 1, 10, 10));
 		add(new RegisterUserButton(manager, 1.1));
+		add(new EditUserButton(manager, manager.getDB().getUser("950407-0856"), 1.1)); // Testknapp, ska inte finnas egentligen
 		add(new UnregisterUserButton(manager, 1.1));
 		add(new RegisterBicycleButton(manager, 1.1));
 		add(new UnregisterBicycleButton(manager, 1.1));

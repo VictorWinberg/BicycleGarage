@@ -1,7 +1,7 @@
 package gui.panels.managers;
 
-import gui.buttons.managers.RegisterUserButton;
-import gui.buttons.managers.UnregisterUserButton;
+import gui.buttons.forms.RegisterUserButton;
+import gui.buttons.forms.UnregisterUserButton;
 import interfaces.Database;
 
 import java.awt.BorderLayout;

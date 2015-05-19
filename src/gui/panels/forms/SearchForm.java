@@ -2,15 +2,14 @@ package gui.panels.forms;
 
 import interfaces.Database;
 
-import java.awt.BorderLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import database.User;
 import main.BicycleGarageManager;
+import database.User;
 
 public class SearchForm extends Form {
 	private BicycleGarageManager manager;

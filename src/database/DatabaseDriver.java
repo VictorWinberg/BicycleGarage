@@ -180,10 +180,7 @@ public class DatabaseDriver implements Database {
 			+ "first_name = '" + user.getFirstName() + "', " 
 			+ "last_name = '" + user.getLastName() + "', " 
 			+ "mail = '" + user.getMail() + "', "
-			+ "phonenr = '" + user.getPhonenr() + "', " 
-			+ "pin = '" + user.getPIN() + "', "
-			+ "reservedSlots = " + user.getReserverdSlots() + ", " 
-			+ "freeSlots = " + user.getFreeSlots() + " "
+			+ "phonenr = '" + user.getPhonenr() + "' "
 			+ "WHERE personnr = '" + user.getPersonnr() + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);

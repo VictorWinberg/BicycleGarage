@@ -1,12 +1,6 @@
 package main;
 
-import gui.panels.FormState;
 import gui.panels.ViewState;
-import gui.panels.forms.RegisterBicycleForm;
-import gui.panels.forms.RegisterUserForm;
-import gui.panels.forms.SearchForm;
-import gui.panels.forms.UnregisterBicycleForm;
-import gui.panels.forms.UnregisterUserForm;
 import gui.panels.managers.BicycleManagerPanel;
 import gui.panels.managers.MainManagerPanel;
 import gui.panels.managers.NavigationPanel;
@@ -115,23 +109,6 @@ public class BicycleGarageManager {
 		return db; 
 	}
 
-	/**
-	 * Öppnar ett formulär-fönster med läge state.
-	 * 
-	 * @param state
-	 *            Ett FormState läge
-	 */
-	public void form(FormState state) {
-		enable(false);
-		switch (state) {
-		case REGISTER_USER: new RegisterUserForm(this);  break;
-		case UNREGISTER_USER: new UnregisterUserForm(this); break;
-		case REGISTER_BICYCLE: new RegisterBicycleForm(this); break;
-		case UNREGISTER_BICYCLE: new UnregisterBicycleForm(this); break;
-		case SEARCH_USER: new SearchForm(this); break;
-		}
-	}
-
 	@SuppressWarnings("deprecation")
 	public void enable(boolean b) {
 		frame.enable(b);
@@ -160,7 +137,11 @@ public class BicycleGarageManager {
 	 * kan vara '0', '1', ... "9".
 	 */
 	public void entryBarcode(String bicycleID) {
-		printer.printBarcode(bicycleID);
+		try {
+			printer.printBarcode(bicycleID);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 	}
 
 	/**
@@ -169,7 +150,11 @@ public class BicycleGarageManager {
 	 * kan vara '0', '1', ... "9".
 	 */
 	public void exitBarcode(String bicycleID) {
-		printer.printBarcode(bicycleID);
+		try {
+			printer.printBarcode(bicycleID);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 	}
 
 	/**

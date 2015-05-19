@@ -20,6 +20,8 @@ import main.BicycleGarageManager;
 
 public abstract class Form {
 	
+	protected JTextField[] fields;
+	
 	public Form(BicycleGarageManager manager, String title) {
 		JFrame frame = new JFrame(title);
 		frame.setMinimumSize(new Dimension(300, 150));
@@ -47,7 +49,7 @@ public abstract class Form {
 		frame.add(labelPanel, BorderLayout.WEST);
 		frame.add(fieldPanel, BorderLayout.CENTER);
 
-		JTextField[] fields = new JTextField[labels.length];
+		fields = new JTextField[labels.length];
 
 		for (int i = 0; i < labels.length; i++) {
 			fields[i] = new JTextField();
@@ -72,7 +74,7 @@ public abstract class Form {
 					stringfield[i] = fields[i].getText();
 					sb.append("\n" + labels[i] + ": " + stringfield[i]);
 				}
-				String options[] = { "Ja, " + title.split(" ")[0], "Nej" };
+				String options[] = { "Ja, " + title.split(" ")[0].toLowerCase(), "Nej" };
 				if (check(stringfield) && JOptionPane.showOptionDialog(null,
 						sb.toString(),
 						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
@@ -94,7 +96,7 @@ public abstract class Form {
 	
 	public abstract String[] getLabels();
 	public abstract int[] getWidths();
-	public abstract boolean check(String[] fields);
-	public abstract void action(String[] fields);
+	public abstract boolean check(String[] stringfields);
+	public abstract void action(String[] stringfields);
 	
 }

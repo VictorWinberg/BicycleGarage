@@ -2,9 +2,6 @@ package gui.panels.forms;
 
 import gui.panels.ViewState;
 import interfaces.Database;
-
-import java.sql.ResultSet;
-
 import main.BicycleGarageManager;
 import database.User;
 

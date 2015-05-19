@@ -1,4 +1,4 @@
-package gui.buttons.navigation;
+package gui.buttons.managers;
 
 import gui.buttons.JModifiedButton;
 import gui.panels.ViewState;
@@ -9,20 +9,20 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class MainManagerButton extends JModifiedButton implements
+public class BicycleManagerButton extends JModifiedButton implements
 		ActionListener {
 
 	private BicycleGarageManager manager;
 
-	public MainManagerButton(BicycleGarageManager manager, double size) {
-		super("Huvudmeny", size);
+	public BicycleManagerButton(BicycleGarageManager manager, double size) {
+		super("Cyklar", size);
 		this.manager = manager;
-		setToolTipText("Gå tillbaka till huvudmenyn");
+		setToolTipText("Hanterar cyklar");
 		addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.changeState(ViewState.START_STATE);
+		manager.changeState(ViewState.BICYCLE_STATE);
 	}
 }

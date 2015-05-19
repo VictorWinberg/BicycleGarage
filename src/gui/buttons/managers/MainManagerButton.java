@@ -1,7 +1,6 @@
-package gui.buttons.navigation;
+package gui.buttons.managers;
 
 import gui.buttons.JModifiedButton;
-import gui.panels.FormState;
 import gui.panels.ViewState;
 
 import java.awt.event.ActionEvent;
@@ -10,20 +9,20 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class SearchManagerButton extends JModifiedButton implements
+public class MainManagerButton extends JModifiedButton implements
 		ActionListener {
 
 	private BicycleGarageManager manager;
 
-	public SearchManagerButton(BicycleGarageManager manager, double size) {
-		super("Sök", size);
+	public MainManagerButton(BicycleGarageManager manager, double size) {
+		super("Huvudmeny", size);
 		this.manager = manager;
-		setToolTipText("Sökfunktion");
+		setToolTipText("Gå tillbaka till huvudmenyn");
 		addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.form(FormState.SEARCH_USER);
+		manager.changeState(ViewState.START_STATE);
 	}
 }

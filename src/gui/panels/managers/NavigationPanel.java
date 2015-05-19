@@ -1,10 +1,10 @@
 package gui.panels.managers;
 
 import gui.JTitle;
-import gui.buttons.navigation.BicycleManagerButton;
-import gui.buttons.navigation.MainManagerButton;
-import gui.buttons.navigation.SearchManagerButton;
-import gui.buttons.navigation.UserManagerButton;
+import gui.buttons.forms.SearchButton;
+import gui.buttons.managers.BicycleManagerButton;
+import gui.buttons.managers.MainManagerButton;
+import gui.buttons.managers.UserManagerButton;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -34,7 +34,7 @@ public class NavigationPanel extends JPanel {
 		panel.add(new MainManagerButton(manager, 1.3));
 		panel.add(new UserManagerButton(manager, 1.3));
 		panel.add(new BicycleManagerButton(manager, 1.3));
-		panel.add(new SearchManagerButton(manager, 1.3));
+		panel.add(new SearchButton(manager, 1.3));
 		add(panel, BorderLayout.SOUTH);
 	}
 

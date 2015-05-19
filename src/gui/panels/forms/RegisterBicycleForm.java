@@ -1,9 +1,10 @@
 package gui.panels.forms;
 
-import javax.swing.JOptionPane;
-
 import gui.panels.ViewState;
 import interfaces.Database;
+
+import javax.swing.JOptionPane;
+
 import main.BicycleGarageManager;
 import database.Bicycle;
 import database.User;

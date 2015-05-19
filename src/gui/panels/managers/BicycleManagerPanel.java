@@ -1,7 +1,7 @@
 package gui.panels.managers;
 
-import gui.buttons.managers.RegisterBicycleButton;
-import gui.buttons.managers.UnregisterBicycleButton;
+import gui.buttons.forms.RegisterBicycleButton;
+import gui.buttons.forms.UnregisterBicycleButton;
 import interfaces.Database;
 
 import java.awt.BorderLayout;
@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;

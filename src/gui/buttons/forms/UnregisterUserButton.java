@@ -1,7 +1,7 @@
-package gui.buttons.navigation;
+package gui.buttons.forms;
 
 import gui.buttons.JModifiedButton;
-import gui.panels.ViewState;
+import gui.panels.forms.UnregisterUserForm;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,20 +9,20 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class BicycleManagerButton extends JModifiedButton implements
+public class UnregisterUserButton extends JModifiedButton implements
 		ActionListener {
 
 	private BicycleGarageManager manager;
 
-	public BicycleManagerButton(BicycleGarageManager manager, double size) {
-		super("Cyklar", size);
+	public UnregisterUserButton(BicycleGarageManager manager, double size) {
+		super("Avregistrera användare", size);
 		this.manager = manager;
-		setToolTipText("Hanterar cyklar");
 		addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.changeState(ViewState.BICYCLE_STATE);
+		manager.enable(false);
+		new UnregisterUserForm(manager);
 	}
 }
