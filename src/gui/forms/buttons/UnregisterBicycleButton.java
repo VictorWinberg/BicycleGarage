@@ -1,7 +1,7 @@
 package gui.forms.buttons;
 
-import gui.JModifiedButton;
 import gui.forms.panels.UnregisterBicycleForm;
+import gui.misc.buttons.JModifiedButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

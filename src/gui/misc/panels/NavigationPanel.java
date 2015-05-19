@@ -1,10 +1,10 @@
-package gui.managers.panels;
+package gui.misc.panels;
 
-import gui.JTitle;
 import gui.forms.buttons.SearchButton;
 import gui.managers.buttons.BicycleManagerButton;
 import gui.managers.buttons.MainManagerButton;
 import gui.managers.buttons.UserManagerButton;
+import gui.misc.JTitle;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

@@ -1,7 +1,7 @@
 package gui.managers.buttons;
 
-import gui.JModifiedButton;
-import gui.ViewState;
+import gui.managers.ViewState;
+import gui.misc.buttons.JModifiedButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

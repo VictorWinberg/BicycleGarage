@@ -1,6 +1,6 @@
 package gui.forms.panels;
 
-import gui.ViewState;
+import gui.managers.ViewState;
 import main.BicycleGarageManager;
 import database.User;
 

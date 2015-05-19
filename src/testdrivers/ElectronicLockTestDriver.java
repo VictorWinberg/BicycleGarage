@@ -1,6 +1,6 @@
 package testdrivers;
 
-import gui.JTitle;
+import gui.misc.JTitle;
 import interfaces.ElectronicLock;
 
 import java.awt.BorderLayout;

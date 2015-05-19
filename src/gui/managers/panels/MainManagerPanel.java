@@ -1,12 +1,12 @@
 package gui.managers.panels;
 
-import gui.forms.buttons.ClearInactiveUsers;
 import gui.forms.buttons.EditUserButton;
 import gui.forms.buttons.RegisterBicycleButton;
 import gui.forms.buttons.RegisterUserButton;
 import gui.forms.buttons.UnregisterBicycleButton;
 import gui.forms.buttons.UnregisterUserButton;
-import gui.managers.buttons.ExitButton;
+import gui.misc.buttons.ClearInactiveUsersButton;
+import gui.misc.buttons.ExitButton;
 
 import java.awt.GridLayout;
 
@@ -38,7 +38,7 @@ public class MainManagerPanel extends JPanel {
 		add(new UnregisterUserButton(manager, 1.1));
 		add(new RegisterBicycleButton(manager, 1.1));
 		add(new UnregisterBicycleButton(manager, 1.1));
-		add(new ClearInactiveUsers(manager, 1.1));
+		add(new ClearInactiveUsersButton(manager, 1.1));
 		add(new JLabel(""));
 		add(new ExitButton(manager, 1.1));
 	}

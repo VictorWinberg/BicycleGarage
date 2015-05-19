@@ -1,6 +1,4 @@
-package gui.forms.buttons;
-
-import gui.JModifiedButton;
+package gui.misc.buttons;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,12 +8,12 @@ import javax.swing.JOptionPane;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class ClearInactiveUsers extends JModifiedButton implements
+public class ClearInactiveUsersButton extends JModifiedButton implements
 		ActionListener {
 
 	private BicycleGarageManager manager;
 
-	public ClearInactiveUsers(BicycleGarageManager manager, double size) {
+	public ClearInactiveUsersButton(BicycleGarageManager manager, double size) {
 		super("Rensa", size);
 		this.manager = manager;
 		setToolTipText("Rensar inaktiva användare");

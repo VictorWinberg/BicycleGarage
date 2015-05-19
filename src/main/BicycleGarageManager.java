@@ -1,11 +1,11 @@
 package main;
 
-import gui.ViewState;
+import gui.managers.ViewState;
 import gui.managers.panels.BicycleManagerPanel;
 import gui.managers.panels.MainManagerPanel;
-import gui.managers.panels.NavigationPanel;
 import gui.managers.panels.SearchManagerPanel;
 import gui.managers.panels.UserManagerPanel;
+import gui.misc.panels.NavigationPanel;
 import interfaces.BarcodePrinter;
 import interfaces.Database;
 import interfaces.ElectronicLock;
