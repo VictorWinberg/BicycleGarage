@@ -341,7 +341,6 @@ public class DatabaseDriver implements Database {
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("tillagd.");
-			User user = bicycle.getOwner();
 			return true;
 		} catch (SQLException e) {
 			System.out.println("inte tillagd. SQL Message: " + e.getMessage());
