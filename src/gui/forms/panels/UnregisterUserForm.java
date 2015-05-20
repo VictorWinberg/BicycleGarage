@@ -3,7 +3,6 @@ package gui.forms.panels;
 import javax.swing.JOptionPane;
 
 import gui.managers.ViewState;
-import interfaces.Database;
 import main.BicycleGarageManager;
 import database.User;
 

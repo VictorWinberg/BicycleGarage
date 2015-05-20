@@ -208,8 +208,11 @@ public class DatabaseDriver implements Database {
 		sql = "UPDATE users SET "
 			+ "first_name = '" + user.getFirstName() + "', " 
 			+ "last_name = '" + user.getLastName() + "', " 
-			+ "mail = '" + user.getMail() + "', "
-			+ "phonenr = '" + user.getPhonenr() + "' "
+			+ "mail = '" + user.getMail() + "', "		 			
+			+ "phonenr = '" + user.getPhonenr() + "', " 		
+			+ "pin = '" + user.getPIN() + "', "		
+			+ "reservedSlots = " + user.getReserverdSlots() + ", " 		
+			+ "freeSlots = " + user.getFreeSlots() + " "
 			+ "WHERE personnr = '" + user.getPersonnr() + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
@@ -361,10 +364,6 @@ public class DatabaseDriver implements Database {
 		sql = "DELETE FROM bicycles WHERE barcode = '" + barcode + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
-			User user = bicycle.getOwner();
-			user.removeReservedSlot();
-			user.removeFreeSlot();
-			updateUser(user);
 			System.out.println("borttagen.");
 			return true;
 		} catch (SQLException e) {

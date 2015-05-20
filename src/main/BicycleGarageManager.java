@@ -132,16 +132,25 @@ public class BicycleGarageManager {
 	}
 
 	/**
-	 * Kommer att kallas när en användare har använt strecksläsaren vid
-	 * entrédörren. Cykel ID bör vara en sträng med 5 tecken, där varje tecken
+	 * Kommer att kallas när operatören har registrerat en cykel.
+	 * Cykel ID är en sträng med 5 tecken, där varje tecken
 	 * kan vara '0', '1', ... "9".
 	 */
-	public void entryBarcode(String bicycleID) {
+	public void printBarcode(String bicycleID) {
 		try {
 			printer.printBarcode(bicycleID);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
+	}
+	
+	/**
+	 * Kommer att kallas när en användare har använt strecksläsaren vid
+	 * entrédörren. Cykel ID bör vara en sträng med 5 tecken, där varje tecken
+	 * kan vara '0', '1', ... "9".
+	 */
+	public void entryBarcode(String bicycleID) {
+		
 	}
 
 	/**
@@ -150,11 +159,7 @@ public class BicycleGarageManager {
 	 * kan vara '0', '1', ... "9".
 	 */
 	public void exitBarcode(String bicycleID) {
-		try {
-			printer.printBarcode(bicycleID);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-		}
+		
 	}
 
 	/**
