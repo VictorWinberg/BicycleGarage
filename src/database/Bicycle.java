@@ -1,5 +1,5 @@
 package database;
-//git-test
+
 public class Bicycle {
 	private String barcode;
 	private User user;

@@ -144,7 +144,6 @@ public class DatabaseDriver implements Database {
 				else
 					sb.append("Telefonnummer");
 			}
-			sb.append(".");
 			throw new Exception(sb.toString());
 		}
 	}
@@ -209,8 +208,11 @@ public class DatabaseDriver implements Database {
 		sql = "UPDATE users SET "
 			+ "first_name = '" + user.getFirstName() + "', " 
 			+ "last_name = '" + user.getLastName() + "', " 
-			+ "mail = '" + user.getMail() + "', "
-			+ "phonenr = '" + user.getPhonenr() + "' "
+			+ "mail = '" + user.getMail() + "', "		 			
+			+ "phonenr = '" + user.getPhonenr() + "', " 		
+			+ "pin = '" + user.getPIN() + "', "		
+			+ "reservedSlots = " + user.getReserverdSlots() + ", " 		
+			+ "freeSlots = " + user.getFreeSlots() + " "
 			+ "WHERE personnr = '" + user.getPersonnr() + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
@@ -340,9 +342,6 @@ public class DatabaseDriver implements Database {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("tillagd.");
 			User user = bicycle.getOwner();
-			user.addReserverdSlot();
-			user.addFreeSlot();
-			updateUser(user);
 			return true;
 		} catch (SQLException e) {
 			System.out.println("inte tillagd. SQL Message: " + e.getMessage());
@@ -365,10 +364,6 @@ public class DatabaseDriver implements Database {
 		sql = "DELETE FROM bicycles WHERE barcode = '" + barcode + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
-			User user = bicycle.getOwner();
-			user.removeReservedSlot();
-			user.removeFreeSlot();
-			updateUser(user);
 			System.out.println("borttagen.");
 			return true;
 		} catch (SQLException e) {
@@ -396,6 +391,38 @@ public class DatabaseDriver implements Database {
 			System.out.println("inte uppdaterad. SQL Message: " + e.getMessage());
 			return false;
 		}
+	}
+	public boolean depositBicycle(Bicycle bc){
+		if(bc == null){
+			return false;
+		}
+		bc.deposit();
+		updateBicycle(bc);
+		return true;
+	}
+	public boolean withdrawBicycle(Bicycle bc){
+		if(bc == null){
+			return false;
+		}
+		bc.withdraw();
+		updateBicycle(bc);
+		return true;
+	}
+	public boolean removeFreeSlot(User user,int slots){
+		if(user == null){
+			return false;
+		}
+		user.removeFreeSlot(slots);
+		updateUser(user);
+		return true;
+	}
+	public boolean addFreeSlot(User user, int slots){
+		if(user == null){
+			return false;
+		}
+		user.addFreeSlot(slots);
+		updateUser(user);
+		return true;
 	}
 
 	@Override
@@ -434,6 +461,26 @@ public class DatabaseDriver implements Database {
 		}
 		return rs;
 	}
+	@Override
+	public boolean reserveSlot(User user, int slots){
+		if( user == null || slots <0){
+			return false;
+		}
+		user.addReserverdSlot(slots);
+		user.addFreeSlot(slots);
+		updateUser(user);
+		return true;
+	}
+	@Override
+	public boolean removeReservedSlot(User user, int slots){
+		if( user == null || slots <0){
+			return false;
+		}
+		user.removeReservedSlot(slots);
+		user.removeFreeSlot(slots);
+		updateUser(user);
+		return true;
+	}
 
 	@Override
 	public boolean clearInactiveUsers() {
@@ -462,7 +509,7 @@ public class DatabaseDriver implements Database {
 		return cleared;
 	}
 	
-	private static boolean isPNRValid(String pnr) {
+	public boolean isPNRValid(String pnr) {
 		boolean isValid = false;
 
 		// Initiera reg ex för PNR.
@@ -476,7 +523,7 @@ public class DatabaseDriver implements Database {
 		return isValid;
 	}
 
-	private static boolean check(String pnr) {
+	private boolean check(String pnr) {
 		StringBuilder sb = new StringBuilder(pnr);
 		sb.deleteCharAt(6);
 		int[] digits = new int[10];

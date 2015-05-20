@@ -1,16 +1,15 @@
 package gui.forms.panels;
 
+import javax.swing.JOptionPane;
+
 import gui.managers.ViewState;
 import main.BicycleGarageManager;
 import database.User;
 
 public class EditUserForm extends RegisterUserForm {
 
-	private BicycleGarageManager manager;
-	
 	public EditUserForm(BicycleGarageManager manager, User user) {
 		super(manager, "Redigera användare");
-		this.manager = manager;
 		fields[0].setText(user.getPersonnr());
 		fields[1].setText(user.getFirstName());
 		fields[2].setText(user.getLastName());
@@ -19,9 +18,24 @@ public class EditUserForm extends RegisterUserForm {
 	}
 	
 	@Override
+	public boolean check(String[] fields) {
+		try {
+			user = db.createUser(fields[0], fields[1], fields[2], fields[3], fields[4]);
+			if(db.getUser(fields[0]) == null) {
+				JOptionPane.showMessageDialog(null, "Användaren finns inte registrerad", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
 	public void action(String[] fields) {
-		User user = new User(fields[0], fields[1], fields[2], fields[3], fields[4], null, -1, -1);
-		manager.getDB().updateUser(user);
+		db.updateUser(user);
 		manager.changeState(ViewState.USER_STATE);
+		JOptionPane.showMessageDialog(null, "Användare uppdaterad");
 	}
 }

@@ -1,5 +1,7 @@
 package gui.forms.panels;
 
+import interfaces.Database;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -16,13 +18,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import database.User;
 import main.BicycleGarageManager;
 
 public abstract class Form {
 	
 	protected JTextField[] fields;
+	protected BicycleGarageManager manager;
+	protected Database db;
 	
 	public Form(BicycleGarageManager manager, String title) {
+		this.manager = manager;
+		this.db = manager.getDB();
 		JFrame frame = new JFrame(title);
 		frame.setMinimumSize(new Dimension(300, 150));
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -71,7 +78,7 @@ public abstract class Form {
 				String[] stringfield = new String[labels.length];
 				StringBuilder sb = new StringBuilder(title);
 				for (int i = 0; i < labels.length; i++){
-					stringfield[i] = fields[i].getText();
+					stringfield[i] = fields[i].getText().trim();
 					sb.append("\n" + labels[i] + ": " + stringfield[i]);
 				}
 				String options[] = { "Ja, " + title.split(" ")[0].toLowerCase(), "Nej" };

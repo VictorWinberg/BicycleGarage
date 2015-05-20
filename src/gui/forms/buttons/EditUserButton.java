@@ -10,22 +10,25 @@ import main.BicycleGarageManager;
 import database.User;
 
 @SuppressWarnings("serial")
-public class EditUserButton extends JModifiedButton implements
-		ActionListener {
+public class EditUserButton extends JModifiedButton implements ActionListener {
 
 	private BicycleGarageManager manager;
 	private User user;
 
-	public EditUserButton(BicycleGarageManager manager, User user, double size) {
+	public EditUserButton(BicycleGarageManager manager, double size) {
 		super("Redigera användare", size);
 		this.manager = manager;
-		this.user = user;
 		addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.enable(false);
-		new EditUserForm(manager, user);
+		if(user != null) {
+			manager.enable(false);
+			new EditUserForm(manager, user);
+		}
+	}
+	public void changeUser(User user){
+		this.user = user;
 	}
 }

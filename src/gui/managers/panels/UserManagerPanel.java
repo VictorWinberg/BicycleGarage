@@ -1,18 +1,28 @@
 package gui.managers.panels;
 
+import gui.forms.buttons.EditUserButton;
 import gui.forms.buttons.RegisterUserButton;
+import gui.forms.buttons.RemoveReservedSlotButton;
+import gui.forms.buttons.ReserveSlotButton;
+import gui.forms.buttons.ShowUserButton;
 import gui.forms.buttons.UnregisterUserButton;
+import gui.misc.buttons.JModifiedButton;
 import interfaces.Database;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import database.User;
 import main.BicycleGarageManager;
 
 /**
@@ -30,6 +40,9 @@ public class UserManagerPanel extends JPanel {
 			"Lediga platser" };
 	private BicycleGarageManager manager;
 	private JPanel northPanel;
+	private JPanel southPanel;
+	private EditUserButton EButton;
+	private ShowUserButton SButton;
 	
 	/**
 	 * Skapar en användarmanagerpanel som hanterar användare
@@ -44,11 +57,20 @@ public class UserManagerPanel extends JPanel {
 		northPanel = new JPanel();
 		northPanel.add(new RegisterUserButton(manager, 1.1));
 		northPanel.add(new UnregisterUserButton(manager, 1.1));
+		southPanel = new JPanel();
+		southPanel.setLayout(new GridLayout(10, 5, 1, 1));
+		EButton = new EditUserButton(manager, 1.1);
+		southPanel.add(EButton);
+		SButton = new ShowUserButton(manager, 1.1);
+		southPanel.add(SButton);
+		southPanel.add(new ReserveSlotButton(manager,1.1));
+		southPanel.add(new RemoveReservedSlotButton(manager, 1.1));
 	}
 	
 	public void update() {
 		removeAll();
 		add(northPanel, BorderLayout.NORTH);
+		add(southPanel, BorderLayout.WEST);
 		
 		Database db = manager.getDB();
 		ResultSet users = db.extractUsers();
@@ -66,12 +88,40 @@ public class UserManagerPanel extends JPanel {
 			}
 			JTable table = new JTable(data, columnNames);
 			add(table.getTableHeader(), BorderLayout.CENTER);
+			table.setCellSelectionEnabled(false);
+		    table.setRowSelectionAllowed(true);
+		   
+		    ListSelectionModel cellSelectionModel = table.getSelectionModel();
+		    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		    cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+		    	public void valueChanged(ListSelectionEvent e) {
+		    		if(!e.getValueIsAdjusting()) {
+		    			String selectedData = null;
+
+		    			int[] selectedRow = table.getSelectedRows();
+		    			int[] selectedColumns = table.getSelectedColumns();
+
+		    			for (int i = 0; i < selectedRow.length; i++) {
+		    				for (int j = 0; j < selectedColumns.length; j++) {
+		    					selectedData = (String) table.getValueAt(selectedRow[i], 0);
+		    				}
+		    			}
+		    			User chosen = manager.getDB().getUser(selectedData);
+		    			EButton.changeUser(chosen);
+		    			SButton.changeUser(chosen);
+		    		}
+		    	}
+
+		    });
 			
-			table.setEnabled(false);
+			
+			
+//			table.setEnabled(false);
 //			table.setFillsViewportHeight(true);
 //			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 			JScrollPane scrollPane = new JScrollPane(table);
-			add(scrollPane, BorderLayout.SOUTH);
+			add(scrollPane, BorderLayout.CENTER);
+			
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
