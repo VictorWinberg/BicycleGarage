@@ -39,7 +39,7 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 		frame.setMinimumSize(new Dimension(100, 100));
 		frame.setLocation(516,30);
 		if(doorIdentifier.equals("Entrélås")){
-			frame.setLocation(637,30);
+			frame.setLocation(657,30);
 		}
 		JPanel panel = new JPanel();
 		frame.add(panel);
