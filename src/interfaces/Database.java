@@ -102,4 +102,10 @@ public interface Database {
 	/** Kontrollerar om personnummert pnr är korrekt
 	 * @return true om personummert är korrekt, annars false */
 	public boolean isPNRValid(String pnr);
+
+/** Reserverar en plats åt användaren
+ * @param user
+ * @return True om en plats reserverats, annars false
+ */
+public boolean reserveSlot(User user);
 }

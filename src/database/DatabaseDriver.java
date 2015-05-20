@@ -339,9 +339,6 @@ public class DatabaseDriver implements Database {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("tillagd.");
 			User user = bicycle.getOwner();
-			user.addReserverdSlot();
-			user.addFreeSlot();
-			updateUser(user);
 			return true;
 		} catch (SQLException e) {
 			System.out.println("inte tillagd. SQL Message: " + e.getMessage());
@@ -432,6 +429,16 @@ public class DatabaseDriver implements Database {
 					+ e.getMessage());
 		}
 		return rs;
+	}
+	@Override
+	public boolean reserveSlot(User user){
+		if( user == null){
+			return false;
+		}
+		user.addReserverdSlot();
+		user.addFreeSlot();
+		updateUser(user);
+		return true;
 	}
 
 	@Override
