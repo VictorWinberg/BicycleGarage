@@ -157,7 +157,7 @@ public class BicycleGarageManager {
 		User user = bc.getOwner();
 		db.removeFreeSlot(user,1);
 		db.depositBicycle(bc);
-		
+		changeState(ViewState.BICYCLE_STATE);
 	}
 
 	/**
@@ -171,6 +171,7 @@ public class BicycleGarageManager {
 		User user = bc.getOwner();
 		db.addFreeSlot(user,1);
 		db.withdrawBicycle(bc);
+		changeState(ViewState.BICYCLE_STATE);
 	}
 
 	/**
