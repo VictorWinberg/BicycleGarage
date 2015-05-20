@@ -14,6 +14,7 @@ public class BarcodeReaderExitTestDriver extends BarcodeReaderTestDriver {
 	 */
 	public BarcodeReaderExitTestDriver() {
 		super("Utgångsläsare");
+		frame.setLocation(265,121);
 	}
 
 	/**

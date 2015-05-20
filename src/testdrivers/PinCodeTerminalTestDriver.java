@@ -76,6 +76,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 		JFrame frame = new JFrame("Pinkodsterminal");
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(250, 250));
+		frame.setLocation(20,230);
 		// make the window impossible to close
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());

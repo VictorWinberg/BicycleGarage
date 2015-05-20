@@ -14,6 +14,7 @@ public class BarcodeReaderEntryTestDriver extends BarcodeReaderTestDriver {
 	 */
 	public BarcodeReaderEntryTestDriver() {
 		super("Entréläsare");
+		frame.setLocation(265,30);
 	}
 
 	/**
