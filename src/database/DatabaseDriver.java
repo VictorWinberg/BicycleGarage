@@ -430,12 +430,22 @@ public class DatabaseDriver implements Database {
 		return rs;
 	}
 	@Override
-	public boolean reserveSlot(User user){
-		if( user == null){
+	public boolean reserveSlot(User user, int slots){
+		if( user == null || slots <0){
 			return false;
 		}
-		user.addReserverdSlot();
-		user.addFreeSlot();
+		user.addReserverdSlot(slots);
+		user.addFreeSlot(slots);
+		updateUser(user);
+		return true;
+	}
+	@Override
+	public boolean removeReservedSlot(User user, int slots){
+		if( user == null || slots <0){
+			return false;
+		}
+		user.removeReservedSlot(slots);
+		user.removeFreeSlot(slots);
 		updateUser(user);
 		return true;
 	}

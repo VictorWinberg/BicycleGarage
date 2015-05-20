@@ -23,18 +23,24 @@ public class User {
 	public String getMail() 		{ return mail; }
 	public String getPhonenr() 		{ return phonenr; }
 	public String getPIN() 			{ return pin; }
-	public int addReserverdSlot() {
-		return ++reservedSlots;
+	public void addReserverdSlot(int slots) {
+		 reservedSlots+=slots;
 	}
-	public int removeReservedSlot() {
-		return --reservedSlots;
+	public void removeReservedSlot(int slots) {
+		if(slots > reservedSlots){
+			throw new IllegalArgumentException("Antalet platser du vill ta bort är större än antalet du ha reserverade");
+		}
+	 reservedSlots-=slots;
 	}
 	public int getReserverdSlots() 	{ return reservedSlots; }
-	public int addFreeSlot() {
-		return ++freeSlots;
+	public void addFreeSlot(int slots) {
+		freeSlots+=slots;;
 	}
-	public int removeFreeSlot() {
-		return --freeSlots;
+	public void removeFreeSlot(int slots) {
+		if(slots > freeSlots){
+			throw new IllegalArgumentException("Antalet platser du vill ta bort är större än antalet du har lediga");
+		}
+	 freeSlots-=slots;
 	}
 	public int getFreeSlots() 		{ return freeSlots; }
 	@Override
