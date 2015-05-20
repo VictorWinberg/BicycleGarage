@@ -57,6 +57,7 @@ public class RegisterBicycleForm extends Form {
 	public void action(String[] fields) {
 		db.insertBicycle(bc);
 		manager.changeState(ViewState.BICYCLE_STATE);
-		manager.printBarcode(bc.getOwner().getFirstName() + " har cykel med streckkod: " + bc.getBarcode());
+		JOptionPane.showMessageDialog(null, bc.getOwner().getFirstName() + " har cykel med streckkod: " + bc.getBarcode());
+		manager.printBarcode(bc.getBarcode());
 	}
 }
