@@ -439,6 +439,16 @@ public class DatabaseDriver implements Database {
 		updateUser(user);
 		return true;
 	}
+	@Override
+	public boolean reserveSlot(User user, int slots){
+		if( user == null){
+			return false;
+		}
+		user.addReserverdSlot(slots);
+		user.addFreeSlot(slots);
+		updateUser(user);
+		return true;
+	}
 
 	@Override
 	public boolean clearInactiveUsers() {
