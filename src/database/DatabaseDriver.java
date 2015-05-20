@@ -431,7 +431,7 @@ public class DatabaseDriver implements Database {
 	}
 	@Override
 	public boolean reserveSlot(User user, int slots){
-		if( user == null){
+		if( user == null || slots <0){
 			return false;
 		}
 		user.addReserverdSlot(slots);
@@ -440,12 +440,12 @@ public class DatabaseDriver implements Database {
 		return true;
 	}
 	@Override
-	public boolean reserveSlot(User user, int slots){
-		if( user == null){
+	public boolean removeReservedSlot(User user, int slots){
+		if( user == null || slots <0){
 			return false;
 		}
-		user.addReserverdSlot(slots);
-		user.addFreeSlot(slots);
+		user.removeReservedSlot(slots);
+		user.removeFreeSlot(slots);
 		updateUser(user);
 		return true;
 	}

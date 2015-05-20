@@ -108,4 +108,5 @@ public interface Database {
  * @return True om en plats reserverats, annars false
  */
 public boolean reserveSlot(User user, int slots);
+public boolean removeReservedSlot(User user, int slots);
 }

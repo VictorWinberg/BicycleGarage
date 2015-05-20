@@ -1,13 +1,12 @@
 	package gui.forms.panels;
 
 	import gui.managers.ViewState;
-	import interfaces.Database;
+import interfaces.Database;
 
-	import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
 
-	import main.BicycleGarageManager;
-	import database.Bicycle;
-	import database.User;
+import main.BicycleGarageManager;
+import database.User;
 
 
 public class RemoveReservedSlotForm extends Form{
@@ -59,8 +58,12 @@ public class RemoveReservedSlotForm extends Form{
 		public void action(String[] fields) {
 			String nbrOfSpots = fields[2];
 			int spot = Integer.parseInt(nbrOfSpots);
-				db.reserveSlot(user,spot);
-			JOptionPane.showMessageDialog(null, nbrOfSpots + "plats/er reserverades");
+			if(spot<0){
+				JOptionPane.showMessageDialog(null, "Felaktigt värde på antal platser som ska avreserveras");
+				return;
+			}
+			db.removeReservedSlot(user,spot);
+			JOptionPane.showMessageDialog(null, nbrOfSpots + "plats/er avreserverades");
 			manager.changeState(ViewState.USER_STATE);
 		}
 }
