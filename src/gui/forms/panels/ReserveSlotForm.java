@@ -67,7 +67,7 @@ public class ReserveSlotForm extends Form {
 		}
 		db.reserveSlot(user, spot);
 		JOptionPane.showMessageDialog(null, nbrOfSpots
-				+ "plats/er reserverades");
+				+ " plats/er reserverades");
 		manager.changeState(ViewState.USER_STATE);
 	}
 }

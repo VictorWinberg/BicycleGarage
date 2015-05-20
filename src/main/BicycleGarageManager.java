@@ -154,6 +154,10 @@ public class BicycleGarageManager {
 	public void entryBarcode(String bicycleID) {
 		Database db = getDB();
 		Bicycle bc = db.getBicycle(bicycleID);
+		if(bc == null){
+		JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+		return;
+		}
 		User user = bc.getOwner();
 		db.removeFreeSlot(user,1);
 		db.depositBicycle(bc);
@@ -168,6 +172,10 @@ public class BicycleGarageManager {
 	public void exitBarcode(String bicycleID) {
 		Database db = getDB();
 		Bicycle bc = db.getBicycle(bicycleID);
+		if(bc==null){
+			JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
 		User user = bc.getOwner();
 		db.addFreeSlot(user,1);
 		db.withdrawBicycle(bc);
