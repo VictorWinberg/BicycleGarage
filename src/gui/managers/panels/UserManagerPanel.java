@@ -59,9 +59,9 @@ public class UserManagerPanel extends JPanel {
 		northPanel.add(new UnregisterUserButton(manager, 1.1));
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(10, 5, 1, 1));
-		EButton = new EditUserButton(manager, null, 1.1);
+		EButton = new EditUserButton(manager, 1.1);
 		southPanel.add(EButton);
-		SButton = new ShowUserButton("Användarens information", 1.1);
+		SButton = new ShowUserButton(manager, 1.1);
 		southPanel.add(SButton);
 		southPanel.add(new ReserveSlotButton(manager,1.1));
 		southPanel.add(new RemoveReservedSlotButton(manager, 1.1));

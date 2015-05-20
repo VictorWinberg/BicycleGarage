@@ -5,16 +5,20 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import main.BicycleGarageManager;
 import database.User;
 import gui.misc.buttons.JModifiedButton;
 
 @SuppressWarnings("serial")
 public class ShowUserButton extends JModifiedButton implements ActionListener {
 
+	private BicycleGarageManager manager;
 	private User user;
 	
-	public ShowUserButton(String text, double sizeModifier) {
-		super(text, sizeModifier);
+	public ShowUserButton(BicycleGarageManager manager, double sizeModifier) {
+		super("Info", sizeModifier);
+		this.manager = manager;
+		addActionListener(this);
 	}
 	
 	public void changeUser(User user){
@@ -23,6 +27,7 @@ public class ShowUserButton extends JModifiedButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("KNAPP");
 		String[] labels = { "Personnummer", "Förnamn", "Efternamn",
 				"Mailadress", "Telefonnummer", "Reserverade platser", "Lediga platser" };
 		String[] fields = new String[labels.length];

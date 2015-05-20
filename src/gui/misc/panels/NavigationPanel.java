@@ -1,6 +1,5 @@
 package gui.misc.panels;
 
-import gui.forms.buttons.SearchButton;
 import gui.managers.buttons.BicycleManagerButton;
 import gui.managers.buttons.MainManagerButton;
 import gui.managers.buttons.UserManagerButton;
@@ -34,7 +33,6 @@ public class NavigationPanel extends JPanel {
 		panel.add(new MainManagerButton(manager, 1.3));
 		panel.add(new UserManagerButton(manager, 1.3));
 		panel.add(new BicycleManagerButton(manager, 1.3));
-		panel.add(new SearchButton(manager, 1.3));
 		add(panel, BorderLayout.SOUTH);
 	}
 

@@ -36,7 +36,6 @@ public class MainManagerPanel extends JPanel {
 	public MainManagerPanel(BicycleGarageManager manager) {
 		setLayout(new GridLayout(10, 1, 10, 10));
 		add(new RegisterUserButton(manager, 1.1));
-		add(new EditUserButton(manager, manager.getDB().getUser("950407-0856"), 1.1)); // Testknapp, ska inte finnas egentligen
 		add(new UnregisterUserButton(manager, 1.1));
 		add(new RegisterBicycleButton(manager, 1.1));
 		add(new UnregisterBicycleButton(manager, 1.1));

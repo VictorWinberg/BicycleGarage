@@ -78,7 +78,7 @@ public abstract class Form {
 				String[] stringfield = new String[labels.length];
 				StringBuilder sb = new StringBuilder(title);
 				for (int i = 0; i < labels.length; i++){
-					stringfield[i] = fields[i].getText();
+					stringfield[i] = fields[i].getText().trim();
 					sb.append("\n" + labels[i] + ": " + stringfield[i]);
 				}
 				String options[] = { "Ja, " + title.split(" ")[0].toLowerCase(), "Nej" };
