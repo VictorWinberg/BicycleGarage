@@ -392,6 +392,38 @@ public class DatabaseDriver implements Database {
 			return false;
 		}
 	}
+	public boolean depositBicycle(Bicycle bc){
+		if(bc == null){
+			return false;
+		}
+		bc.deposit();
+		updateBicycle(bc);
+		return true;
+	}
+	public boolean withdrawBicycle(Bicycle bc){
+		if(bc == null){
+			return false;
+		}
+		bc.withdraw();
+		updateBicycle(bc);
+		return true;
+	}
+	public boolean removeFreeSlot(User user,int slots){
+		if(user == null){
+			return false;
+		}
+		user.removeFreeSlot(slots);
+		updateUser(user);
+		return true;
+	}
+	public boolean addFreeSlot(User user, int slots){
+		if(user == null){
+			return false;
+		}
+		user.addFreeSlot(slots);
+		updateUser(user);
+		return true;
+	}
 
 	@Override
 	public Bicycle getBicycle(String barcode) {

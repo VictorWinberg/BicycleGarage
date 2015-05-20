@@ -21,7 +21,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import database.Bicycle;
 import database.DatabaseDriver;
+import database.User;
 
 /**
  * Denna klass skapar operatörsgränssnittet. Den länkar ihop de fem
@@ -150,6 +152,11 @@ public class BicycleGarageManager {
 	 * kan vara '0', '1', ... "9".
 	 */
 	public void entryBarcode(String bicycleID) {
+		Database db = getDB();
+		Bicycle bc = db.getBicycle(bicycleID);
+		User user = bc.getOwner();
+		db.removeFreeSlot(user,1);
+		db.depositBicycle(bc);
 		
 	}
 
@@ -159,7 +166,11 @@ public class BicycleGarageManager {
 	 * kan vara '0', '1', ... "9".
 	 */
 	public void exitBarcode(String bicycleID) {
-		
+		Database db = getDB();
+		Bicycle bc = db.getBicycle(bicycleID);
+		User user = bc.getOwner();
+		db.addFreeSlot(user,1);
+		db.withdrawBicycle(bc);
 	}
 
 	/**

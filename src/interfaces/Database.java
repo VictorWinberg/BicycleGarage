@@ -109,4 +109,8 @@ public interface Database {
  */
 public boolean reserveSlot(User user, int slots);
 public boolean removeReservedSlot(User user, int slots);
+public boolean depositBicycle(Bicycle bc);
+public boolean withdrawBicycle(Bicycle bc);
+public boolean removeFreeSlot(User user,int slots);
+public boolean addFreeSlot(User user, int slots);
 }
