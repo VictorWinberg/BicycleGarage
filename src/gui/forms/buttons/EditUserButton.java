@@ -28,7 +28,7 @@ public class EditUserButton extends JModifiedButton implements
 		manager.enable(false);
 		new EditUserForm(manager, user);
 	}
-	public void changeUser(User u){
-		this.user = u;
+	public void changeUser(User user){
+		this.user = user;
 	}
 }

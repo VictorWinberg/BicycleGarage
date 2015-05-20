@@ -1,0 +1,30 @@
+package gui.forms.buttons;
+
+import javax.swing.JOptionPane;
+
+import database.User;
+import gui.misc.buttons.JModifiedButton;
+
+@SuppressWarnings("serial")
+public class ShowUserButton extends JModifiedButton {
+
+	private User user;
+	
+	public ShowUserButton(String text, double sizeModifier) {
+		super(text, sizeModifier);
+		
+		
+		String[] labels = { "Personnummer", "Förnamn", "Efternamn",
+				"Mailadress", "Telefonnummer", "Reserverade platser", "Lediga platser" };
+		String[] fields = new String[labels.length];
+		StringBuilder sb = new StringBuilder("Användareinformation");
+		for (int i = 0; i < labels.length; i++){
+			sb.append("\n" + labels[i] + ": " + fields[i]);
+		}
+		JOptionPane.showMessageDialog(null, sb.toString(), "Information", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void changeUser(User user){
+		this.user = user;
+	}
+}
