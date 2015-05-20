@@ -55,7 +55,7 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 				+ "Skriver ut " + bicycleID + "\n");
 	}
 	
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		new BarcodePrinterTestDriver();
 	}
 }

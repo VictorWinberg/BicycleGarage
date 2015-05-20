@@ -115,19 +115,29 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 						greenPanel.setBackground(new Color(238, 238, 238));;
 					}
 				});
+		sb = new StringBuilder();
 	}
 
+	private long time;
+	private StringBuilder sb;
+	
 	/**
 	 * Hanterar händelser när en knapp har tryckts.
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String theActionCommand = e.getActionCommand();
 		char c = theActionCommand.charAt(0);
-		if (manager != null)
-			manager.entryCharacter(c);
+		printPIN(c);
 	}
 	
-	public static void main(String[] args) {
-		new PinCodeTerminalTestDriver();
+	private void printPIN(char c) {
+		if(time + 10000 < System.currentTimeMillis())
+			sb = new StringBuilder();
+		time = System.currentTimeMillis();
+		sb.append(c);
+		if(sb.length() == 6) {
+			manager.entryPIN(sb.toString());
+			sb = new StringBuilder();
+		}
 	}
 }

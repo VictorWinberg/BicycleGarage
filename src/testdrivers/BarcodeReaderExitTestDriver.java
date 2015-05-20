@@ -27,7 +27,7 @@ public class BarcodeReaderExitTestDriver extends BarcodeReaderTestDriver {
 		manager.exitBarcode(code);
 	}
 	
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		new BarcodeReaderExitTestDriver();
 	}
 }

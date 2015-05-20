@@ -187,11 +187,10 @@ public class BicycleGarageManager {
 	 * på entrédörren. Följande tecken kan vara intryckta: "0", "1", ... "9",
 	 * "*", "#".
 	 */
-	public void entryCharacter(char c) {
-		terminal.lightLED(1, 1);
-	}
-
-	public static void main(String[] args) throws SQLException {
-		new BicycleGarageManager();
+	public void entryPIN(String pin) {
+		if(db.getUserWithPIN(pin) == null)
+			terminal.lightLED(0, 3);
+		else
+			terminal.lightLED(1, 3);
 	}
 }

@@ -80,7 +80,7 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		new ElectronicLockTestDriver("Entrélås");
 	}
 }
