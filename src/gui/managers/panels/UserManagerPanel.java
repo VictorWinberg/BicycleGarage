@@ -2,12 +2,15 @@ package gui.managers.panels;
 
 import gui.forms.buttons.EditUserButton;
 import gui.forms.buttons.RegisterUserButton;
+import gui.forms.buttons.RemoveReservedSlotButton;
+import gui.forms.buttons.ReserveSlotButton;
 import gui.forms.buttons.ShowUserButton;
 import gui.forms.buttons.UnregisterUserButton;
 import gui.misc.buttons.JModifiedButton;
 import interfaces.Database;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -55,10 +58,13 @@ public class UserManagerPanel extends JPanel {
 		northPanel.add(new RegisterUserButton(manager, 1.1));
 		northPanel.add(new UnregisterUserButton(manager, 1.1));
 		southPanel = new JPanel();
+		southPanel.setLayout(new GridLayout(10, 5, 1, 1));
 		EButton = new EditUserButton(manager, null, 1.1);
 		southPanel.add(EButton);
 		SButton = new ShowUserButton("Användarens information", 1.1);
 		southPanel.add(SButton);
+		southPanel.add(new ReserveSlotButton(manager,1.1));
+		southPanel.add(new RemoveReservedSlotButton(manager, 1.1));
 	}
 	
 	public void update() {
