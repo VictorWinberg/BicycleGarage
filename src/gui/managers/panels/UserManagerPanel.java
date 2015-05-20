@@ -2,6 +2,7 @@ package gui.managers.panels;
 
 import gui.forms.buttons.EditUserButton;
 import gui.forms.buttons.RegisterUserButton;
+import gui.forms.buttons.ShowUserButton;
 import gui.forms.buttons.UnregisterUserButton;
 import gui.misc.buttons.JModifiedButton;
 import interfaces.Database;
@@ -38,6 +39,7 @@ public class UserManagerPanel extends JPanel {
 	private JPanel northPanel;
 	private JPanel southPanel;
 	private EditUserButton EButton;
+	private ShowUserButton SButton;
 	
 	/**
 	 * Skapar en användarmanagerpanel som hanterar användare
@@ -55,6 +57,8 @@ public class UserManagerPanel extends JPanel {
 		southPanel = new JPanel();
 		EButton = new EditUserButton(manager, null, 1.1);
 		southPanel.add(EButton);
+		SButton = new ShowUserButton("Användarens information", 1.1);
+		southPanel.add(SButton);
 	}
 	
 	public void update() {
@@ -98,6 +102,7 @@ public class UserManagerPanel extends JPanel {
 		    			}
 		    			User chosen = manager.getDB().getUser(selectedData);
 		    			EButton.changeUser(chosen);
+		    			SButton.changeUser(chosen);
 		    		}
 		    	}
 
