@@ -60,9 +60,7 @@ public class ReserveSlotForm extends Form{
 		public void action(String[] fields) {
 			String nbrOfSpots = fields[2];
 			int spot = Integer.parseInt(nbrOfSpots);
-			for(int i = 0; i < spot; i++){
-				db.reserveSlot(user);
-			}
+				db.reserveSlot(user,spot);
 			JOptionPane.showMessageDialog(null, nbrOfSpots + "plats/er reserverades");
 			manager.changeState(ViewState.USER_STATE);
 		}
