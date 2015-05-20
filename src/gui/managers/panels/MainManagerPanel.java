@@ -3,6 +3,7 @@ package gui.managers.panels;
 import gui.forms.buttons.EditUserButton;
 import gui.forms.buttons.RegisterBicycleButton;
 import gui.forms.buttons.RegisterUserButton;
+import gui.forms.buttons.ReserveSlotButton;
 import gui.forms.buttons.UnregisterBicycleButton;
 import gui.forms.buttons.UnregisterUserButton;
 import gui.misc.buttons.ClearInactiveUsersButton;
@@ -32,13 +33,14 @@ public class MainManagerPanel extends JPanel {
 	 *            cykelgaragemanager
 	 */
 	public MainManagerPanel(BicycleGarageManager manager) {
-		setLayout(new GridLayout(8, 1, 10, 10));
+		setLayout(new GridLayout(9, 1, 10, 10));
 		add(new RegisterUserButton(manager, 1.1));
 		add(new EditUserButton(manager, manager.getDB().getUser("950407-0856"), 1.1)); // Testknapp, ska inte finnas egentligen
 		add(new UnregisterUserButton(manager, 1.1));
 		add(new RegisterBicycleButton(manager, 1.1));
 		add(new UnregisterBicycleButton(manager, 1.1));
 		add(new ClearInactiveUsersButton(manager, 1.1));
+		add(new ReserveSlotButton(manager,1.1));
 		add(new JLabel(""));
 		add(new ExitButton(manager, 1.1));
 	}

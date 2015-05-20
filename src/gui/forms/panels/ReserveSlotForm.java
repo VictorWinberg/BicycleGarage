@@ -31,29 +31,39 @@ public class ReserveSlotForm extends Form{
 			return widths;
 		}
 		
-		
+		private User user;
+		private User userPIN;
 		@Override
 		public boolean check(String[] fields) {
 			Database db = manager.getDB();
-			User user = db.getUser(fields[0]);
-			User userPIN = db.getUserWithPIN(fields[1]);
-			String nbrOfSpots = fields[2];
+			user = db.getUser(fields[0]);
+			userPIN = db.getUserWithPIN(fields[1]);
+			if(!db.isPNRValid(fields[0])){
+				JOptionPane.showMessageDialog(null, "Personnumret angavs på fel format");
+				return false;
+			}
+			if(user == null){
+				JOptionPane.showMessageDialog(null, "Personnumret är ej kopplat till en användare");
+			return false;
+			}
+			if(userPIN == null){
+				JOptionPane.showMessageDialog(null, "Felaktig PIN-kod");
+				return false;	
+			}
 			if(user.equals(userPIN)){
-				try {
-					int slots = Integer.parseInt(nbrOfSpots);
-					for(int i = 0; i < slots; i++ ){
-						db.reserveSlot(user);
-					}
-					return true;
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
-				}
-			} else JOptionPane.showMessageDialog(null, "Felaktig PIN");
+				return true;
+			}
 			return false;
 		}
 
 		@Override
 		public void action(String[] fields) {
-			manager.changeState(ViewState.BICYCLE_STATE);
+			String nbrOfSpots = fields[2];
+			int spot = Integer.parseInt(nbrOfSpots);
+			for(int i = 0; i < spot; i++){
+				db.reserveSlot(user);
+			}
+			JOptionPane.showMessageDialog(null, nbrOfSpots + "plats/er reserverades");
+			manager.changeState(ViewState.USER_STATE);
 		}
 }
