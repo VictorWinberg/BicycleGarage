@@ -42,9 +42,9 @@ public class DatabaseDriver implements Database {
 		System.out.println();
 		System.out.print("Användartabell ");
 		sql = "CREATE TABLE  users (" + "personnr VARCHAR( 11 ) NOT NULL ,"
-				+ "first_name VARCHAR( 25 ) NOT NULL ,"
-				+ "last_name VARCHAR( 25 ) NOT NULL ,"
-				+ "mail VARCHAR( 25 ) NOT NULL ,"
+				+ "first_name VARCHAR( 255 ) NOT NULL ,"
+				+ "last_name VARCHAR( 255 ) NOT NULL ,"
+				+ "mail VARCHAR( 255 ) NOT NULL ,"
 				+ "phonenr VARCHAR( 10 ) NOT NULL ,"
 				+ "pin VARCHAR( 6 ) NOT NULL ,"
 				+ "reservedSlots INT ( 4 ) NOT NULL ,"

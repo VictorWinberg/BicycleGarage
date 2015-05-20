@@ -6,7 +6,6 @@ import interfaces.Database;
 import javax.swing.JOptionPane;
 
 import main.BicycleGarageManager;
-import database.Bicycle;
 import database.User;
 
 public class ReserveSlotForm extends Form {

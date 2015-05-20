@@ -6,7 +6,6 @@ import gui.forms.buttons.RemoveReservedSlotButton;
 import gui.forms.buttons.ReserveSlotButton;
 import gui.forms.buttons.ShowUserButton;
 import gui.forms.buttons.UnregisterUserButton;
-import gui.misc.buttons.JModifiedButton;
 import interfaces.Database;
 
 import java.awt.BorderLayout;
@@ -22,8 +21,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import database.User;
 import main.BicycleGarageManager;
+import database.User;
 
 /**
  * Denna panel öppnas när man klickar på “Användare” i operatörsgränssnittet och

@@ -1,6 +1,5 @@
 package gui.managers.panels;
 
-import gui.forms.buttons.EditUserButton;
 import gui.forms.buttons.RegisterBicycleButton;
 import gui.forms.buttons.RegisterUserButton;
 import gui.forms.buttons.RemoveReservedSlotButton;
