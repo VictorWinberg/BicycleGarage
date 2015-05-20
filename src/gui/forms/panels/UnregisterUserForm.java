@@ -35,8 +35,7 @@ public class UnregisterUserForm extends Form {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
-		user = db.getUser(fields[0]);
-		if(user == null) {
+		if(db.getUser(fields[0]) == null) {
 			JOptionPane.showMessageDialog(null, "Personnumret saknar användare", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}

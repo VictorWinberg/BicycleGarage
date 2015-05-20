@@ -29,13 +29,13 @@ public class RegisterUserForm extends Form {
 		return widths;
 	}
 
-	private User user;
+	protected User user;
 	
 	@Override
 	public boolean check(String[] fields) {
 		try {
 			user = db.createUser(fields[0], fields[1], fields[2], fields[3], fields[4]);
-			if(db.getUser(fields[0]) == null) {
+			if(db.getUser(fields[0]) != null) {
 				JOptionPane.showMessageDialog(null, "Användaren är redan registrerad", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
