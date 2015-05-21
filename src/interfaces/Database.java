@@ -103,14 +103,15 @@ public interface Database {
 	 * @return true om personummert är korrekt, annars false */
 	public boolean isPNRValid(String pnr);
 
-/** Reserverar en plats åt användaren
- * @param user
- * @return True om en plats reserverats, annars false
- */
-public boolean reserveSlot(User user, int slots);
-public boolean removeReservedSlot(User user, int slots);
-public boolean depositBicycle(Bicycle bc);
-public boolean withdrawBicycle(Bicycle bc);
-public boolean removeFreeSlot(User user,int slots);
-public boolean addFreeSlot(User user, int slots);
+	/** Reserverar en plats åt användaren
+	 * @param user
+	 * @return True om en plats reserverats, annars false
+	 */
+	public boolean reserveSlot(User user, int slots);
+	public boolean removeReservedSlot(User user, int slots);
+	public boolean depositBicycle(Bicycle bc);
+	public boolean withdrawBicycle(Bicycle bc);
+	public boolean removeFreeSlot(User user,int slots);
+	public boolean addFreeSlot(User user, int slots);
+	public int getReservedSlots();
 }

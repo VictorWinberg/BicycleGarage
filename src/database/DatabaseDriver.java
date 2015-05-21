@@ -525,6 +525,7 @@ public class DatabaseDriver implements Database {
 		return cleared;
 	}
 	
+	@Override
 	public int getReservedSlots() {
 		ResultSet rs = extractUsers();
 		int slots = 0;
