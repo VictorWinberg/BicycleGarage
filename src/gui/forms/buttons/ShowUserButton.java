@@ -1,6 +1,6 @@
 package gui.forms.buttons;
 
-import gui.misc.buttons.ModifiedButton;
+import gui.misc.buttons.ModifiedUserButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,34 +8,31 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import main.BicycleGarageManager;
-import database.User;
 
 @SuppressWarnings("serial")
-public class ShowUserButton extends ModifiedButton implements ActionListener {
+public class ShowUserButton extends ModifiedUserButton implements ActionListener {
 
 	private BicycleGarageManager manager;
-	private User user;
 	
 	public ShowUserButton(BicycleGarageManager manager, double sizeModifier) {
 		super("Info", sizeModifier);
 		this.manager = manager;
 		addActionListener(this);
 	}
-	
-	public void changeUser(User user){
-		this.user = user;
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("KNAPP");
 		String[] labels = { "Personnummer", "Förnamn", "Efternamn",
-				"Mailadress", "Telefonnummer", "Reserverade platser", "Lediga platser" };
-		String[] fields = new String[labels.length];
+				"Mailadress", "Telefonnummer", "PIN", "Reserverade platser", "Lediga platser" };
 		StringBuilder sb = new StringBuilder("Användareinformation");
-		for (int i = 0; i < labels.length; i++){
-			sb.append("\n" + labels[i] + ": " + fields[i]);
-		}
+		sb.append("\n" + labels[0] + ": " + user.getPersonnr());
+		sb.append("\n" + labels[1] + ": " + user.getFirstName());
+		sb.append("\n" + labels[2] + ": " + user.getLastName());
+		sb.append("\n" + labels[3] + ": " + user.getMail());
+		sb.append("\n" + labels[4] + ": " + user.getPhonenr());
+		sb.append("\n" + labels[5] + ": " + user.getPIN());
+		sb.append("\n" + labels[6] + ": " + user.getReserverdSlots());
+		sb.append("\n" + labels[7] + ": " + user.getFreeSlots());
 		JOptionPane.showMessageDialog(null, sb.toString(), "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

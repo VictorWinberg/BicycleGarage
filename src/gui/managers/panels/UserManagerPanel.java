@@ -36,9 +36,7 @@ import database.User;
 @SuppressWarnings("serial")
 public class UserManagerPanel extends JPanel {
 
-	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Mail",
-			"Telefonnummer", "PIN-kod", "Reserverade platser",
-			"Lediga platser" };
+	private String[] columnNames = { "Personummer", "Förnamn", "Efternman" };
 	private BicycleGarageManager manager;
 	private JPanel westPanel;
 	private UnregisterUserButton unregBtn;
@@ -85,14 +83,12 @@ public class UserManagerPanel extends JPanel {
 		ResultSet users = db.extractUsers();
 		try {
 			users.last();
-			Object[][] data = new Object[users.getRow()][8];
+			Object[][] data = new Object[users.getRow()][3];
 			users.beforeFirst();
 			int j = 0;
 			while (users.next()) {
-				for (int i = 0; i < 6; i++)
+				for (int i = 0; i < 3; i++)
 					data[j][i] = users.getString(i + 1);
-				data[j][6] = users.getInt(7);
-				data[j][7] = users.getInt(8);
 				j++;
 			}
 			JTable table = new JTable(data, columnNames);
