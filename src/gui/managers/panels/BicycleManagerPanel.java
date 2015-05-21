@@ -25,7 +25,7 @@ import main.BicycleGarageManager;
  */
 @SuppressWarnings("serial")
 public class BicycleManagerPanel extends JPanel {
-	
+
 	private BicycleGarageManager manager;
 	private JPanel northPanel;
 
@@ -49,7 +49,7 @@ public class BicycleManagerPanel extends JPanel {
 	public void update() {
 		removeAll();
 		add(northPanel, BorderLayout.NORTH);
-		
+
 		Database db = manager.getDB();
 		try {
 			ResultSet bicycles = db.extractBicycles();

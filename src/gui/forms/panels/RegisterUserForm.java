@@ -12,15 +12,14 @@ public class RegisterUserForm extends Form {
 	public RegisterUserForm(BicycleGarageManager manager) {
 		super(manager, "Registrera användare");
 	}
-	
+
 	public RegisterUserForm(BicycleGarageManager manager, String altTitle) {
 		super(manager, altTitle);
 	}
 
 	@Override
 	public String[] getLabels() {
-		String[] labels = { "Personnummer", "Förnamn", "Efternamn",
-				"Mailadress", "Telefonnummer" };
+		String[] labels = { "Personnummer", "Förnamn", "Efternamn", "Mailadress", "Telefonnummer" };
 		return labels;
 	}
 
@@ -31,22 +30,24 @@ public class RegisterUserForm extends Form {
 	}
 
 	protected User user;
-	
+
 	@Override
 	public boolean check(String[] fields) {
 		try {
 			user = db.createUser(fields[0], fields[1], fields[2], fields[3], fields[4]);
-			if(db.getUser(fields[0]) != null) {
-				JOptionPane.showMessageDialog(null, "Användaren är redan registrerad", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			if (db.getUser(fields[0]) != null) {
+				JOptionPane.showMessageDialog(null, "Användaren är redan registrerad",
+						"Felmeddelande", JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande",
+					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void action(String[] fields) {
 		db.insertUser(user);

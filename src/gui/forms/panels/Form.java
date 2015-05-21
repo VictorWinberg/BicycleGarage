@@ -22,12 +22,12 @@ import main.BicycleGarageManager;
 import database.User;
 
 public abstract class Form {
-	
+
 	protected JTextField[] textfields;
 	protected BicycleGarageManager manager;
 	protected Database db;
 	protected User user;
-	
+
 	public Form(BicycleGarageManager manager, String title) {
 		this.manager = manager;
 		this.db = manager.getDB();
@@ -40,15 +40,15 @@ public abstract class Form {
 			public void windowClosing(WindowEvent e) {
 				String options[] = { "Ja, stäng", "Nej" };
 				if (JOptionPane.showOptionDialog(null,
-						"Är du säker på att du vill stänga formuläret?",
-						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
-						JOptionPane.WARNING_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
+						"Är du säker på att du vill stänga formuläret?", "Säkerhetsfråga",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
+						options[0]) == JOptionPane.YES_OPTION) {
 					manager.enable(true);
 					frame.dispose();
 				}
 			}
 		});
-		
+
 		String[] labels = getLabels();
 		int[] widths = getWidths();
 		JPanel labelPanel = new JPanel(new GridLayout(labels.length, 1));
@@ -71,22 +71,22 @@ public abstract class Form {
 			p.add(textfields[i]);
 			fieldPanel.add(p);
 		}
-		
+
 		JButton submit = new JButton(title.split(" ")[0]);
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String[] stringfield = new String[labels.length];
 				StringBuilder sb = new StringBuilder(title);
-				for (int i = 0; i < labels.length; i++){
+				for (int i = 0; i < labels.length; i++) {
 					stringfield[i] = textfields[i].getText().trim();
 					sb.append("\n" + labels[i] + ": " + stringfield[i]);
 				}
 				String options[] = { "Ja, " + title.split(" ")[0].toLowerCase(), "Nej" };
-				if (check(stringfield) && JOptionPane.showOptionDialog(null,
-						sb.toString(),
-						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
+				if (check(stringfield)
+						&& JOptionPane.showOptionDialog(null, sb.toString(), "Säkerhetsfråga",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+								options, options[0]) == JOptionPane.YES_OPTION) {
 					action(stringfield);
 					manager.enable(true);
 					frame.dispose();
@@ -101,10 +101,13 @@ public abstract class Form {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-	
+
 	public abstract String[] getLabels();
+
 	public abstract int[] getWidths();
+
 	public abstract boolean check(String[] stringfields);
+
 	public abstract void action(String[] stringfields);
-	
+
 }

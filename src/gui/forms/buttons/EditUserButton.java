@@ -12,7 +12,7 @@ import main.BicycleGarageManager;
 public class EditUserButton extends ModifiedUserButton implements ActionListener {
 
 	private BicycleGarageManager manager;
-	
+
 	public EditUserButton(BicycleGarageManager manager, double size) {
 		super("Redigera användare", size);
 		this.manager = manager;
@@ -21,7 +21,7 @@ public class EditUserButton extends ModifiedUserButton implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(user != null) {
+		if (user != null) {
 			manager.enable(false);
 			new EditUserForm(manager, user);
 		}

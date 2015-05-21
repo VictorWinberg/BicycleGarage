@@ -22,8 +22,7 @@ import main.BicycleGarageManager;
  * @version 1.0
  * @author Martin Höst
  */
-abstract public class BarcodeReaderTestDriver implements BarcodeReader,
-		ActionListener {
+abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionListener {
 
 	protected JFrame frame;
 	private JTextField scannedCode;

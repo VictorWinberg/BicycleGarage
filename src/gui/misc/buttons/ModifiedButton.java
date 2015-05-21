@@ -9,7 +9,7 @@ import javax.swing.JButton;
 public class ModifiedButton extends JButton {
 
 	private double sizeModifier;
-	
+
 	public ModifiedButton(String text, double sizeModifier) {
 		super(text);
 		this.sizeModifier = sizeModifier;
@@ -23,6 +23,6 @@ public class ModifiedButton extends JButton {
 
 	@Override
 	public Font getFont() {
-		return new Font(Font.SANS_SERIF, Font.BOLD, (int)(12 * sizeModifier));
+		return new Font(Font.SANS_SERIF, Font.BOLD, (int) (12 * sizeModifier));
 	}
 }

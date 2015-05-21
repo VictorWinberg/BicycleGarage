@@ -12,7 +12,7 @@ public class UnregisterBicycleForm extends Form {
 
 	public UnregisterBicycleForm(BicycleGarageManager manager) {
 		super(manager, "Avregistrera cykel");
-		this.manager= manager;
+		this.manager = manager;
 	}
 
 	@Override
@@ -26,18 +26,20 @@ public class UnregisterBicycleForm extends Form {
 		int[] widths = { 11 };
 		return widths;
 	}
-	
+
 	private Bicycle bc;
-	
+
 	@Override
 	public boolean check(String[] fields) {
 		bc = db.getBicycle(fields[0]);
-		if(bc == null) {
-			JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + fields[0] + " tillhör ej detta garaget");
+		if (bc == null) {
+			JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + fields[0]
+					+ " tillhör ej detta garaget");
 			return false;
 		}
-		if(bc.isDeposited()) {
-			JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + fields[0] + " är inlämnad i garaget");
+		if (bc.isDeposited()) {
+			JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + fields[0]
+					+ " är inlämnad i garaget");
 			return false;
 		}
 		return true;

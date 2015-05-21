@@ -9,8 +9,7 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class BicycleManagerButton extends ModifiedButton implements
-		ActionListener {
+public class BicycleManagerButton extends ModifiedButton implements ActionListener {
 
 	private BicycleGarageManager manager;
 

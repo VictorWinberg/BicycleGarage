@@ -13,7 +13,7 @@ import main.BicycleGarageManager;
 public class ShowUserButton extends ModifiedUserButton implements ActionListener {
 
 	private BicycleGarageManager manager;
-	
+
 	public ShowUserButton(BicycleGarageManager manager, double sizeModifier) {
 		super("Info", sizeModifier);
 		this.manager = manager;
@@ -22,8 +22,8 @@ public class ShowUserButton extends ModifiedUserButton implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String[] labels = { "Personnummer", "Förnamn", "Efternamn",
-				"Mailadress", "Telefonnummer", "PIN", "Reserverade platser", "Lediga platser", "Antal cyklar" };
+		String[] labels = { "Personnummer", "Förnamn", "Efternamn", "Mailadress", "Telefonnummer",
+				"PIN", "Reserverade platser", "Lediga platser", "Antal cyklar" };
 		StringBuilder sb = new StringBuilder("Användareinformation");
 		sb.append("\n" + labels[0] + ": " + user.getPersonnr());
 		sb.append("\n" + labels[1] + ": " + user.getFirstName());
@@ -34,6 +34,7 @@ public class ShowUserButton extends ModifiedUserButton implements ActionListener
 		sb.append("\n" + labels[6] + ": " + user.getReserverdSlots());
 		sb.append("\n" + labels[7] + ": " + user.getFreeSlots());
 		sb.append("\n" + labels[8] + ": " + user.getNbrOfBicycles());
-		JOptionPane.showMessageDialog(null, sb.toString(), "Information", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, sb.toString(), "Information",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 }

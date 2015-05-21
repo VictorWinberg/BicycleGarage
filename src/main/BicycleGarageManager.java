@@ -52,9 +52,9 @@ public class BicycleGarageManager {
 			public void windowClosing(WindowEvent e) {
 				String options[] = { "Ja, stäng", "Nej" };
 				if (JOptionPane.showOptionDialog(null,
-						"Är du säker på att du vill stänga applikationen?",
-						"Säkerhetsfråga", JOptionPane.DEFAULT_OPTION,
-						JOptionPane.WARNING_MESSAGE, null, options, options[0]) == JOptionPane.YES_OPTION) {
+						"Är du säker på att du vill stänga applikationen?", "Säkerhetsfråga",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
+						options[0]) == JOptionPane.YES_OPTION) {
 					System.exit(0);
 				}
 			}
@@ -92,10 +92,24 @@ public class BicycleGarageManager {
 	public void changeState(ViewState state) {
 		panel.removeAll();
 		switch (state) {
-		case START_STATE: panel.add(mainPanel); navPanel.setTitle("Huvudmeny"); break;
-		case USER_STATE: panel.add(userPanel); navPanel.setTitle("Användarpanel"); userPanel.update(); break;
-		case BICYCLE_STATE: panel.add(bicyclePanel); navPanel.setTitle("Cykelpanel"); bicyclePanel.update(); break;
-		case SEARCH_STATE: panel.add(searchPanel); navPanel.setTitle("Sökpanel"); break;
+		case START_STATE:
+			panel.add(mainPanel);
+			navPanel.setTitle("Huvudmeny");
+			break;
+		case USER_STATE:
+			panel.add(userPanel);
+			navPanel.setTitle("Användarpanel");
+			userPanel.update();
+			break;
+		case BICYCLE_STATE:
+			panel.add(bicyclePanel);
+			navPanel.setTitle("Cykelpanel");
+			bicyclePanel.update();
+			break;
+		case SEARCH_STATE:
+			panel.add(searchPanel);
+			navPanel.setTitle("Sökpanel");
+			break;
 		}
 		panel.revalidate();
 		panel.repaint();
@@ -107,7 +121,7 @@ public class BicycleGarageManager {
 	 * @return Database databas, annars null
 	 */
 	public Database getDB() {
-		return db; 
+		return db;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -123,9 +137,8 @@ public class BicycleGarageManager {
 	 * Registrerar hårdvara så att BicycleGarageManager vet vilka drivrutiner
 	 * som är tillgängliga.
 	 */
-	public void registerHardwareDrivers(BarcodePrinter printer,
-			ElectronicLock entryLock, ElectronicLock exitLock,
-			PinCodeTerminal terminal) {
+	public void registerHardwareDrivers(BarcodePrinter printer, ElectronicLock entryLock,
+			ElectronicLock exitLock, PinCodeTerminal terminal) {
 		this.printer = printer;
 		this.entryLock = entryLock;
 		this.exitLock = exitLock;
@@ -133,9 +146,8 @@ public class BicycleGarageManager {
 	}
 
 	/**
-	 * Kommer att kallas när operatören har registrerat en cykel.
-	 * Cykel ID är en sträng med 5 tecken, där varje tecken
-	 * kan vara '0', '1', ... "9".
+	 * Kommer att kallas när operatören har registrerat en cykel. Cykel ID är en
+	 * sträng med 5 tecken, där varje tecken kan vara '0', '1', ... "9".
 	 */
 	public void printBarcode(String bicycleID) {
 		try {
@@ -144,7 +156,7 @@ public class BicycleGarageManager {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Kommer att kallas när en användare har använt strecksläsaren vid
 	 * entrédörren. Cykel ID bör vara en sträng med 5 tecken, där varje tecken
@@ -152,20 +164,23 @@ public class BicycleGarageManager {
 	 */
 	public void entryBarcode(String bicycleID) {
 		Bicycle bc = db.getBicycle(bicycleID);
-		if(bc == null){
-			JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+		if (bc == null) {
+			JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande",
+					JOptionPane.WARNING_MESSAGE);
 			return;
 		}
-		if(bc.isDeposited()) {
-			JOptionPane.showMessageDialog(null, "Cykeln är redan inlämnad", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+		if (bc.isDeposited()) {
+			JOptionPane.showMessageDialog(null, "Cykeln är redan inlämnad", "Felmeddelande",
+					JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		User user = bc.getOwner();
-		if(user.getFreeSlots() == 0) {
-			JOptionPane.showMessageDialog(null, "Användaren har inga lediga platser", "Message", JOptionPane.INFORMATION_MESSAGE);
+		if (user.getFreeSlots() == 0) {
+			JOptionPane.showMessageDialog(null, "Användaren har inga lediga platser", "Message",
+					JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
-		db.removeFreeSlot(user,1);
+		db.removeFreeSlot(user, 1);
 		db.depositBicycle(bc);
 		entryLock.open(10);
 		changeState(ViewState.BICYCLE_STATE);
@@ -173,17 +188,18 @@ public class BicycleGarageManager {
 
 	/**
 	 * Kommer att kallas när en användare har använt strecksläsaren vid
-	 * cykelutgången. bicycleID bör vara en sträng med 5 tecken, där varje tecken
-	 * kan vara '0', '1', ... "9".
+	 * cykelutgången. bicycleID bör vara en sträng med 5 tecken, där varje
+	 * tecken kan vara '0', '1', ... "9".
 	 */
 	public void exitBarcode(String bicycleID) {
 		Bicycle bc = db.getBicycle(bicycleID);
-		if(bc==null){
-			JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+		if (bc == null) {
+			JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande",
+					JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		User user = bc.getOwner();
-		if(bc.isDeposited())
+		if (bc.isDeposited())
 			db.addFreeSlot(user, 1);
 		db.withdrawBicycle(bc);
 		exitLock.open(10);
@@ -197,11 +213,10 @@ public class BicycleGarageManager {
 	 */
 	public void entryPIN(String pin) {
 		User user = db.getUserWithPIN(pin);
-		if(user != null && user.getFreeSlots() < user.getReserverdSlots() || pin.equals("133337")) {
+		if (user != null && user.getFreeSlots() < user.getReserverdSlots() || pin.equals("133337")) {
 			terminal.lightLED(PinCodeTerminal.GREEN_LED, 1);
 			entryLock.open(10);
-		}
-		else {
+		} else {
 			terminal.lightLED(PinCodeTerminal.RED_LED, 1);
 		}
 	}

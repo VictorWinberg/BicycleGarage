@@ -17,22 +17,24 @@ public class EditUserForm extends RegisterUserForm {
 		textfields[3].setText(user.getMail());
 		textfields[4].setText(user.getPhonenr());
 	}
-	
+
 	@Override
 	public boolean check(String[] fields) {
 		try {
 			user = db.createUser(fields[0], fields[1], fields[2], fields[3], fields[4]);
-			if(db.getUser(fields[0]) == null) {
-				JOptionPane.showMessageDialog(null, "Användaren finns inte registrerad", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			if (db.getUser(fields[0]) == null) {
+				JOptionPane.showMessageDialog(null, "Användaren finns inte registrerad",
+						"Felmeddelande", JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande",
+					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void action(String[] fields) {
 		db.updateUser(user);

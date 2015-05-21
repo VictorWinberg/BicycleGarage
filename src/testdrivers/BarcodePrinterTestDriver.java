@@ -28,7 +28,8 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 		frame = new JFrame("Streckkodsskrivare");
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(230, 350));
-		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint());
+		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
+				.getCenterPoint());
 		frame.setLocation(frame.getLocation().x - 650, frame.getLocation().y - 50);
 
 		textArea = new JTextArea(5, 20);
@@ -48,14 +49,13 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 	 *            "9".
 	 */
 	public void printBarcode(String bicycleID) {
-		if(bicycleID.length() != 5 || !bicycleID.matches("[0-9]+")){
+		if (bicycleID.length() != 5 || !bicycleID.matches("[0-9]+")) {
 			System.out.println(bicycleID);
 			throw new IllegalArgumentException("Streckkoden är inte giltlig");
 		}
-		textArea.append("Event " + ++serialNr + ": "
-				+ "Skriver ut " + bicycleID + "\n");
+		textArea.append("Event " + ++serialNr + ": " + "Skriver ut " + bicycleID + "\n");
 	}
-	
+
 	public void main(String[] args) {
 		new BarcodePrinterTestDriver();
 	}

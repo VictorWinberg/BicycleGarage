@@ -23,12 +23,11 @@ import main.BicycleGarageManager;
  * @version 1.0
  * @author Martin Höst
  */
-public class PinCodeTerminalTestDriver implements PinCodeTerminal,
-		ActionListener {
+public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListener {
 
 	private BicycleGarageManager manager = null;
-	private static final String[] KEYS = { "1", "2", "3", "4", "5", "6", "7",
-			"8", "9", "#", "0", "*" };
+	private static final String[] KEYS = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "0",
+			"*" };
 	private JPanel redPanel, greenPanel;
 	private Timer redTimer, greenTimer;
 
@@ -76,7 +75,8 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 		JFrame frame = new JFrame("Pinkodsterminal");
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(240, 240));
-		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint());
+		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
+				.getCenterPoint());
 		frame.setLocation(frame.getLocation().x - 650, frame.getLocation().y - 300);
 		// make the window impossible to close
 		JPanel panel = new JPanel();
@@ -106,14 +106,16 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 			public void actionPerformed(ActionEvent e) { // Inner class with
 															// code
 				redTimer.stop(); // to be executed when the timer
-				redPanel.setBackground(new Color(238, 238, 238));; // event happens
+				redPanel.setBackground(new Color(238, 238, 238));
+				; // event happens
 			}
 		});
 		greenTimer = new Timer(1000, new ActionListener() { // Inner class as
 															// above
 					public void actionPerformed(ActionEvent e) {
 						greenTimer.stop();
-						greenPanel.setBackground(new Color(238, 238, 238));;
+						greenPanel.setBackground(new Color(238, 238, 238));
+						;
 					}
 				});
 		sb = new StringBuilder();
@@ -130,7 +132,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 
 	private Timer timer;
 	private StringBuilder sb;
-	
+
 	/**
 	 * Hanterar händelser när en knapp har tryckts.
 	 */
@@ -139,7 +141,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 		char c = theActionCommand.charAt(0);
 		printPIN(c);
 	}
-	
+
 	private void printPIN(char c) {
 		sb.append(c);
 		try {
@@ -149,7 +151,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 			System.err.println("ERROR: IllegalArgumentException i "
 					+ "pin i PinCodeTerminalTestDriver");
 		}
-		if(sb.length() == 6) {
+		if (sb.length() == 6) {
 			manager.entryPIN(sb.toString());
 			sb = new StringBuilder();
 		}

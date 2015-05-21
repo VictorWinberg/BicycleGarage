@@ -9,22 +9,21 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class ReserveSlotButton extends ModifiedUserButton implements
-ActionListener{
+public class ReserveSlotButton extends ModifiedUserButton implements ActionListener {
 
-		private BicycleGarageManager manager;
+	private BicycleGarageManager manager;
 
-		public ReserveSlotButton(BicycleGarageManager manager, double size) {
-			super("Reservera plats/er", size);
-			this.manager = manager;
-			addActionListener(this);
-		}
+	public ReserveSlotButton(BicycleGarageManager manager, double size) {
+		super("Reservera plats/er", size);
+		this.manager = manager;
+		addActionListener(this);
+	}
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if(user != null) {
-				manager.enable(false);
-				new ReserveSlotForm(manager, user);
-			}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (user != null) {
+			manager.enable(false);
+			new ReserveSlotForm(manager, user);
 		}
 	}
+}

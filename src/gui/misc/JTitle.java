@@ -9,9 +9,9 @@ import javax.swing.JLabel;
 public class JTitle extends JLabel {
 
 	public JTitle() {
-		
+
 	}
-	
+
 	public JTitle(String title) {
 		super(title);
 	}
@@ -25,7 +25,7 @@ public class JTitle extends JLabel {
 	public int getHorizontalAlignment() {
 		return JLabel.CENTER;
 	}
-	
+
 	@Override
 	public int getVerticalAlignment() {
 		return JLabel.CENTER;

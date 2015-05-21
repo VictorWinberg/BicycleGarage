@@ -21,8 +21,8 @@ import testdrivers.PinCodeTerminalTestDriver;
  */
 public class BicycleGarage {
 	/**
-	 * Skapar ett BicycleGarageManager-objekt samt alla testdrivrutinobjekt
-	 * och länkar ihop dessa.
+	 * Skapar ett BicycleGarageManager-objekt samt alla testdrivrutinobjekt och
+	 * länkar ihop dessa.
 	 */
 	public BicycleGarage() {
 		BicycleGarageManager manager = new BicycleGarageManager();

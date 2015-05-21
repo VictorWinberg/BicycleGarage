@@ -8,8 +8,7 @@ import javax.swing.JOptionPane;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class NumberOfAvailableSlotsButton extends ModifiedButton implements
-		ActionListener {
+public class NumberOfAvailableSlotsButton extends ModifiedButton implements ActionListener {
 
 	private BicycleGarageManager manager;
 
@@ -22,6 +21,7 @@ public class NumberOfAvailableSlotsButton extends ModifiedButton implements
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		JOptionPane.showMessageDialog(null, "Antalet reserverbara platser är "+(300-manager.getDB().getReservedSlots())+".");
+		JOptionPane.showMessageDialog(null, "Antalet reserverbara platser är "
+				+ (300 - manager.getDB().getReservedSlots()) + ".");
 	}
 }

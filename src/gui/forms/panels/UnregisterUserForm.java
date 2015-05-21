@@ -25,18 +25,19 @@ public class UnregisterUserForm extends Form {
 		int[] widths = { 4 };
 		return widths;
 	}
-	
+
 	@Override
 	public boolean check(String[] fields) {
-		if(user == null)
+		if (user == null)
 			return false;
 		User checkUser = db.getUserWithPIN(fields[0]);
-		if(checkUser == null || !user.equals(checkUser)) {
-			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+		if (checkUser == null || !user.equals(checkUser)) {
+			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod", "Felmeddelande",
+					JOptionPane.WARNING_MESSAGE);
 			return false;
-		}
-		else if(!db.getBicycles(user).isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Användaren har inlämnade cyklar", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+		} else if (!db.getBicycles(user).isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Användaren har inlämnade cyklar", "Felmeddelande",
+					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		return true;

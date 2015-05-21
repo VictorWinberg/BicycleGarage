@@ -35,7 +35,8 @@ import database.User;
 @SuppressWarnings("serial")
 public class UserManagerPanel extends JPanel {
 
-	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Reserv", "Lediga","Cyklar" };
+	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Reserv", "Lediga",
+			"Cyklar" };
 	private BicycleGarageManager manager;
 	private JPanel westPanel;
 	private UnregisterUserButton unregBtn;
@@ -45,7 +46,7 @@ public class UserManagerPanel extends JPanel {
 	private UnregisterBicycleButton unregBicBtn;
 	private ReserveSlotButton resBtn;
 	private RemoveReservedSlotButton remResBtn;
-	
+
 	/**
 	 * Skapar en användarmanagerpanel som hanterar användare
 	 * 
@@ -68,16 +69,16 @@ public class UserManagerPanel extends JPanel {
 		westPanel.add(regBicBtn);
 		unregBicBtn = new UnregisterBicycleButton(manager, 1.1);
 		westPanel.add(unregBicBtn);
-		resBtn = new ReserveSlotButton(manager,1.1);
+		resBtn = new ReserveSlotButton(manager, 1.1);
 		westPanel.add(resBtn);
 		remResBtn = new RemoveReservedSlotButton(manager, 1.1);
 		westPanel.add(remResBtn);
 	}
-	
+
 	public void update() {
 		removeAll();
 		add(westPanel, BorderLayout.WEST);
-		
+
 		Database db = manager.getDB();
 		ResultSet users = db.extractUsers();
 		try {
@@ -96,48 +97,45 @@ public class UserManagerPanel extends JPanel {
 			JTable table = new JTable(data, columnNames);
 			add(table.getTableHeader(), BorderLayout.CENTER);
 			table.setCellSelectionEnabled(false);
-		    table.setRowSelectionAllowed(true);
-		    table.getColumnModel().getColumn(3).setPreferredWidth(10);
-		    table.getColumnModel().getColumn(4).setPreferredWidth(10);
-		    table.getColumnModel().getColumn(5).setPreferredWidth(10);
-		   
-		    ListSelectionModel cellSelectionModel = table.getSelectionModel();
-		    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		    cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
-		    	public void valueChanged(ListSelectionEvent e) {
-		    		if(!e.getValueIsAdjusting()) {
-		    			String selectedData = null;
+			table.setRowSelectionAllowed(true);
+			table.getColumnModel().getColumn(3).setPreferredWidth(10);
+			table.getColumnModel().getColumn(4).setPreferredWidth(10);
+			table.getColumnModel().getColumn(5).setPreferredWidth(10);
 
-		    			int[] selectedRow = table.getSelectedRows();
-		    			int[] selectedColumns = table.getSelectedColumns();
+			ListSelectionModel cellSelectionModel = table.getSelectionModel();
+			cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						String selectedData = null;
 
-		    			for (int i = 0; i < selectedRow.length; i++) {
-		    				for (int j = 0; j < selectedColumns.length; j++) {
-		    					selectedData = (String) table.getValueAt(selectedRow[i], 0);
-		    				}
-		    			}
-		    			User chosen = manager.getDB().getUser(selectedData);
-		    			unregBtn.changeUser(chosen);
-		    			editBtn.changeUser(chosen);
-		    			showBtn.changeUser(chosen);
-		    			regBicBtn.changeUser(chosen);
-		    			resBtn.changeUser(chosen);
-		    			remResBtn.changeUser(chosen);
-		    		}
-		    	}
+						int[] selectedRow = table.getSelectedRows();
+						int[] selectedColumns = table.getSelectedColumns();
 
-		    });
-			
-			
-			
-//			table.setEnabled(false);
-//			table.setFillsViewportHeight(true);
-//			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+						for (int i = 0; i < selectedRow.length; i++) {
+							for (int j = 0; j < selectedColumns.length; j++) {
+								selectedData = (String) table.getValueAt(selectedRow[i], 0);
+							}
+						}
+						User chosen = manager.getDB().getUser(selectedData);
+						unregBtn.changeUser(chosen);
+						editBtn.changeUser(chosen);
+						showBtn.changeUser(chosen);
+						regBicBtn.changeUser(chosen);
+						resBtn.changeUser(chosen);
+						remResBtn.changeUser(chosen);
+					}
+				}
+
+			});
+
+			// table.setEnabled(false);
+			// table.setFillsViewportHeight(true);
+			// table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 			JScrollPane scrollPane = new JScrollPane(table);
 			add(scrollPane, BorderLayout.CENTER);
-			
-			
-		} catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

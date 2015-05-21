@@ -9,8 +9,7 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class UnregisterUserButton extends ModifiedUserButton implements
-		ActionListener {
+public class UnregisterUserButton extends ModifiedUserButton implements ActionListener {
 
 	private BicycleGarageManager manager;
 
@@ -22,7 +21,7 @@ public class UnregisterUserButton extends ModifiedUserButton implements
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(user != null) {
+		if (user != null) {
 			manager.enable(false);
 			new UnregisterUserForm(manager, user);
 		}
