@@ -16,7 +16,7 @@ public class NumberOfAvailableSlotsButton extends ModifiedButton implements
 	public NumberOfAvailableSlotsButton(BicycleGarageManager manager, double size) {
 		super("Visa antal lediga platser", size);
 		this.manager = manager;
-		setToolTipText("Rensar inaktiva användare");
+		setToolTipText("Visar hur många platser i garaget det finns att reservera");
 		addActionListener(this);
 	}
 
