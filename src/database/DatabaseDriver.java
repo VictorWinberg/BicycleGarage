@@ -524,6 +524,20 @@ public class DatabaseDriver implements Database {
 		}
 		return cleared;
 	}
+	
+	public int getReservedSlots() {
+		ResultSet rs = extractUsers();
+		int slots = 0;
+		try {
+			rs.beforeFirst();
+			while(rs.next()) {
+				slots += rs.getInt(6);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return slots;
+	}
 
 	public boolean isPNRValid(String pnr) {
 		boolean isValid = false;
