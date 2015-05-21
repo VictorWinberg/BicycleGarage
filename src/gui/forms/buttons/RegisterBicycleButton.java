@@ -1,7 +1,6 @@
 package gui.forms.buttons;
 
 import gui.forms.panels.RegisterBicycleForm;
-import gui.misc.buttons.ModifiedButton;
 import gui.misc.buttons.ModifiedUserButton;
 
 import java.awt.event.ActionEvent;

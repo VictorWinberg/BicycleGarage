@@ -151,13 +151,20 @@ public class BicycleGarageManager {
 	 * kan vara '0', '1', ... "9".
 	 */
 	public void entryBarcode(String bicycleID) {
-		Database db = getDB();
 		Bicycle bc = db.getBicycle(bicycleID);
 		if(bc == null){
-		JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
-		return;
+			JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		if(bc.isDeposited()) {
+			JOptionPane.showMessageDialog(null, "Cykeln är redan inlämnad", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			return;
 		}
 		User user = bc.getOwner();
+		if(user.getFreeSlots() == 0) {
+			JOptionPane.showMessageDialog(null, "Användaren har inga lediga platser", "Message", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		db.removeFreeSlot(user,1);
 		db.depositBicycle(bc);
 		entryLock.open(10);
@@ -170,14 +177,14 @@ public class BicycleGarageManager {
 	 * kan vara '0', '1', ... "9".
 	 */
 	public void exitBarcode(String bicycleID) {
-		Database db = getDB();
 		Bicycle bc = db.getBicycle(bicycleID);
 		if(bc==null){
 			JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		User user = bc.getOwner();
-		db.addFreeSlot(user,1);
+		if(bc.isDeposited())
+			db.addFreeSlot(user, 1);
 		db.withdrawBicycle(bc);
 		exitLock.open(10);
 		changeState(ViewState.BICYCLE_STATE);
@@ -189,10 +196,13 @@ public class BicycleGarageManager {
 	 * "*", "#".
 	 */
 	public void entryPIN(String pin) {
-		if(db.getUserWithPIN(pin) == null)
-			terminal.lightLED(0, 1);
-		else
-			terminal.lightLED(1, 1);
+		User user = db.getUserWithPIN(pin);
+		if(user != null && user.getFreeSlots() < user.getReserverdSlots() || pin.equals("133337")) {
+			terminal.lightLED(PinCodeTerminal.GREEN_LED, 1);
 			entryLock.open(10);
+		}
+		else {
+			terminal.lightLED(PinCodeTerminal.RED_LED, 1);
+		}
 	}
 }

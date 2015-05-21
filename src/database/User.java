@@ -44,6 +44,15 @@ public class User {
 	 freeSlots-=slots;
 	}
 	public int getFreeSlots() 		{ return freeSlots; }
+	public void addBicycle() {
+		 nbrOfBicycles++;
+	}
+	public void removeBicycle() {
+		if(nbrOfBicycles <= 0){
+			throw new IllegalArgumentException("Antalet cyklar är mindre än noll");
+		}
+		nbrOfBicycles--;
+	}
 	public int getNbrOfBicycles()	{ return nbrOfBicycles; }
 	@Override
 	public String toString() {

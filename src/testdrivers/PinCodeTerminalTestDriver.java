@@ -117,9 +117,18 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 					}
 				});
 		sb = new StringBuilder();
+		timer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) { // Inner class with
+															// code
+				sb = new StringBuilder(); // to be executed when the timer
+				lightLED(RED_LED, 3);
+				timer.stop(); // event happens
+			}
+		});
+		timer.stop();
 	}
 
-	private long time;
+	private Timer timer;
 	private StringBuilder sb;
 	
 	/**
@@ -132,10 +141,14 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal,
 	}
 	
 	private void printPIN(char c) {
-		if(time + 10000 < System.currentTimeMillis())
-			sb = new StringBuilder();
-		time = System.currentTimeMillis();
 		sb.append(c);
+		try {
+			timer.setInitialDelay(10 * 1000);
+			timer.restart();
+		} catch (IllegalArgumentException e) {
+			System.err.println("ERROR: IllegalArgumentException i "
+					+ "pin i PinCodeTerminalTestDriver");
+		}
 		if(sb.length() == 6) {
 			manager.entryPIN(sb.toString());
 			sb = new StringBuilder();

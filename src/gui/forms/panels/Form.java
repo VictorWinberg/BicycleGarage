@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import database.User;
 import main.BicycleGarageManager;
+import database.User;
 
 public abstract class Form {
 	

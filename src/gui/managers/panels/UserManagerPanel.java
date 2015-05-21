@@ -2,7 +2,6 @@ package gui.managers.panels;
 
 import gui.forms.buttons.EditUserButton;
 import gui.forms.buttons.RegisterBicycleButton;
-import gui.forms.buttons.RegisterUserButton;
 import gui.forms.buttons.RemoveReservedSlotButton;
 import gui.forms.buttons.ReserveSlotButton;
 import gui.forms.buttons.ShowUserButton;
@@ -36,7 +35,7 @@ import database.User;
 @SuppressWarnings("serial")
 public class UserManagerPanel extends JPanel {
 
-	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Reserv", "Cyklar" };
+	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Reserverade", "Lediga","Antal Cyklar" };
 	private BicycleGarageManager manager;
 	private JPanel westPanel;
 	private UnregisterUserButton unregBtn;
@@ -83,14 +82,15 @@ public class UserManagerPanel extends JPanel {
 		ResultSet users = db.extractUsers();
 		try {
 			users.last();
-			Object[][] data = new Object[users.getRow()][5];
+			Object[][] data = new Object[users.getRow()][6];
 			users.beforeFirst();
 			int j = 0;
 			while (users.next()) {
 				for (int i = 0; i < 3; i++)
 					data[j][i] = users.getString(i + 1);
 				data[j][3] = users.getInt(7);
-				data[j][4] = users.getInt(9);
+				data[j][4] = users.getInt(8);
+				data[j][5] = users.getInt(9);
 				j++;
 			}
 			JTable table = new JTable(data, columnNames);

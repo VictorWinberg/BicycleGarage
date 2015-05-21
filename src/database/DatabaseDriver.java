@@ -346,6 +346,9 @@ public class DatabaseDriver implements Database {
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("tillagd.");
+			User user = bicycle.getOwner();
+			user.addBicycle();
+			updateUser(user);
 			return true;
 		} catch (SQLException e) {
 			System.out.println("inte tillagd. SQL Message: " + e.getMessage());
@@ -371,6 +374,9 @@ public class DatabaseDriver implements Database {
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("borttagen.");
+			User user = bicycle.getOwner();
+			user.removeBicycle();
+			updateUser(user);
 			return true;
 		} catch (SQLException e) {
 			System.out
