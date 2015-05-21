@@ -534,7 +534,37 @@ public class DatabaseDriver implements Database {
 		try {
 			rs.beforeFirst();
 			while(rs.next()) {
-				slots += rs.getInt(6);
+				slots += rs.getInt(7);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return slots;
+	}
+	
+	@Override
+	public int getFreeSlots() {
+		ResultSet rs = extractUsers();
+		int slots = 0;
+		try {
+			rs.beforeFirst();
+			while(rs.next()) {
+				slots += rs.getInt(8);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return slots;
+	}
+	
+	@Override
+	public int getNbrOfBicycles() {
+		ResultSet rs = extractUsers();
+		int slots = 0;
+		try {
+			rs.beforeFirst();
+			while(rs.next()) {
+				slots += rs.getInt(9);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -586,7 +616,7 @@ public class DatabaseDriver implements Database {
 		
 	}
 
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		DatabaseDriver db = null;
 		try {
 			db = new DatabaseDriver();
@@ -599,79 +629,17 @@ public class DatabaseDriver implements Database {
 							+ e.getMessage());
 		}
 
-		int nbr = 0;
-		for (int i = 0; i < 100; i++) {
-			String pnr = "001122-33" + i;
-			if (isPNRValid(pnr)) {
-				System.out.println(pnr);
-				nbr++;
-			}
-		}
-		System.out.println(nbr);
-
 		// db.dropTables();
 		// db.createTables();
-
-		// User u = db.getUserWithPIN("754532");
-		// if(u != null){
-		// System.out.println(u.toString());
-		// db.deleteUser(u);
-		// } else System.out.println("User not found");
-
-		try {
-			User victor = db.createUser("950407-0856", "Victor", "Winberg",
-					"cool@swag.com", "0707133700");
-			db.insertUser(victor);
-
-			User pelle = db.createUser("950102-0300", "Pelle", "Nilsson",
-					"pelle@nilsson.se", "0707001122");
-			db.insertUser(pelle);
-
-			User notfake = db.createUser("950123-4562", "Fake", "Fakesson",
-					"swag@lol.se", "0707123456");
-			db.insertUser(notfake);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-		// User u = db.getUser("950123-4562");
-		// if(u != null) {
-		// Bicycle bicycle = db.createBicycle(u);
-		// db.insertBicycle(bicycle);
-		// }
-
-		Bicycle bike = db.getBicycle("49896");
-		if (bike != null)
-			bike.withdraw();
-
-		db.updateBicycle(bike);
-
-		// db.clearInactiveUsers();
-
-		// db.deleteBicycle(db.getBicycle("77032"));
-		// db.deleteBicycle(db.getBicycle("50582"));
-
-		// if(db.getUserWithPIN("553587") != null)
-		// System.out.println("PIN 553587 finns");
-		// else System.out.println("PIN 553587 finns inte");
-
-		// List<Bicycle> list = db.getBicycles(db.getUser("950407-0856"));
-		// if(list == null)
-		// System.out.println("Användaren är felaktig.");
-		// else if(list.isEmpty())
-		// System.out.println("Användaren har inga cyklar.");
-		// else {
-		// System.out.println();
-		// for (Bicycle bicycle : list) {
-		// System.out.print(bicycle.getBarcode() + ", ");
-		// }
-		// System.out.println();
-		// }
 
 		System.out.println();
 		print(db.extractUsers());
 		System.out.println();
 		print(db.extractBicycles());
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(db.getReservedSlots());
 	}
 
 	public static void print(ResultSet rs) {

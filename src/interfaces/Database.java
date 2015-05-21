@@ -143,7 +143,15 @@ public interface Database {
 	 */
 	public boolean addFreeSlot(User user, int slots);
 	
-	/** Hämtar totalt antal reserverade playser 
+	/** Hämtar totalt antal reserverade platser 
 	 * @return Antalet reserverade platser */
 	public int getReservedSlots();
+	
+	/** Hämtar totalt antal lediga platser 
+	 * @return Antalet lediga platser */
+	public int getFreeSlots();
+	
+	/** Hämtar totalt antal inlämnade cyklar 
+	 * @return Antalet inlämnade cyklar */
+	public int getNbrOfBicycles();
 }
