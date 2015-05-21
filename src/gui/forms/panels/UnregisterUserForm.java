@@ -9,39 +9,34 @@ import database.User;
 
 public class UnregisterUserForm extends Form {
 
-	public UnregisterUserForm(BicycleGarageManager manager) {
+	public UnregisterUserForm(BicycleGarageManager manager, User user) {
 		super(manager, "Avregistrera användare");
+		this.user = user;
 	}
 
 	@Override
 	public String[] getLabels() {
-		String[] labels = { "Personnummer", "PIN" };
+		String[] labels = { "PIN" };
 		return labels;
 	}
 
 	@Override
 	public int[] getWidths() {
-		int[] widths = { 11, 4 };
+		int[] widths = { 4 };
 		return widths;
 	}
 	
-	private User user;
-	
 	@Override
 	public boolean check(String[] fields) {
-		try {
-			db.createUser(fields[0], "firstname", "lastname", "name@example.com", "0707001122");
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+		if(user == null)
 			return false;
-		}
-		if(db.getUser(fields[0]) == null) {
-			JOptionPane.showMessageDialog(null, "Personnumret saknar användare", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
-			return false;
-		}
-		User checkUser = db.getUserWithPIN(fields[1]);
-		if(!user.equals(checkUser)) {
+		User checkUser = db.getUserWithPIN(fields[0]);
+		if(checkUser == null || !user.equals(checkUser)) {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		else if(!db.getBicycles(user).isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Användaren har inlämnade cyklar", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		return true;

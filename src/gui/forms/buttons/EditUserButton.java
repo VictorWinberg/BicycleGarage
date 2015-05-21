@@ -1,7 +1,8 @@
 package gui.forms.buttons;
 
 import gui.forms.panels.EditUserForm;
-import gui.misc.buttons.JModifiedButton;
+import gui.misc.buttons.ModifiedButton;
+import gui.misc.buttons.ModifiedUserButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +11,10 @@ import main.BicycleGarageManager;
 import database.User;
 
 @SuppressWarnings("serial")
-public class EditUserButton extends JModifiedButton implements ActionListener {
+public class EditUserButton extends ModifiedUserButton implements ActionListener {
 
 	private BicycleGarageManager manager;
-	private User user;
-
+	
 	public EditUserButton(BicycleGarageManager manager, double size) {
 		super("Redigera användare", size);
 		this.manager = manager;
@@ -27,8 +27,5 @@ public class EditUserButton extends JModifiedButton implements ActionListener {
 			manager.enable(false);
 			new EditUserForm(manager, user);
 		}
-	}
-	public void changeUser(User user){
-		this.user = user;
 	}
 }

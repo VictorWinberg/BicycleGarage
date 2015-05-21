@@ -1,11 +1,6 @@
 package gui.managers.panels;
 
-import gui.forms.buttons.RegisterBicycleButton;
 import gui.forms.buttons.RegisterUserButton;
-import gui.forms.buttons.RemoveReservedSlotButton;
-import gui.forms.buttons.ReserveSlotButton;
-import gui.forms.buttons.UnregisterBicycleButton;
-import gui.forms.buttons.UnregisterUserButton;
 import gui.misc.buttons.ClearInactiveUsersButton;
 import gui.misc.buttons.ExitButton;
 
@@ -35,12 +30,7 @@ public class MainManagerPanel extends JPanel {
 	public MainManagerPanel(BicycleGarageManager manager) {
 		setLayout(new GridLayout(10, 1, 10, 10));
 		add(new RegisterUserButton(manager, 1.1));
-		add(new UnregisterUserButton(manager, 1.1));
-		add(new RegisterBicycleButton(manager, 1.1));
-		add(new UnregisterBicycleButton(manager, 1.1));
 		add(new ClearInactiveUsersButton(manager, 1.1));
-		add(new ReserveSlotButton(manager,1.1));
-		add(new RemoveReservedSlotButton(manager, 1.1));
 		add(new JLabel(""));
 		add(new ExitButton(manager, 1.1));
 	}

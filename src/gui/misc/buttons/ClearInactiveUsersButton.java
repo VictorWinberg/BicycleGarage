@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class ClearInactiveUsersButton extends JModifiedButton implements
+public class ClearInactiveUsersButton extends ModifiedButton implements
 		ActionListener {
 
 	private BicycleGarageManager manager;

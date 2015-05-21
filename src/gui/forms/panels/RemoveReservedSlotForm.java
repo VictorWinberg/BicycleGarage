@@ -11,63 +11,46 @@ import database.User;
 public class RemoveReservedSlotForm extends Form {
 	private BicycleGarageManager manager;
 
-	public RemoveReservedSlotForm(BicycleGarageManager manager) {
+	public RemoveReservedSlotForm(BicycleGarageManager manager, User user) {
 		super(manager, "Avreservera plats");
 		this.manager = manager;
+		this.user = user;
 	}
 
 	@Override
 	public String[] getLabels() {
-		String[] labels = { "Personnummer", "PIN-kod", "Antal platser" };
+		String[] labels = { "PIN-kod", "Antal platser" };
 		return labels;
 	}
 
 	@Override
 	public int[] getWidths() {
-		int[] widths = { 11, 15, 5 };
+		int[] widths = { 4, 5 };
 		return widths;
 	}
 
-	private User user;
-	private User userPIN;
-
 	@Override
 	public boolean check(String[] fields) {
-		Database db = manager.getDB();
-		user = db.getUser(fields[0]);
-		userPIN = db.getUserWithPIN(fields[1]);
-		if (!db.isPNRValid(fields[0])) {
-			JOptionPane.showMessageDialog(null,
-					"Personnumret angavs på fel format");
+		if(user == null)
 			return false;
-		}
-		if (user == null) {
-			JOptionPane.showMessageDialog(null,
-					"Personnumret är ej kopplat till en användare");
-			return false;
-		}
-		if (userPIN == null) {
+		User checkUser = db.getUserWithPIN(fields[0]);
+		if (checkUser == null || !user.equals(checkUser)) {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod");
 			return false;
 		}
-		if (user.equals(userPIN)) {
-			return true;
+		else if(user.getReserverdSlots() < Integer.parseInt(fields[1])) {
+			JOptionPane.showMessageDialog(null, "Användaren har inte så många reserverade platser");
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public void action(String[] fields) {
-		String nbrOfSpots = fields[2];
-		int spot = Integer.parseInt(nbrOfSpots);
-		if (spot < 0) {
-			JOptionPane.showMessageDialog(null,
-					"Felaktigt värde på antal platser som ska avreserveras");
-			return;
-		}
+		int spot = Integer.parseInt(fields[1]);
 		db.removeReservedSlot(user, spot);
-		JOptionPane.showMessageDialog(null, nbrOfSpots
-				+ "plats/er avreserverades");
+		JOptionPane.showMessageDialog(null, spot
+				+ " plats/er avreserverades");
 		manager.changeState(ViewState.USER_STATE);
 	}
 }

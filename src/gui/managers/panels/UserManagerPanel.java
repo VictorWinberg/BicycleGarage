@@ -1,10 +1,12 @@
 package gui.managers.panels;
 
 import gui.forms.buttons.EditUserButton;
+import gui.forms.buttons.RegisterBicycleButton;
 import gui.forms.buttons.RegisterUserButton;
 import gui.forms.buttons.RemoveReservedSlotButton;
 import gui.forms.buttons.ReserveSlotButton;
 import gui.forms.buttons.ShowUserButton;
+import gui.forms.buttons.UnregisterBicycleButton;
 import gui.forms.buttons.UnregisterUserButton;
 import interfaces.Database;
 
@@ -38,10 +40,14 @@ public class UserManagerPanel extends JPanel {
 			"Telefonnummer", "PIN-kod", "Reserverade platser",
 			"Lediga platser" };
 	private BicycleGarageManager manager;
-	private JPanel northPanel;
-	private JPanel southPanel;
-	private EditUserButton EButton;
-	private ShowUserButton SButton;
+	private JPanel westPanel;
+	private UnregisterUserButton unregBtn;
+	private EditUserButton editBtn;
+	private ShowUserButton showBtn;
+	private RegisterBicycleButton regBicBtn;
+	private UnregisterBicycleButton unregBicBtn;
+	private ReserveSlotButton resBtn;
+	private RemoveReservedSlotButton remResBtn;
 	
 	/**
 	 * Skapar en användarmanagerpanel som hanterar användare
@@ -53,23 +59,27 @@ public class UserManagerPanel extends JPanel {
 		this.manager = manager;
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
-		northPanel = new JPanel();
-		northPanel.add(new RegisterUserButton(manager, 1.1));
-		northPanel.add(new UnregisterUserButton(manager, 1.1));
-		southPanel = new JPanel();
-		southPanel.setLayout(new GridLayout(10, 5, 1, 1));
-		EButton = new EditUserButton(manager, 1.1);
-		southPanel.add(EButton);
-		SButton = new ShowUserButton(manager, 1.1);
-		southPanel.add(SButton);
-		southPanel.add(new ReserveSlotButton(manager,1.1));
-		southPanel.add(new RemoveReservedSlotButton(manager, 1.1));
+		westPanel = new JPanel();
+		westPanel.setLayout(new GridLayout(10, 1, 1, 1));
+		unregBtn = new UnregisterUserButton(manager, 1.1);
+		westPanel.add(unregBtn);
+		editBtn = new EditUserButton(manager, 1.1);
+		westPanel.add(editBtn);
+		showBtn = new ShowUserButton(manager, 1.1);
+		westPanel.add(showBtn);
+		regBicBtn = new RegisterBicycleButton(manager, 1.1);
+		westPanel.add(regBicBtn);
+		unregBicBtn = new UnregisterBicycleButton(manager, 1.1);
+		westPanel.add(unregBicBtn);
+		resBtn = new ReserveSlotButton(manager,1.1);
+		westPanel.add(resBtn);
+		remResBtn = new RemoveReservedSlotButton(manager, 1.1);
+		westPanel.add(remResBtn);
 	}
 	
 	public void update() {
 		removeAll();
-		add(northPanel, BorderLayout.NORTH);
-		add(southPanel, BorderLayout.WEST);
+		add(westPanel, BorderLayout.WEST);
 		
 		Database db = manager.getDB();
 		ResultSet users = db.extractUsers();
@@ -106,8 +116,12 @@ public class UserManagerPanel extends JPanel {
 		    				}
 		    			}
 		    			User chosen = manager.getDB().getUser(selectedData);
-		    			EButton.changeUser(chosen);
-		    			SButton.changeUser(chosen);
+		    			unregBtn.changeUser(chosen);
+		    			editBtn.changeUser(chosen);
+		    			showBtn.changeUser(chosen);
+		    			regBicBtn.changeUser(chosen);
+		    			resBtn.changeUser(chosen);
+		    			remResBtn.changeUser(chosen);
 		    		}
 		    	}
 

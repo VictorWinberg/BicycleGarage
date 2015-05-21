@@ -11,11 +11,11 @@ public class EditUserForm extends RegisterUserForm {
 
 	public EditUserForm(BicycleGarageManager manager, User user) {
 		super(manager, "Redigera användare");
-		fields[0].setText(user.getPersonnr());
-		fields[1].setText(user.getFirstName());
-		fields[2].setText(user.getLastName());
-		fields[3].setText(user.getMail());
-		fields[4].setText(user.getPhonenr());
+		textfields[0].setText(user.getPersonnr());
+		textfields[1].setText(user.getFirstName());
+		textfields[2].setText(user.getLastName());
+		textfields[3].setText(user.getMail());
+		textfields[4].setText(user.getPhonenr());
 	}
 	
 	@Override

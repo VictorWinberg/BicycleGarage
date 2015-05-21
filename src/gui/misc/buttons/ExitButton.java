@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
-public class ExitButton extends JModifiedButton implements ActionListener {
+public class ExitButton extends ModifiedButton implements ActionListener {
 
 	public ExitButton(BicycleGarageManager manager, double size) {
 		super("Avsluta", size);

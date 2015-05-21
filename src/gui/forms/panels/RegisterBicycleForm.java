@@ -10,19 +10,20 @@ import database.User;
 
 public class RegisterBicycleForm extends Form {
 	
-	public RegisterBicycleForm(BicycleGarageManager manager) {
+	public RegisterBicycleForm(BicycleGarageManager manager, User user) {
 		super(manager, "Registrera cykel");
+		this.user = user;
 	}
 
 	@Override
 	public String[] getLabels() {
-		String[] labels = { "Personnummer", "PIN-kod"};
+		String[] labels = { "PIN-kod"};
 		return labels;
 	}
 
 	@Override
 	public int[] getWidths() {
-		int[] widths = { 11, 15};
+		int[] widths = { 4 };
 		return widths;
 	}
 	
@@ -30,16 +31,7 @@ public class RegisterBicycleForm extends Form {
 	
 	@Override
 	public boolean check(String[] fields) {
-		if(!db.isPNRValid(fields[0])) {
-			JOptionPane.showMessageDialog(null, "Personnumret angavs på fel format", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
-			return false;
-		}
-		User user = db.getUser(fields[0]);
-		if(user == null) {
-			JOptionPane.showMessageDialog(null, "Personnumret är ej kopplat till en användare", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
-			return false;
-		}
-		User checkUser = db.getUserWithPIN(fields[1]);
+		User checkUser = db.getUserWithPIN(fields[0]);
 		if(!user.equals(checkUser)){
 			JOptionPane.showMessageDialog(null, "Felaktig PIN", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
 			return false;

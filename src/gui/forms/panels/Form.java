@@ -18,13 +18,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import database.User;
 import main.BicycleGarageManager;
 
 public abstract class Form {
 	
-	protected JTextField[] fields;
+	protected JTextField[] textfields;
 	protected BicycleGarageManager manager;
 	protected Database db;
+	protected User user;
 	
 	public Form(BicycleGarageManager manager, String title) {
 		this.manager = manager;
@@ -55,18 +57,18 @@ public abstract class Form {
 		frame.add(labelPanel, BorderLayout.WEST);
 		frame.add(fieldPanel, BorderLayout.CENTER);
 
-		fields = new JTextField[labels.length];
+		textfields = new JTextField[labels.length];
 
 		for (int i = 0; i < labels.length; i++) {
-			fields[i] = new JTextField();
+			textfields[i] = new JTextField();
 			if (i < widths.length)
-				fields[i].setColumns(widths[i]);
+				textfields[i].setColumns(widths[i]);
 
 			JLabel lab = new JLabel(labels[i], JLabel.RIGHT);
-			lab.setLabelFor(fields[i]);
+			lab.setLabelFor(textfields[i]);
 			labelPanel.add(lab);
 			JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			p.add(fields[i]);
+			p.add(textfields[i]);
 			fieldPanel.add(p);
 		}
 		
@@ -77,7 +79,7 @@ public abstract class Form {
 				String[] stringfield = new String[labels.length];
 				StringBuilder sb = new StringBuilder(title);
 				for (int i = 0; i < labels.length; i++){
-					stringfield[i] = fields[i].getText().trim();
+					stringfield[i] = textfields[i].getText().trim();
 					sb.append("\n" + labels[i] + ": " + stringfield[i]);
 				}
 				String options[] = { "Ja, " + title.split(" ")[0].toLowerCase(), "Nej" };

@@ -1,6 +1,6 @@
 package gui.forms.buttons;
 
-import gui.misc.buttons.JModifiedButton;
+import gui.misc.buttons.ModifiedButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,7 @@ import main.BicycleGarageManager;
 import database.User;
 
 @SuppressWarnings("serial")
-public class ShowUserButton extends JModifiedButton implements ActionListener {
+public class ShowUserButton extends ModifiedButton implements ActionListener {
 
 	private BicycleGarageManager manager;
 	private User user;

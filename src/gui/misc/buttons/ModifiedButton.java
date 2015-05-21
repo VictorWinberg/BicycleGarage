@@ -6,11 +6,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class JModifiedButton extends JButton {
+public class ModifiedButton extends JButton {
 
 	private double sizeModifier;
 	
-	public JModifiedButton(String text, double sizeModifier) {
+	public ModifiedButton(String text, double sizeModifier) {
 		super(text);
 		this.sizeModifier = sizeModifier;
 	}

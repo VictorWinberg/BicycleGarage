@@ -31,7 +31,7 @@ public class UnregisterBicycleForm extends Form {
 	
 	@Override
 	public boolean check(String[] fields) {
-		bc = manager.getDB().getBicycle(fields[0]);
+		bc = db.getBicycle(fields[0]);
 		if(bc == null) {
 			JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + fields[0] + " tillhör ej detta garaget");
 			return false;
