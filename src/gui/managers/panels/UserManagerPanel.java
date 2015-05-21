@@ -35,7 +35,7 @@ import database.User;
 @SuppressWarnings("serial")
 public class UserManagerPanel extends JPanel {
 
-	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Reserverade", "Lediga","Antal Cyklar" };
+	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Reserv", "Lediga","Cyklar" };
 	private BicycleGarageManager manager;
 	private JPanel westPanel;
 	private UnregisterUserButton unregBtn;
@@ -97,6 +97,9 @@ public class UserManagerPanel extends JPanel {
 			add(table.getTableHeader(), BorderLayout.CENTER);
 			table.setCellSelectionEnabled(false);
 		    table.setRowSelectionAllowed(true);
+		    table.getColumnModel().getColumn(3).setPreferredWidth(10);
+		    table.getColumnModel().getColumn(4).setPreferredWidth(10);
+		    table.getColumnModel().getColumn(5).setPreferredWidth(10);
 		   
 		    ListSelectionModel cellSelectionModel = table.getSelectionModel();
 		    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
