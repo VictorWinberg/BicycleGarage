@@ -28,7 +28,9 @@ public class ReserveSlotForm extends Form {
 		int[] widths = { 4, 5 };
 		return widths;
 	}
-
+	
+	private int spots;
+	
 	@Override
 	public boolean check(String[] fields) {
 		if(user == null)
@@ -38,21 +40,25 @@ public class ReserveSlotForm extends Form {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod");
 			return false;
 		}
+		spots = Integer.parseInt(fields[1]);
+		if (spots <= 0) {
+			JOptionPane.showMessageDialog(null,
+					"Felaktigt värde på antal platser som ska reserveras");
+			return false; 
+		}
+		if (db.getReservedSlots()+spots>300){
+			JOptionPane.showMessageDialog(null,
+					"Inte tillräckligt många platser i garaget. "+(300-db.getReservedSlots())+" Lediga platser kvar");
+			return false; 
+		}
 		return true;
 	}
 
 	@Override
 	public void action(String[] fields) {
-		String nbrOfSpots = fields[1];
-		int spot = Integer.parseInt(nbrOfSpots);
-		if (spot < 0) {
-			JOptionPane.showMessageDialog(null,
-					"Felaktigt värde på antal platser som ska reserveras");
-			return; 
-		}
-		db.reserveSlot(user, spot);
-		JOptionPane.showMessageDialog(null, nbrOfSpots
-				+ " plats/er reserverades");
+		db.reserveSlot(user, spots);
+		JOptionPane.showMessageDialog(null, spots
+				+ " platser reserverades");
 		manager.changeState(ViewState.USER_STATE);
 	}
 }
