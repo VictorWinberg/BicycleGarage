@@ -103,15 +103,47 @@ public interface Database {
 	 * @return true om personummert är korrekt, annars false */
 	public boolean isPNRValid(String pnr);
 
-	/** Reserverar en plats åt användaren
-	 * @param user
-	 * @return True om en plats reserverats, annars false
+	/** Reserverar slots platser åt användaren user
+	 * @param user användaren som man vill reservera platser åt
+	 * @param slots antalet platser som man vill reservera
+	 * @return True om en eller flera platser reserverats, annars false
 	 */
 	public boolean reserveSlot(User user, int slots);
+	
+	/**	Avresererverar platser åt användaren 
+	 * @param user användaren som man vill avreservera platser åt
+	 * @param slots antalet platser man vill avreservera
+	 * @return True om en eller flera platser avreserverats, annars false
+	 */
 	public boolean removeReservedSlot(User user, int slots);
+	
+	/**	Registerar en cykel som inlämnad
+	 * @param bc cykeln som man vill registrera
+	 * @return True om cykeln registrerats, annars false
+	 */
 	public boolean depositBicycle(Bicycle bc);
+	
+	/** Registrerar cykeln som ej inlämnad
+	 * @param bc cykeln som man vill registrera
+	 * @return True om cykeln registrerades, annars false
+	 */
 	public boolean withdrawBicycle(Bicycle bc);
+	
+	/** Tar bort lediga platser från en användare
+	 * @param user användaren som man vill ta bort lediga platser från
+	 * @param slots antalet platser man vill ta bort
+	 * @return True om en eller flera platser togs bort, annars false
+	 */
 	public boolean removeFreeSlot(User user,int slots);
+	
+	/** Lägger till lediga platser till en användare
+	 * @param user använadren som man vill lägga till platser till
+	 * @param slots antalet platser man vill lägga till
+	 * @return True om en eller flera lediga platser lades till, annars false
+	 */
 	public boolean addFreeSlot(User user, int slots);
+	
+	/** Hämtar totalt antal reserverade playser 
+	 * @return Antalet reserverade platser */
 	public int getReservedSlots();
 }
