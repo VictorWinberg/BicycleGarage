@@ -58,11 +58,9 @@ public class DatabaseDriver implements Database {
 			System.out.println("inte skapad, finns redan.");
 		}
 		System.out.print("Cykeltabell ");
-		sql = "CREATE TABLE  bicycles ("
-				+ "barcode VARCHAR( 5 ) NOT NULL ,"
+		sql = "CREATE TABLE  bicycles (" + "barcode VARCHAR( 5 ) NOT NULL ,"
 				+ "user_personnr VARCHAR( 11 ) NOT NULL ,"
-				+ "deposited BOOLEAN NOT NULL ,"
-				+ "PRIMARY KEY (  barcode ))";
+				+ "deposited BOOLEAN NOT NULL ," + "PRIMARY KEY (  barcode ))";
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("skapad.");
@@ -101,8 +99,10 @@ public class DatabaseDriver implements Database {
 	@Override
 	public User createUser(String personnr, String first_name,
 			String last_name, String mail, String phonenr) throws Exception {
-		if (isPNRValid(personnr) && first_name.matches("[A-ö]{2,25}") && last_name.matches("[A-ö]{2,25}") && 
-			EmailValidator.getInstance().isValid(mail) && phonenr.matches("[0-9]{10}")) {
+		if (isPNRValid(personnr) && nameIsValid(first_name)
+				&& nameIsValid(last_name)
+				&& EmailValidator.getInstance().isValid(mail)
+				&& phonenr.matches("[0-9]{10}")) {
 			String chars = "0123456789";
 			while (true) {
 				StringBuilder sb = new StringBuilder();
@@ -112,34 +112,35 @@ public class DatabaseDriver implements Database {
 				}
 				String pin = sb.toString();
 				if (getUserWithPIN(pin) == null)
-					return new User(personnr, first_name, last_name, mail, phonenr, pin, 0, 0);
+					return new User(personnr, first_name, last_name, mail,
+							phonenr, pin, 0, 0);
 			}
 		} else {
 			StringBuilder sb = new StringBuilder("Felaktigt: ");
 			int length = sb.length();
-			if(!isPNRValid(personnr)) {
+			if (!isPNRValid(personnr)) {
 				sb.append("Personnummer");
 			}
-			if(!first_name.matches("[A-ö]{2,25}")) {
-				if(sb.length() > length)
+			if (!nameIsValid(first_name)) {
+				if (sb.length() > length)
 					sb.append(", förnamn");
 				else
 					sb.append("Förnamn");
 			}
-			if(!last_name.matches("[A-ö]{2,25}")) {
-				if(sb.length() > length)
+			if (!nameIsValid(last_name)) {
+				if (sb.length() > length)
 					sb.append(", efternamn");
 				else
 					sb.append("Efternamn");
 			}
-			if(!EmailValidator.getInstance().isValid(mail)) {
-				if(sb.length() > length)
+			if (!EmailValidator.getInstance().isValid(mail)) {
+				if (sb.length() > length)
 					sb.append(", mailadress");
 				else
 					sb.append("Mailadress");
 			}
-			if(!phonenr.matches("[0-9]{10}")) {
-				if(sb.length() > length)
+			if (!phonenr.matches("[0-9]{10}")) {
+				if (sb.length() > length)
 					sb.append(", telefonnummer");
 				else
 					sb.append("Telefonnummer");
@@ -151,19 +152,16 @@ public class DatabaseDriver implements Database {
 	@Override
 	public boolean insertUser(User user) {
 		if (user == null) {
-			System.out.println("Användare user som skulle läggas till är null.");
+			System.out
+					.println("Användare user som skulle läggas till är null.");
 			return false;
 		}
 		System.out.print("Användare " + user.getFirstName() + " ");
-		sql = "INSERT INTO users " + "VALUES (" 
-				+ "'" + user.getPersonnr() + "', " 
-				+ "'" + user.getFirstName() + "', " 
-				+ "'" + user.getLastName() + "', " 
-				+ "'" + user.getMail() + "', "
-				+ "'" + user.getPhonenr() + "', " 
-				+ "'" + user.getPIN() + "', "
-				+ user.getReserverdSlots() + ", " 
-				+ user.getFreeSlots() + ")";
+		sql = "INSERT INTO users " + "VALUES (" + "'" + user.getPersonnr()
+				+ "', " + "'" + user.getFirstName() + "', " + "'"
+				+ user.getLastName() + "', " + "'" + user.getMail() + "', "
+				+ "'" + user.getPhonenr() + "', " + "'" + user.getPIN() + "', "
+				+ user.getReserverdSlots() + ", " + user.getFreeSlots() + ")";
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("tillagd.");
@@ -179,11 +177,13 @@ public class DatabaseDriver implements Database {
 		if (user == null) {
 			System.out.println("Användare user som skulle tas bort är null.");
 			return false;
-		} else if(getUser(user.getPersonnr()) == null) {
-			System.out.println("Användare " + user.getFirstName() + " inte borttagen, finns inte.");
+		} else if (getUser(user.getPersonnr()) == null) {
+			System.out.println("Användare " + user.getFirstName()
+					+ " inte borttagen, finns inte.");
 			return false;
-		} else if(!getBicycles(user).isEmpty()) {
-			System.out.println("Användare " + user.getFirstName() + " inte borttagen, har cyklar");
+		} else if (!getBicycles(user).isEmpty()) {
+			System.out.println("Användare " + user.getFirstName()
+					+ " inte borttagen, har cyklar");
 			return false;
 		}
 		System.out.print("Användare " + user.getFirstName() + " ");
@@ -193,7 +193,8 @@ public class DatabaseDriver implements Database {
 			System.out.println("borttagen.");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("inte borttagen. SQL Message: " + e.getMessage());
+			System.out
+					.println("inte borttagen. SQL Message: " + e.getMessage());
 			return false;
 		}
 	}
@@ -205,29 +206,29 @@ public class DatabaseDriver implements Database {
 			return false;
 		}
 		System.out.print("Användare " + user.getFirstName() + " ");
-		sql = "UPDATE users SET "
-			+ "first_name = '" + user.getFirstName() + "', " 
-			+ "last_name = '" + user.getLastName() + "', " 
-			+ "mail = '" + user.getMail() + "', "		 			
-			+ "phonenr = '" + user.getPhonenr() + "', " 		
-			+ "pin = '" + user.getPIN() + "', "		
-			+ "reservedSlots = " + user.getReserverdSlots() + ", " 		
-			+ "freeSlots = " + user.getFreeSlots() + " "
-			+ "WHERE personnr = '" + user.getPersonnr() + "'";
+		sql = "UPDATE users SET " + "first_name = '" + user.getFirstName()
+				+ "', " + "last_name = '" + user.getLastName() + "', "
+				+ "mail = '" + user.getMail() + "', " + "phonenr = '"
+				+ user.getPhonenr() + "', " + "pin = '" + user.getPIN() + "', "
+				+ "reservedSlots = " + user.getReserverdSlots() + ", "
+				+ "freeSlots = " + user.getFreeSlots() + " "
+				+ "WHERE personnr = '" + user.getPersonnr() + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("uppdaterad.");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("inte uppdaterad. SQL Message: " + e.getMessage());
+			System.out.println("inte uppdaterad. SQL Message: "
+					+ e.getMessage());
 			return false;
 		}
 	}
-	
+
 	@Override
 	public User getUser(String personnr) {
 		if (personnr == null) {
-			System.out.println("Användare med personnr som skulle hittas är null.");
+			System.out
+					.println("Användare med personnr som skulle hittas är null.");
 			return null;
 		}
 		ResultSet rs = extractUsers();
@@ -266,7 +267,8 @@ public class DatabaseDriver implements Database {
 							rs.getString(6), rs.getInt(7), rs.getInt(8));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL Message i getUserWithPIN: " + e.getMessage());
+			System.out.println("SQL Message i getUserWithPIN: "
+					+ e.getMessage());
 		}
 		return user;
 	}
@@ -274,7 +276,8 @@ public class DatabaseDriver implements Database {
 	@Override
 	public List<Bicycle> getBicycles(User user) {
 		if (user == null) {
-			System.out.println("Cyklar med användaren user som skulle hittas är null.");
+			System.out
+					.println("Cyklar med användaren user som skulle hittas är null.");
 			return null;
 		}
 		List<Bicycle> bicycles = new LinkedList<Bicycle>();
@@ -296,7 +299,7 @@ public class DatabaseDriver implements Database {
 		}
 		return bicycles;
 	}
-	
+
 	@Override
 	public ResultSet extractUsers() {
 		ResultSet rs = null;
@@ -308,11 +311,11 @@ public class DatabaseDriver implements Database {
 		}
 		return rs;
 	}
-	
+
 	@Override
 	public Bicycle createBicycle(User user) throws Exception {
-		if(user == null)
-			 throw new Exception("Användaren är felaktigt");
+		if (user == null)
+			throw new Exception("Användaren är felaktigt");
 		String chars = "0123456789";
 		while (true) {
 			StringBuilder sb = new StringBuilder();
@@ -326,17 +329,17 @@ public class DatabaseDriver implements Database {
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean insertBicycle(Bicycle bicycle) {
 		if (bicycle == null) {
-			System.out.println("Cykeln bicycle som skulle läggas till är null.");
+			System.out
+					.println("Cykeln bicycle som skulle läggas till är null.");
 			return false;
 		}
 		System.out.print("Cykeln med streckkod " + bicycle.getBarcode() + " ");
-		sql = "INSERT INTO bicycles " + "VALUES (" 
-				+ "'" + bicycle.getBarcode() + "', "
-				+ "'" + bicycle.getOwner().getPersonnr() + "', "
+		sql = "INSERT INTO bicycles " + "VALUES (" + "'" + bicycle.getBarcode()
+				+ "', " + "'" + bicycle.getOwner().getPersonnr() + "', "
 				+ bicycle.isDeposited() + ")";
 		try {
 			conn.createStatement().executeUpdate(sql);
@@ -355,68 +358,77 @@ public class DatabaseDriver implements Database {
 			return false;
 		}
 		String barcode = bicycle.getBarcode();
-		if(getBicycle(barcode) == null) {
-			System.out.println("Cykeln med streckkod " + barcode + " inte borttagen, finns inte.");
+		if (getBicycle(barcode) == null) {
+			System.out.println("Cykeln med streckkod " + barcode
+					+ " inte borttagen, finns inte.");
 			return false;
 		}
-		System.out.print("Cykeln med användare " + bicycle.getOwner().getFirstName() + " ");
+		System.out.print("Cykeln med användare "
+				+ bicycle.getOwner().getFirstName() + " ");
 		sql = "DELETE FROM bicycles WHERE barcode = '" + barcode + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("borttagen.");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("inte borttagen. SQL Message: " + e.getMessage());
+			System.out
+					.println("inte borttagen. SQL Message: " + e.getMessage());
 			return false;
 		}
 	}
-	
+
 	@Override
 	public boolean updateBicycle(Bicycle bicycle) {
 		if (bicycle == null) {
 			System.out.println("Cykeln bicycle som skulle uppdateras är null.");
 			return false;
 		}
-		System.out.print("Cykel med ägare " + bicycle.getOwner().getFirstName() + " ");
-		sql = "UPDATE bicycles SET "
-			+ "user_personnr = '" + bicycle.getOwner().getPersonnr() + "', " 
-			+ "deposited = " + bicycle.isDeposited() + " "
-			+ "WHERE barcode = '" + bicycle.getBarcode() + "'";
+		System.out.print("Cykel med ägare " + bicycle.getOwner().getFirstName()
+				+ " ");
+		sql = "UPDATE bicycles SET " + "user_personnr = '"
+				+ bicycle.getOwner().getPersonnr() + "', " + "deposited = "
+				+ bicycle.isDeposited() + " " + "WHERE barcode = '"
+				+ bicycle.getBarcode() + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("uppdaterad.");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("inte uppdaterad. SQL Message: " + e.getMessage());
+			System.out.println("inte uppdaterad. SQL Message: "
+					+ e.getMessage());
 			return false;
 		}
 	}
-	public boolean depositBicycle(Bicycle bc){
-		if(bc == null){
+
+	public boolean depositBicycle(Bicycle bc) {
+		if (bc == null) {
 			return false;
 		}
 		bc.deposit();
 		updateBicycle(bc);
 		return true;
 	}
-	public boolean withdrawBicycle(Bicycle bc){
-		if(bc == null){
+
+	public boolean withdrawBicycle(Bicycle bc) {
+		if (bc == null) {
 			return false;
 		}
 		bc.withdraw();
 		updateBicycle(bc);
 		return true;
 	}
-	public boolean removeFreeSlot(User user,int slots){
-		if(user == null){
+
+	public boolean removeFreeSlot(User user, int slots) {
+		if (user == null) {
 			return false;
 		}
 		user.removeFreeSlot(slots);
 		updateUser(user);
 		return true;
 	}
-	public boolean addFreeSlot(User user, int slots){
-		if(user == null){
+
+	public boolean addFreeSlot(User user, int slots) {
+		if (user == null) {
 			return false;
 		}
 		user.addFreeSlot(slots);
@@ -427,7 +439,8 @@ public class DatabaseDriver implements Database {
 	@Override
 	public Bicycle getBicycle(String barcode) {
 		if (barcode == null) {
-			System.out.println("Cykeln med sträckkod barcode som skulle hittas är null.");
+			System.out
+					.println("Cykeln med sträckkod barcode som skulle hittas är null.");
 			return null;
 		}
 		ResultSet rs = extractBicycles();
@@ -448,7 +461,7 @@ public class DatabaseDriver implements Database {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public ResultSet extractBicycles() {
 		ResultSet rs = null;
@@ -460,9 +473,10 @@ public class DatabaseDriver implements Database {
 		}
 		return rs;
 	}
+
 	@Override
-	public boolean reserveSlot(User user, int slots){
-		if( user == null || slots <0){
+	public boolean reserveSlot(User user, int slots) {
+		if (user == null || slots < 0) {
 			return false;
 		}
 		user.addReserverdSlot(slots);
@@ -470,9 +484,10 @@ public class DatabaseDriver implements Database {
 		updateUser(user);
 		return true;
 	}
+
 	@Override
-	public boolean removeReservedSlot(User user, int slots){
-		if( user == null || slots <0){
+	public boolean removeReservedSlot(User user, int slots) {
+		if (user == null || slots < 0) {
 			return false;
 		}
 		user.removeReservedSlot(slots);
@@ -487,17 +502,19 @@ public class DatabaseDriver implements Database {
 		boolean cleared = false;
 		try {
 			rs.beforeFirst();
-			while(rs.next()) {
+			while (rs.next()) {
 				String personnr = rs.getString(1);
 				int reservedSlots = rs.getInt(7);
-				if(reservedSlots == 0) {
+				if (reservedSlots == 0) {
 					System.out.print("Användare " + personnr + " ");
-					sql = "DELETE FROM users WHERE personnr = '" + personnr + "'";
+					sql = "DELETE FROM users WHERE personnr = '" + personnr
+							+ "'";
 					try {
 						conn.createStatement().executeUpdate(sql);
 						System.out.println("borttagen.");
 					} catch (SQLException e) {
-						System.out.println("inte borttagen. SQL Message: " + e.getMessage());
+						System.out.println("inte borttagen. SQL Message: "
+								+ e.getMessage());
 					}
 					cleared = true;
 				}
@@ -507,7 +524,7 @@ public class DatabaseDriver implements Database {
 		}
 		return cleared;
 	}
-	
+
 	public boolean isPNRValid(String pnr) {
 		boolean isValid = false;
 
@@ -543,6 +560,15 @@ public class DatabaseDriver implements Database {
 		return sum % 10 == 0;
 	}
 
+	private boolean nameIsValid(String name){
+
+		if(name.matches("[A-ö-]{2,25}")){
+			return true;
+		}
+		return false;
+		
+	}
+
 	public void main(String[] args) {
 		DatabaseDriver db = null;
 		try {
@@ -551,86 +577,88 @@ public class DatabaseDriver implements Database {
 			System.out.println("JDBC drivrutin hittades ej. SQL Message: "
 					+ e.getMessage());
 		} catch (SQLException e) {
-			System.out.println("Gick ej att ansluta till databas. SQL Message: "
+			System.out
+					.println("Gick ej att ansluta till databas. SQL Message: "
 							+ e.getMessage());
 		}
 
 		int nbr = 0;
 		for (int i = 0; i < 100; i++) {
-			String pnr = "001122-33"+i;
-			if(isPNRValid(pnr)){
+			String pnr = "001122-33" + i;
+			if (isPNRValid(pnr)) {
 				System.out.println(pnr);
 				nbr++;
 			}
 		}
-		 System.out.println(nbr);
-		
-//		db.dropTables();
-//		db.createTables();
+		System.out.println(nbr);
 
-//		User u = db.getUserWithPIN("754532");
-//		if(u != null){
-//			System.out.println(u.toString());
-//			db.deleteUser(u);
-//		} else System.out.println("User not found");
+		// db.dropTables();
+		// db.createTables();
 
-		try{User victor = db.createUser("950407-0856", "Victor", "Winberg",
-				"cool@swag.com", "0707133700");
-		db.insertUser(victor);
-		
-		User pelle = db.createUser("950102-0300", "Pelle", "Nilsson",
-				"pelle@nilsson.se", "0707001122");
-		db.insertUser(pelle);
-		
-		User notfake = db.createUser("950123-4562", "Fake", "Fakesson",
-				"swag@lol.se", "0707123456");
-		db.insertUser(notfake);
+		// User u = db.getUserWithPIN("754532");
+		// if(u != null){
+		// System.out.println(u.toString());
+		// db.deleteUser(u);
+		// } else System.out.println("User not found");
+
+		try {
+			User victor = db.createUser("950407-0856", "Victor", "Winberg",
+					"cool@swag.com", "0707133700");
+			db.insertUser(victor);
+
+			User pelle = db.createUser("950102-0300", "Pelle", "Nilsson",
+					"pelle@nilsson.se", "0707001122");
+			db.insertUser(pelle);
+
+			User notfake = db.createUser("950123-4562", "Fake", "Fakesson",
+					"swag@lol.se", "0707123456");
+			db.insertUser(notfake);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-//		User u = db.getUser("950123-4562");
-//		if(u != null) {
-//			Bicycle bicycle = db.createBicycle(u);
-//			db.insertBicycle(bicycle);
-//		}
-		
-		Bicycle bike = db.getBicycle("49896");
-		if(bike != null)
-			bike.withdraw();
-		
-		db.updateBicycle(bike);
-		
-//		db.clearInactiveUsers();
-		
-//		db.deleteBicycle(db.getBicycle("77032"));
-//		db.deleteBicycle(db.getBicycle("50582"));
 
-//		if(db.getUserWithPIN("553587") != null)
-//			System.out.println("PIN 553587 finns");
-//		else System.out.println("PIN 553587 finns inte");
-		
-//		List<Bicycle> list = db.getBicycles(db.getUser("950407-0856"));
-//		if(list == null)
-//			System.out.println("Användaren är felaktig.");
-//		else if(list.isEmpty())
-//			System.out.println("Användaren har inga cyklar.");
-//		else {
-//			System.out.println();
-//			for (Bicycle bicycle : list) {
-//				System.out.print(bicycle.getBarcode() + ", ");
-//			}
-//			System.out.println();
-//		}
-		
+		// User u = db.getUser("950123-4562");
+		// if(u != null) {
+		// Bicycle bicycle = db.createBicycle(u);
+		// db.insertBicycle(bicycle);
+		// }
+
+		Bicycle bike = db.getBicycle("49896");
+		if (bike != null)
+			bike.withdraw();
+
+		db.updateBicycle(bike);
+
+		// db.clearInactiveUsers();
+
+		// db.deleteBicycle(db.getBicycle("77032"));
+		// db.deleteBicycle(db.getBicycle("50582"));
+
+		// if(db.getUserWithPIN("553587") != null)
+		// System.out.println("PIN 553587 finns");
+		// else System.out.println("PIN 553587 finns inte");
+
+		// List<Bicycle> list = db.getBicycles(db.getUser("950407-0856"));
+		// if(list == null)
+		// System.out.println("Användaren är felaktig.");
+		// else if(list.isEmpty())
+		// System.out.println("Användaren har inga cyklar.");
+		// else {
+		// System.out.println();
+		// for (Bicycle bicycle : list) {
+		// System.out.print(bicycle.getBarcode() + ", ");
+		// }
+		// System.out.println();
+		// }
+
 		System.out.println();
 		print(db.extractUsers());
 		System.out.println();
 		print(db.extractBicycles());
 	}
-	
+
 	public static void print(ResultSet rs) {
-		if(rs == null)
+		if (rs == null)
 			return;
 		try {
 			ResultSetMetaData rsmd = rs.getMetaData();
