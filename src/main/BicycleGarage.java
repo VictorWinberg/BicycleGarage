@@ -26,14 +26,14 @@ public class BicycleGarage {
 	 */
 	public BicycleGarage() {
 		BicycleGarageManager manager = new BicycleGarageManager();
+		BarcodeReader readerEntry = new BarcodeReaderEntryTestDriver();
 		ElectronicLock entryLock = new ElectronicLockTestDriver("Entrélås");
+		BarcodeReader readerExit = new BarcodeReaderExitTestDriver();
 		ElectronicLock exitLock = new ElectronicLockTestDriver("Utgångslås");
-		BarcodePrinter printer = new BarcodePrinterTestDriver();
 		PinCodeTerminal terminal = new PinCodeTerminalTestDriver();
+		BarcodePrinter printer = new BarcodePrinterTestDriver();
 		manager.registerHardwareDrivers(printer, entryLock, exitLock, terminal);
 		terminal.register(manager);
-		BarcodeReader readerEntry = new BarcodeReaderEntryTestDriver();
-		BarcodeReader readerExit = new BarcodeReaderExitTestDriver();
 		readerEntry.register(manager);
 		readerExit.register(manager);
 	}

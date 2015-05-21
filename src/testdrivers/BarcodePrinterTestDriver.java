@@ -27,8 +27,9 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 	public BarcodePrinterTestDriver() {
 		frame = new JFrame("Streckkodsskrivare");
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frame.setMinimumSize(new Dimension(200, 200));
-		frame.setLocation(20,30);
+		frame.setMinimumSize(new Dimension(230, 350));
+		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint());
+		frame.setLocation(frame.getLocation().x - 650, frame.getLocation().y - 50);
 
 		textArea = new JTextArea(5, 20);
 		JScrollPane scrollPane = new JScrollPane(textArea);

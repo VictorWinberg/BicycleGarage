@@ -36,11 +36,11 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 	public ElectronicLockTestDriver(String doorIdentifier) {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frame.setMinimumSize(new Dimension(100, 100));
-		frame.setLocation(516,30);
-		if(doorIdentifier.equals("Entrélås")){
-			frame.setLocation(693,30);
-		}
+		frame.setMinimumSize(new Dimension(150, 90));
+		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint());
+		frame.setLocation(frame.getLocation().x - 150, frame.getLocation().y - 400);
+		if(doorIdentifier.equals("Utgångslås"))
+			frame.setLocation(frame.getLocation().x + 400, frame.getLocation().y);
 		JPanel panel = new JPanel();
 		frame.add(panel);
 		state = new JTitle("LÅST");

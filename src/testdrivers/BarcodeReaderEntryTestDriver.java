@@ -14,7 +14,9 @@ public class BarcodeReaderEntryTestDriver extends BarcodeReaderTestDriver {
 	 */
 	public BarcodeReaderEntryTestDriver() {
 		super("Entréläsare");
-		frame.setLocation(265,30);
+		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint());
+		frame.setLocation(frame.getLocation().x - 400, frame.getLocation().y - 400);
+
 	}
 
 	/**

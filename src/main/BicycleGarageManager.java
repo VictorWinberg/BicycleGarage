@@ -45,8 +45,7 @@ public class BicycleGarageManager {
 	public BicycleGarageManager() {
 		frame = new JFrame("Operatörsgränssnittet");
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(800, 600));
-		frame.setMinimumSize(new Dimension(600, 300));
+		frame.setMinimumSize(new Dimension(800, 600));
 		frame.setLayout(new BorderLayout(0, 10));
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
