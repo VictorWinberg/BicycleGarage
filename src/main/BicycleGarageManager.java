@@ -161,6 +161,7 @@ public class BicycleGarageManager {
 		User user = bc.getOwner();
 		db.removeFreeSlot(user,1);
 		db.depositBicycle(bc);
+		entryLock.open(10);
 		changeState(ViewState.BICYCLE_STATE);
 	}
 
@@ -179,6 +180,7 @@ public class BicycleGarageManager {
 		User user = bc.getOwner();
 		db.addFreeSlot(user,1);
 		db.withdrawBicycle(bc);
+		exitLock.open(10);
 		changeState(ViewState.BICYCLE_STATE);
 	}
 
@@ -189,8 +191,9 @@ public class BicycleGarageManager {
 	 */
 	public void entryPIN(String pin) {
 		if(db.getUserWithPIN(pin) == null)
-			terminal.lightLED(0, 3);
+			terminal.lightLED(0, 1);
 		else
-			terminal.lightLED(1, 3);
+			terminal.lightLED(1, 1);
+			entryLock.open(10);
 	}
 }
