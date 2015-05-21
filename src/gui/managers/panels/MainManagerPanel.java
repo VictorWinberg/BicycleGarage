@@ -3,6 +3,7 @@ package gui.managers.panels;
 import gui.forms.buttons.RegisterUserButton;
 import gui.misc.buttons.ClearInactiveUsersButton;
 import gui.misc.buttons.ExitButton;
+import gui.misc.buttons.NumberOfAvailableSlotsButton;
 
 import java.awt.GridLayout;
 
@@ -31,6 +32,7 @@ public class MainManagerPanel extends JPanel {
 		setLayout(new GridLayout(10, 1, 10, 10));
 		add(new RegisterUserButton(manager, 1.1));
 		add(new ClearInactiveUsersButton(manager, 1.1));
+		add(new NumberOfAvailableSlotsButton(manager, 1.1));
 		add(new JLabel(""));
 		add(new ExitButton(manager, 1.1));
 	}
