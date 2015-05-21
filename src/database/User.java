@@ -2,11 +2,11 @@ package database;
 
 public class User {
 	private String personnr, first_name, last_name, mail, phonenr, pin;
-	private int reservedSlots, freeSlots;
+	private int reservedSlots, freeSlots, nbrOfBicycles;
 	
 	/** Redan definierad användare */
 	public User(String personnr, String first_name, String last_name,
-			String mail, String phonenr, String pin, int reservedSlots, int freeSlots) {
+			String mail, String phonenr, String pin, int reservedSlots, int freeSlots, int nbrOfBicycles) {
 		this.personnr = personnr;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -15,6 +15,7 @@ public class User {
 		this.pin = pin;
 		this.reservedSlots = reservedSlots;
 		this.freeSlots = freeSlots;
+		this.nbrOfBicycles = nbrOfBicycles;
 	}
 	
 	public String getPersonnr() 	{ return personnr; }
@@ -43,11 +44,12 @@ public class User {
 	 freeSlots-=slots;
 	}
 	public int getFreeSlots() 		{ return freeSlots; }
+	public int getNbrOfBicycles()	{ return nbrOfBicycles; }
 	@Override
 	public String toString() {
 		return personnr + " | " + first_name + " | " + 
 		last_name + " | " + mail + " | " + phonenr + " | " + 
-		pin + " | " + reservedSlots + " | " + freeSlots;
+		pin + " | " + reservedSlots + " | " + freeSlots + " | " + nbrOfBicycles;
 	}
 	public boolean equals(Object o){
 		if( o instanceof User){

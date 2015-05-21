@@ -90,7 +90,7 @@ public class UserManagerPanel extends JPanel {
 				for (int i = 0; i < 3; i++)
 					data[j][i] = users.getString(i + 1);
 				data[j][3] = users.getInt(7);
-				data[j][4] = db.getBicycles(db.getUser(users.getString(1))).size();
+				data[j][4] = users.getInt(9);
 				j++;
 			}
 			JTable table = new JTable(data, columnNames);

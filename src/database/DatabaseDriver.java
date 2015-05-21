@@ -49,6 +49,7 @@ public class DatabaseDriver implements Database {
 				+ "pin VARCHAR( 6 ) NOT NULL ,"
 				+ "reservedSlots INT ( 4 ) NOT NULL ,"
 				+ "freeSlots INT ( 4 ) NOT NULL ,"
+				+ "nbrOfBicycles INT ( 4 ) NOT NULL ,"
 				+ "PRIMARY KEY (  personnr ))";
 		try {
 			conn.createStatement().executeUpdate(sql);
@@ -113,7 +114,7 @@ public class DatabaseDriver implements Database {
 				String pin = sb.toString();
 				if (getUserWithPIN(pin) == null)
 					return new User(personnr, first_name, last_name, mail,
-							phonenr, pin, 0, 0);
+							phonenr, pin, 0, 0, 0);
 			}
 		} else {
 			StringBuilder sb = new StringBuilder("Felaktigt: ");
@@ -161,7 +162,7 @@ public class DatabaseDriver implements Database {
 				+ "', " + "'" + user.getFirstName() + "', " + "'"
 				+ user.getLastName() + "', " + "'" + user.getMail() + "', "
 				+ "'" + user.getPhonenr() + "', " + "'" + user.getPIN() + "', "
-				+ user.getReserverdSlots() + ", " + user.getFreeSlots() + ")";
+				+ user.getReserverdSlots() + ", " + user.getFreeSlots() + ", " + user.getNbrOfBicycles() + ")";
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("tillagd.");
@@ -211,7 +212,8 @@ public class DatabaseDriver implements Database {
 				+ "mail = '" + user.getMail() + "', " + "phonenr = '"
 				+ user.getPhonenr() + "', " + "pin = '" + user.getPIN() + "', "
 				+ "reservedSlots = " + user.getReserverdSlots() + ", "
-				+ "freeSlots = " + user.getFreeSlots() + " "
+				+ "freeSlots = " + user.getFreeSlots() + ", "
+				+ "nbrOfBicycles = " + user.getNbrOfBicycles() + " "
 				+ "WHERE personnr = '" + user.getPersonnr() + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
@@ -240,7 +242,7 @@ public class DatabaseDriver implements Database {
 				if (rs.getString(1).equals(personnr))
 					return new User(rs.getString(1), rs.getString(2),
 							rs.getString(3), rs.getString(4), rs.getString(5),
-							rs.getString(6), rs.getInt(7), rs.getInt(8));
+							rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL Message i getUser: " + e.getMessage());
@@ -264,7 +266,7 @@ public class DatabaseDriver implements Database {
 				if (rs.getString(6).equals(pin))
 					return new User(rs.getString(1), rs.getString(2),
 							rs.getString(3), rs.getString(4), rs.getString(5),
-							rs.getString(6), rs.getInt(7), rs.getInt(8));
+							rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL Message i getUserWithPIN: "
