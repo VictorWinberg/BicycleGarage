@@ -2,6 +2,7 @@ package gui.managers.panels;
 
 import gui.forms.buttons.EditUserButton;
 import gui.forms.buttons.RegisterBicycleButton;
+import gui.forms.buttons.RegisterUserButton;
 import gui.forms.buttons.RemoveReservedSlotButton;
 import gui.forms.buttons.ReserveSlotButton;
 import gui.forms.buttons.ShowUserButton;
@@ -51,7 +52,6 @@ public class UserManagerPanel extends JPanel {
 	private EditUserButton editBtn;
 	private ShowUserButton showBtn;
 	private RegisterBicycleButton regBicBtn;
-	private UnregisterBicycleButton unregBicBtn;
 	private ReserveSlotButton resBtn;
 	private RemoveReservedSlotButton remResBtn;
 
@@ -66,6 +66,9 @@ public class UserManagerPanel extends JPanel {
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
 		westPanel = new JPanel();
+		
+		westPanel.add(new RegisterUserButton(manager, 1.1));
+		
 		westPanel.setLayout(new GridLayout(10, 1, 1, 1));
 		unregBtn = new UnregisterUserButton(manager, 1.1);
 		westPanel.add(unregBtn);
@@ -75,12 +78,11 @@ public class UserManagerPanel extends JPanel {
 		westPanel.add(showBtn);
 		regBicBtn = new RegisterBicycleButton(manager, 1.1);
 		westPanel.add(regBicBtn);
-		unregBicBtn = new UnregisterBicycleButton(manager, 1.1);
-		westPanel.add(unregBicBtn);
 		resBtn = new ReserveSlotButton(manager, 1.1);
 		westPanel.add(resBtn);
 		remResBtn = new RemoveReservedSlotButton(manager, 1.1);
 		westPanel.add(remResBtn);
+		
 	}
 
 	public void update() {
