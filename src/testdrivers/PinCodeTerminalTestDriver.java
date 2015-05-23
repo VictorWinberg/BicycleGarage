@@ -142,6 +142,12 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 		printPIN(c);
 	}
 
+	/**
+	 * Hanterar inmatning av pinkod i pinkodsterminalen.
+	 * @param c
+	 * 			Tecknet på knappen som klickas/trycks på.
+	 */
+	
 	private void printPIN(char c) {
 		sb.append(c);
 		try {
