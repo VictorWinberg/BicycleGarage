@@ -37,7 +37,7 @@ public class RemoveReservedSlotForm extends Form {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod");
 			return false;
 		} else if (user.getFreeSlots() < Integer.parseInt(fields[1])) {
-			JOptionPane.showMessageDialog(null, "Användaren har inte så många lediga platser");
+			JOptionPane.showMessageDialog(null, "Användaren har endast "+user.getFreeSlots()+" lediga platser");
 			return false;
 		}
 		return true;
