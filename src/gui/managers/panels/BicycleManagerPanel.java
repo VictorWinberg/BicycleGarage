@@ -5,6 +5,7 @@ import gui.forms.buttons.UnregisterBicycleButton;
 import interfaces.Database;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -12,8 +13,12 @@ import java.sql.SQLException;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import database.User;
 import main.BicycleGarageManager;
 
 /**
@@ -28,6 +33,7 @@ public class BicycleManagerPanel extends JPanel {
 
 	private BicycleGarageManager manager;
 	private JPanel westPanel;
+	private RegisterBicycleButton regBicBtn;
 
 	/**
 	 * Skapar en cykelmanagerpanel som hanterar cyklar
@@ -40,9 +46,10 @@ public class BicycleManagerPanel extends JPanel {
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
 		westPanel = new JPanel();
-		westPanel.add(new RegisterBicycleButton(manager, 1.1));
+		westPanel.setLayout(new GridLayout(10, 1, 1, 1));
+		regBicBtn = new RegisterBicycleButton(manager, 1.1);
+		westPanel.add(regBicBtn);
 		westPanel.add(new UnregisterBicycleButton(manager, 1.1));
-		// "Lediga platser"
 
 	}
 
@@ -71,11 +78,27 @@ public class BicycleManagerPanel extends JPanel {
 					return false;
 				}
 			};
+			
+			ListSelectionModel cellSelectionModel = table.getSelectionModel();
+			cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						String selectedData = (String) table.getValueAt(table.getSelectedRow(), 1);
+						User chosen = manager.getDB().getUser(selectedData);
+						
+						regBicBtn.changeUser(chosen);
+						
+					}
+				}
+			});
+			
+			
+			
 			table.getTableHeader().setReorderingAllowed(false);
-			add(table.getTableHeader(), BorderLayout.CENTER);
 
 			JScrollPane scrollPane = new JScrollPane(table);
-			add(scrollPane, BorderLayout.SOUTH);
+			add(scrollPane, BorderLayout.CENTER);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
