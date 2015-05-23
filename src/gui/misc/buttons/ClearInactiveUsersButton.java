@@ -15,7 +15,7 @@ public class ClearInactiveUsersButton extends ModifiedButton implements ActionLi
 	public ClearInactiveUsersButton(BicycleGarageManager manager, double size) {
 		super("Rensa", size);
 		this.manager = manager;
-		setToolTipText("Rensar inaktiva användare");
+		setToolTipText("Tar bort inaktiva användare");
 		addActionListener(this);
 	}
 
