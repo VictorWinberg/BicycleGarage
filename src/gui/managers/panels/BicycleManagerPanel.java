@@ -69,11 +69,14 @@ public class BicycleManagerPanel extends JPanel {
 				}
 				j++;
 			}
-			JTable table = new JTable(data, columnNames);
+			JTable table = new JTable(data, columnNames) {
+			    @Override
+			    public boolean isCellEditable(int row, int column) {
+			        return false;
+			    }
+			};
+			table.getTableHeader().setReorderingAllowed(false);
 			add(table.getTableHeader(), BorderLayout.CENTER);
-			// table.setEnabled(false);
-			// table.setFillsViewportHeight(true);
-			// table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 			JScrollPane scrollPane = new JScrollPane(table);
 			add(scrollPane, BorderLayout.SOUTH);
 		} catch (SQLException e) {
