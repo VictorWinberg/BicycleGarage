@@ -17,7 +17,7 @@ public class RegisterBicycleForm extends Form {
 
 	@Override
 	public String[] getLabels() {
-		String[] labels = { "PIN-kod" };
+		String[] labels = { "PIN-kod"};
 		return labels;
 	}
 
