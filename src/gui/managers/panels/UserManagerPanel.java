@@ -14,9 +14,11 @@ import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -37,8 +39,8 @@ public class UserManagerPanel extends JPanel {
 
 	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Reserv", "Lediga",
 			"Cyklar" };
-	private BicycleGarageManager manager;
 	private JPanel westPanel;
+	private BicycleGarageManager manager;
 	private UnregisterUserButton unregBtn;
 	private EditUserButton editBtn;
 	private ShowUserButton showBtn;
@@ -89,13 +91,11 @@ public class UserManagerPanel extends JPanel {
 			while (users.next()) {
 				for (int i = 0; i < 3; i++)
 					data[j][i] = users.getString(i + 1);
-				data[j][3] = users.getInt(7);
-				data[j][4] = users.getInt(8);
-				data[j][5] = users.getInt(9);
+				for(int i = 3; i < 6; i++)
+					data[j][i] = users.getInt(i + 4);
 				j++;
 			}
 			JTable table = new JTable(data, columnNames) {
-				
 			    @Override
 			    public boolean isCellEditable(int row, int column) {
 			        return false;
@@ -114,17 +114,9 @@ public class UserManagerPanel extends JPanel {
 			cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent e) {
 					if (!e.getValueIsAdjusting()) {
-						String selectedData = null;
-
-						int[] selectedRow = table.getSelectedRows();
-						int[] selectedColumns = table.getSelectedColumns();
-
-						for (int i = 0; i < selectedRow.length; i++) {
-							for (int j = 0; j < selectedColumns.length; j++) {
-								selectedData = (String) table.getValueAt(selectedRow[i], 0);
-							}
-						}
+						String selectedData = (String) table.getValueAt(table.getSelectedRow(), 0);
 						User chosen = manager.getDB().getUser(selectedData);
+						
 						unregBtn.changeUser(chosen);
 						editBtn.changeUser(chosen);
 						showBtn.changeUser(chosen);
@@ -133,12 +125,8 @@ public class UserManagerPanel extends JPanel {
 						remResBtn.changeUser(chosen);
 					}
 				}
-
 			});
 
-			// table.setEnabled(false);
-			// table.setFillsViewportHeight(true);
-			// table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 			JScrollPane scrollPane = new JScrollPane(table);
 			add(scrollPane, BorderLayout.CENTER);
 
