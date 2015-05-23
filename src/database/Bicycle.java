@@ -1,5 +1,9 @@
 package database;
-
+/**
+ * Beskriver cyklarna i databasen med pssande metoder och funktioner.
+ * @author Grupp 25
+ *
+ */
 public class Bicycle {
 	private String barcode;
 	private User user;
