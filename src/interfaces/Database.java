@@ -236,18 +236,4 @@ public interface Database {
 	 * @return Antalet reserverade platser
 	 */
 	public int getReservedSlots();
-
-	/**
-	 * Hämtar totalt antal lediga platser
-	 * 
-	 * @return Antalet lediga platser
-	 */
-	public int getFreeSlots();
-
-	/**
-	 * Hämtar totalt antal inlämnade cyklar
-	 * 
-	 * @return Antalet inlämnade cyklar
-	 */
-	public int getNbrOfBicycles();
 }
