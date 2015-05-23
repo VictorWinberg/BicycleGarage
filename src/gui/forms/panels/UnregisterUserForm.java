@@ -35,8 +35,9 @@ public class UnregisterUserForm extends Form {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod", "Felmeddelande",
 					JOptionPane.WARNING_MESSAGE);
 			return false;
-		} else if (!db.getBicycles(user).isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Användaren har inlämnade cyklar", "Felmeddelande",
+		} 
+		else if (user.getReserverdSlots()!=0) {
+			JOptionPane.showMessageDialog(null, "Användaren har reserverade platser", "Felmeddelande",
 					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
@@ -45,6 +46,9 @@ public class UnregisterUserForm extends Form {
 
 	@Override
 	public void action(String[] fields) {
+		for (database.Bicycle a : db.getBicycles(user)){
+			db.deleteBicycle(a);
+		}
 		db.deleteUser(user);
 		manager.changeState(ViewState.USER_STATE);
 		JOptionPane.showMessageDialog(null, "Användaren är borttagen");
