@@ -51,8 +51,8 @@ public abstract class Form {
 
 		String[] labels = getLabels();
 		int[] widths = getWidths();
-		JPanel labelPanel = new JPanel(new GridLayout(labels.length, 1));
-		JPanel fieldPanel = new JPanel(new GridLayout(labels.length, 1));
+		JPanel labelPanel = new JPanel(new GridLayout(labels.length + 1, 1));
+		JPanel fieldPanel = new JPanel(new GridLayout(labels.length + 1, 1));
 
 		frame.add(labelPanel, BorderLayout.WEST);
 		frame.add(fieldPanel, BorderLayout.CENTER);
@@ -63,7 +63,6 @@ public abstract class Form {
 			textfields[i] = new JTextField();
 			if (i < widths.length)
 				textfields[i].setColumns(widths[i]);
-
 			JLabel lab = new JLabel(labels[i], JLabel.RIGHT);
 			lab.setLabelFor(textfields[i]);
 			labelPanel.add(lab);
