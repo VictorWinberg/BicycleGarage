@@ -1,6 +1,7 @@
 package gui.managers.panels;
 
 import gui.forms.buttons.RegisterBicycleButton;
+import gui.forms.buttons.ShowOwnerButton;
 import gui.forms.buttons.UnregisterBicycleButton;
 import interfaces.Database;
 
@@ -40,6 +41,7 @@ public class BicycleManagerPanel extends JPanel {
 	private BicycleGarageManager manager;
 	private JPanel westPanel;
 	private RegisterBicycleButton regBicBtn;
+	private ShowOwnerButton showOwnBtn;
 
 	/**
 	 * Skapar en cykelmanagerpanel som hanterar cyklar
@@ -56,7 +58,8 @@ public class BicycleManagerPanel extends JPanel {
 		regBicBtn = new RegisterBicycleButton(manager, 1.1);
 		westPanel.add(regBicBtn);
 		westPanel.add(new UnregisterBicycleButton(manager, 1.1));
-
+		showOwnBtn = new ShowOwnerButton(manager, 1.1);
+		westPanel.add(showOwnBtn);
 	}
 
 	public void update() {
@@ -94,7 +97,7 @@ public class BicycleManagerPanel extends JPanel {
 						User chosen = manager.getDB().getUser(selectedData);
 						
 						regBicBtn.changeUser(chosen);
-						
+						showOwnBtn.changeUser(chosen);
 					}
 				}
 			});

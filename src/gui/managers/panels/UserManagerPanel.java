@@ -142,7 +142,7 @@ public class UserManagerPanel extends JPanel {
 			TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
 			table.setRowSorter(rowSorter);
 			
-			JTextField jtfFilter = new JTextField();
+			jtfFilter = new JTextField();
 			
 			JPanel panel = new JPanel(new BorderLayout());
 	        panel.add(new JLabel("Sök:"),
@@ -186,4 +186,8 @@ public class UserManagerPanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
-}
+	private JTextField jtfFilter;
+	
+	public void setText(String text){
+		jtfFilter.setText(text);
+}}
