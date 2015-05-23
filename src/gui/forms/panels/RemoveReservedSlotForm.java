@@ -39,7 +39,12 @@ public class RemoveReservedSlotForm extends Form {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod");
 			return false;
 		} 
-		spots = Integer.parseInt(fields[1]);
+		try{
+			spots = Integer.parseInt(fields[1]);
+		}
+		catch (NumberFormatException n){
+			spots = 0;
+		}
 		if (spots <= 0) {
 			JOptionPane.showMessageDialog(null,
 					"Felaktigt värde på antal platser som ska avreserveras");
