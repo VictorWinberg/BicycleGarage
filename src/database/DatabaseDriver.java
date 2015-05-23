@@ -518,36 +518,6 @@ public class DatabaseDriver implements Database {
 		return slots;
 	}
 
-	@Override
-	public int getFreeSlots() {
-		ResultSet rs = extractUsers();
-		int slots = 0;
-		try {
-			rs.beforeFirst();
-			while (rs.next()) {
-				slots += rs.getInt(8);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return slots;
-	}
-
-	@Override
-	public int getNbrOfBicycles() {
-		ResultSet rs = extractUsers();
-		int slots = 0;
-		try {
-			rs.beforeFirst();
-			while (rs.next()) {
-				slots += rs.getInt(9);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return slots;
-	}
-
 	public boolean isPNRValid(String pnr) {
 		boolean isValid = false;
 

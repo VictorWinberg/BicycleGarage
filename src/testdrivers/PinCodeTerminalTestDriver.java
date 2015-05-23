@@ -32,7 +32,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	private Timer redTimer, greenTimer;
 
 	/**
-	 * Registrerar cykelgarage manager så att pinkodsterminalen vet vilken
+     * Registrerar cykelgarage manager så att pinkodsterminalen vet vilken
 	 * manager som ska anropas när en användare har tryckt en tangent.
 	 * 
 	 * @param manager
