@@ -28,6 +28,8 @@ public class RemoveReservedSlotForm extends Form {
 		return widths;
 	}
 
+	private int spots;
+	
 	@Override
 	public boolean check(String[] fields) {
 		if (user == null)
@@ -36,7 +38,14 @@ public class RemoveReservedSlotForm extends Form {
 		if (checkUser == null || !user.equals(checkUser)) {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod");
 			return false;
-		} else if (user.getFreeSlots() < Integer.parseInt(fields[1])) {
+		} 
+		spots = Integer.parseInt(fields[1]);
+		if (spots <= 0) {
+			JOptionPane.showMessageDialog(null,
+					"Felaktigt värde på antal platser som ska avreserveras");
+			return false;
+		}
+		if (user.getFreeSlots() < spots) {
 			JOptionPane.showMessageDialog(null, "Användaren har inte så många lediga platser");
 			return false;
 		}
@@ -45,9 +54,11 @@ public class RemoveReservedSlotForm extends Form {
 
 	@Override
 	public void action(String[] fields) {
-		int spot = Integer.parseInt(fields[1]);
-		db.removeReservedSlot(user, spot);
-		JOptionPane.showMessageDialog(null, spot + " plats/er avreserverades");
+		db.removeReservedSlot(user, spots);
+		if(spots > 1)
+			JOptionPane.showMessageDialog(null, spots + " platser avreserverades");
+		else
+			JOptionPane.showMessageDialog(null, spots + " plats avreserverades");
 		manager.changeState(ViewState.USER_STATE);
 	}
 }

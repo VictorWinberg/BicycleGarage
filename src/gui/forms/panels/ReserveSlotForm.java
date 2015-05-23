@@ -56,7 +56,10 @@ public class ReserveSlotForm extends Form {
 	@Override
 	public void action(String[] fields) {
 		db.reserveSlot(user, spots);
-		JOptionPane.showMessageDialog(null, spots + " platser reserverades");
+		if(spots > 1)
+			JOptionPane.showMessageDialog(null, spots + " platser reserverades");
+		else
+			JOptionPane.showMessageDialog(null, spots + " plats reserverades");
 		manager.changeState(ViewState.USER_STATE);
 	}
 }

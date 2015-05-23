@@ -14,7 +14,7 @@ public class ReserveSlotButton extends ModifiedUserButton implements ActionListe
 	private BicycleGarageManager manager;
 
 	public ReserveSlotButton(BicycleGarageManager manager, double size) {
-		super("Reservera plats/er", size);
+		super("Reservera platser", size);
 		this.manager = manager;
 		addActionListener(this);
 	}

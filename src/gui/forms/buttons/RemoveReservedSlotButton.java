@@ -14,7 +14,7 @@ public class RemoveReservedSlotButton extends ModifiedUserButton implements Acti
 	private BicycleGarageManager manager;
 
 	public RemoveReservedSlotButton(BicycleGarageManager manager, double size) {
-		super("Avreservera plats/er", size);
+		super("Avreservera platser", size);
 		this.manager = manager;
 		addActionListener(this);
 	}
