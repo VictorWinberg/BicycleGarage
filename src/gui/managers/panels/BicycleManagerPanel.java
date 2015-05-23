@@ -12,8 +12,12 @@ import java.sql.SQLException;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import database.User;
 import main.BicycleGarageManager;
 
 /**
@@ -28,6 +32,7 @@ public class BicycleManagerPanel extends JPanel {
 
 	private BicycleGarageManager manager;
 	private JPanel northPanel;
+	private RegisterBicycleButton regBicBtn;
 
 	/**
 	 * Skapar en cykelmanagerpanel som hanterar cyklar
@@ -40,7 +45,8 @@ public class BicycleManagerPanel extends JPanel {
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
 		northPanel = new JPanel();
-		northPanel.add(new RegisterBicycleButton(manager, 1.1));
+		regBicBtn = new RegisterBicycleButton(manager, 1.1);
+		northPanel.add(regBicBtn);
 		northPanel.add(new UnregisterBicycleButton(manager, 1.1));
 		// "Lediga platser"
 
@@ -75,6 +81,23 @@ public class BicycleManagerPanel extends JPanel {
 			        return false;
 			    }
 			};
+			
+			ListSelectionModel cellSelectionModel = table.getSelectionModel();
+			cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						String selectedData = (String) table.getValueAt(table.getSelectedRow(), 1);
+						User chosen = manager.getDB().getUser(selectedData);
+						
+						regBicBtn.changeUser(chosen);
+						
+					}
+				}
+			});
+			
+			
+			
 			table.getTableHeader().setReorderingAllowed(false);
 			add(table.getTableHeader(), BorderLayout.CENTER);
 			JScrollPane scrollPane = new JScrollPane(table);
