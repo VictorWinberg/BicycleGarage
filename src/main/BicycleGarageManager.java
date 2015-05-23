@@ -165,24 +165,22 @@ public class BicycleGarageManager {
 	public void entryBarcode(String bicycleID) {
 		Bicycle bc = db.getBicycle(bicycleID);
 		if (bc == null) {
-			JOptionPane.showMessageDialog(null, "Streckkoden är ej giltig", "Felmeddelande",
-					JOptionPane.WARNING_MESSAGE);
+			terminal.lightLED(0, 1);
 			return;
 		}
 		if (bc.isDeposited()) {
-			JOptionPane.showMessageDialog(null, "Cykeln är redan inlämnad", "Felmeddelande",
-					JOptionPane.WARNING_MESSAGE);
+			terminal.lightLED(0, 1);
 			return;
 		}
 		User user = bc.getOwner();
 		if (user.getFreeSlots() == 0) {
-			JOptionPane.showMessageDialog(null, "Användaren har inga lediga platser", "Message",
-					JOptionPane.INFORMATION_MESSAGE);
+			terminal.lightLED(0, 1);
 			return;
 		}
 		db.removeFreeSlot(user, 1);
 		db.depositBicycle(bc);
 		entryLock.open(10);
+		terminal.lightLED(1, 1);
 		changeState(ViewState.BICYCLE_STATE);
 	}
 
