@@ -5,7 +5,7 @@ package testdrivers;
  * när BicycleGarageManager testas.
  * 
  * @version 1.0
- * @author Martin Host
+ * @author Grupp 25
  */
 public class BarcodeReaderExitTestDriver extends BarcodeReaderTestDriver {
 

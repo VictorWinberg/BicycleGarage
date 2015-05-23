@@ -15,9 +15,9 @@ public class MasterResetButton extends ModifiedButton implements ActionListener 
 	private BicycleGarageManager manager;
 
 	public MasterResetButton(BicycleGarageManager manager, double size) {
-		super("RESET", size);
+		super("Nollställ databas", size);
 		this.manager = manager;
-		setToolTipText("Återställer systemet");
+		setToolTipText("Tar bort all information lagrad i databasen.");
 		addActionListener(this);
 	}
 
@@ -25,14 +25,22 @@ public class MasterResetButton extends ModifiedButton implements ActionListener 
 	public void actionPerformed(ActionEvent e) {
 		Object[] options = { "Ja, återställ", "Nej" };
 		switch (JOptionPane.showOptionDialog(null,
-				"Är du säker på att du vill återställa hela systemet?", "Säkerhetsfråga",
+				"All information lagrad i databasen kommer tas bort, är du säker på att du vill nollställa hela systemet?", "Säkerhetsfråga",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0])){
 		case 0:
+			String submittedCode = JOptionPane.showInputDialog("Ange operatörskoden.");
+			if (submittedCode == null){
+			}
+			else if (submittedCode.equals("133337")){
 			Database db = manager.getDB();
 			db.dropTables();
 			db.createTables();
-			JOptionPane.showMessageDialog(null, "Systemet återställt",
+			JOptionPane.showMessageDialog(null, "Systemet är nu återställt.",
 						"Meddelande", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Felaktig operatörskod.", "Felmeddelande", JOptionPane.WARNING_MESSAGE);
+			}
 		}
 	}
 }

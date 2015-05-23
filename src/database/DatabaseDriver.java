@@ -489,7 +489,10 @@ public class DatabaseDriver implements Database {
 			while (rs.next()) {
 				String personnr = rs.getString(1);
 				int reservedSlots = rs.getInt(7);
-				if (reservedSlots == 0) {
+				if (reservedSlots == 0) {				
+					for (Bicycle a : getBicycles(getUser(personnr))){
+					deleteBicycle(a);
+				}
 					System.out.print("Användare " + personnr + " ");
 					sql = "DELETE FROM users WHERE personnr = '" + personnr + "'";
 					try {

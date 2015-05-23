@@ -19,7 +19,7 @@ import javax.swing.Timer;
  * BicycleGarageManager testas.
  * 
  * @version 1.1
- * @author Martin Host
+ * @author Grupp25
  */
 public class ElectronicLockTestDriver implements ElectronicLock {
 

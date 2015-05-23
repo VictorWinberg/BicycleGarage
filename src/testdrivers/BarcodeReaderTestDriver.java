@@ -20,7 +20,7 @@ import main.BicycleGarageManager;
  * streckkodsläsare.
  * 
  * @version 1.0
- * @author Martin Höst
+ * @author Grupp 25
  */
 abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionListener {
 

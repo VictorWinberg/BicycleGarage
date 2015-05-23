@@ -45,6 +45,9 @@ public class UnregisterUserForm extends Form {
 
 	@Override
 	public void action(String[] fields) {
+		for (database.Bicycle a : db.getBicycles(user)){
+			db.deleteBicycle(a);
+		}
 		db.deleteUser(user);
 		manager.changeState(ViewState.USER_STATE);
 		JOptionPane.showMessageDialog(null, "Användaren är borttagen");

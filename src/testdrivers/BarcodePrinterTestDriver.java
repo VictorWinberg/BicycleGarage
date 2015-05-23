@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
  * BicycleGarageManager testas.
  * 
  * @version 1.1
- * @author Martin Höst
+ * @author Grupp25
  */
 public class BarcodePrinterTestDriver implements BarcodePrinter {
 

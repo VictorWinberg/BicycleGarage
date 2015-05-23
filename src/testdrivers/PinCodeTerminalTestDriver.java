@@ -21,7 +21,7 @@ import main.BicycleGarageManager;
  * BicycleGarageManager testas.
  * 
  * @version 1.0
- * @author Martin Höst
+ * @author Grupp25
  */
 public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListener {
 
