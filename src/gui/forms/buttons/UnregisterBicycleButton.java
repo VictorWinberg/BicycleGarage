@@ -33,13 +33,20 @@ public class UnregisterBicycleButton extends ModifiedButton implements ActionLis
 					+ " är inlämnad i garaget");
 			return;
 		}
-		manager.getDB().deleteBicycle(bicycle);
-		manager.changeState(ViewState.BICYCLE_STATE);
-		if(bicycle.getOwner() == null)
-			JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + bicycle.getBarcode() + " borttagen");
-		else
-			JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + bicycle.getBarcode() + " och användare " + bicycle.getOwner().getFirstName() + " borttagen");
-		
+		String options[] = { "Ja, avregistrera", "Nej" };
+		if (JOptionPane.showOptionDialog(null,
+				"Är du säker på att du vill avregistrera cykeln " + bicycle.getBarcode() + "?", "Säkerhetsfråga",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
+				options[0]) == JOptionPane.YES_OPTION) {
+			manager.enable(false);
+			manager.getDB().deleteBicycle(bicycle);
+			manager.changeState(ViewState.BICYCLE_STATE);
+			if(bicycle.getOwner() == null)
+				JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + bicycle.getBarcode() + " borttagen");
+			else
+				JOptionPane.showMessageDialog(null, "Cykeln med streckkod " + bicycle.getBarcode() + " med ägare " + bicycle.getOwner().getFirstName() + " borttagen");
+			manager.enable(true);
+		}
 	}
 	
 	public void changeBicycle(Bicycle bicycle) {

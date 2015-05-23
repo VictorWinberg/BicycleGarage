@@ -25,7 +25,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import main.BicycleGarageManager;
-import database.User;
 
 /**
  * Denna panel öppnas när man klickar på knappen “Cyklar” i
