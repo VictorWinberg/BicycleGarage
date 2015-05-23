@@ -15,14 +15,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import main.BicycleGarageManager;
 import database.User;
@@ -129,6 +135,50 @@ public class UserManagerPanel extends JPanel {
 
 			JScrollPane scrollPane = new JScrollPane(table);
 			add(scrollPane, BorderLayout.CENTER);
+			
+			TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
+			table.setRowSorter(rowSorter);
+			
+			JTextField jtfFilter = new JTextField();
+			JButton jbtFilter = new JButton("Filter");
+			
+			JPanel panel = new JPanel(new BorderLayout());
+	        panel.add(new JLabel("Sök:"),
+	                BorderLayout.WEST);
+	        panel.add(jtfFilter, BorderLayout.CENTER);
+			
+	        add(panel, BorderLayout.SOUTH);
+	        
+	        jtfFilter.getDocument().addDocumentListener(new DocumentListener(){
+
+	            @Override
+	            public void insertUpdate(DocumentEvent e) {
+	                String text = jtfFilter.getText();
+
+	                if (text.trim().length() == 0) {
+	                    rowSorter.setRowFilter(null);
+	                } else {
+	                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+	                }
+	            }
+
+	            @Override
+	            public void removeUpdate(DocumentEvent e) {
+	                String text = jtfFilter.getText();
+
+	                if (text.trim().length() == 0) {
+	                    rowSorter.setRowFilter(null);
+	                } else {
+	                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+	                }
+	            }
+
+	            @Override
+	            public void changedUpdate(DocumentEvent e) {
+	                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	            }
+
+	        });
 
 		} catch (SQLException e) {
 			e.printStackTrace();
