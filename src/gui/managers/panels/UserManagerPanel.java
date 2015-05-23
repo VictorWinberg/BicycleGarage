@@ -43,7 +43,7 @@ import database.User;
 @SuppressWarnings("serial")
 public class UserManagerPanel extends JPanel {
 
-	private String[] columnNames = { "Personummer", "Förnamn", "Efternman", "Reserv", "Lediga",
+	private String[] columnNames = { "Personummer", "Förnamn", "Efternamn", "Reserv", "Lediga",
 			"Cyklar" };
 	private JPanel westPanel;
 	private BicycleGarageManager manager;
