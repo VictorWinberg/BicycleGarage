@@ -26,7 +26,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import main.BicycleGarageManager;
-import database.User;
 
 /**
  * Denna panel öppnas när man klickar på knappen “Cyklar” i
@@ -58,7 +57,6 @@ public class BicycleManagerPanel extends JPanel {
 		westPanel.setLayout(new GridLayout(10, 1, 1, 1));
 		regBicBtn = new RegisterBicycleButton(manager, 1.1);
 		westPanel.add(regBicBtn);
-		westPanel.add(new UnregisterBicycleButton(manager, 1.1));
 		showOwnBtn = new ShowOwnerButton(manager, 1.1);
 		westPanel.add(showOwnBtn);
 		unregBicBtn = new UnregisterBicycleButton(manager, 1.1);
