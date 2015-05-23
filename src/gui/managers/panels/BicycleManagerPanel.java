@@ -27,7 +27,7 @@ import main.BicycleGarageManager;
 public class BicycleManagerPanel extends JPanel {
 
 	private BicycleGarageManager manager;
-	private JPanel northPanel;
+	private JPanel westPanel;
 
 	/**
 	 * Skapar en cykelmanagerpanel som hanterar cyklar
@@ -39,16 +39,16 @@ public class BicycleManagerPanel extends JPanel {
 		this.manager = manager;
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
-		northPanel = new JPanel();
-		northPanel.add(new RegisterBicycleButton(manager, 1.1));
-		northPanel.add(new UnregisterBicycleButton(manager, 1.1));
+		westPanel = new JPanel();
+		westPanel.add(new RegisterBicycleButton(manager, 1.1));
+		westPanel.add(new UnregisterBicycleButton(manager, 1.1));
 		// "Lediga platser"
 
 	}
 
 	public void update() {
 		removeAll();
-		add(northPanel, BorderLayout.NORTH);
+		add(westPanel, BorderLayout.WEST);
 
 		Database db = manager.getDB();
 		try {
@@ -62,21 +62,18 @@ public class BicycleManagerPanel extends JPanel {
 			while (bicycles.next()) {
 				data[j][0] = bicycles.getString(1);
 				data[j][1] = bicycles.getString(2);
-				if (bicycles.getBoolean(3) == true) {
-					data[j][2] = "Ja";
-				} else {
-					data[j][2] = "Nej";
-				}
+				data[j][2] = bicycles.getBoolean(3) ? "Ja" : "Nej";
 				j++;
 			}
 			JTable table = new JTable(data, columnNames) {
-			    @Override
-			    public boolean isCellEditable(int row, int column) {
-			        return false;
-			    }
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
 			};
 			table.getTableHeader().setReorderingAllowed(false);
 			add(table.getTableHeader(), BorderLayout.CENTER);
+
 			JScrollPane scrollPane = new JScrollPane(table);
 			add(scrollPane, BorderLayout.SOUTH);
 		} catch (SQLException e) {
