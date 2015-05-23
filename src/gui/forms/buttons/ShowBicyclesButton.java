@@ -6,9 +6,6 @@ import gui.misc.buttons.ModifiedUserButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JTextField;
-
 import main.BicycleGarageManager;
 
 @SuppressWarnings("serial")
