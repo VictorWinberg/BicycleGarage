@@ -22,6 +22,9 @@ public class ShowUserButton extends ModifiedUserButton implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(user == null){
+			return;
+		}
 		String[] labels = { "Personnummer", "Förnamn", "Efternamn", "Mailadress", "Telefonnummer",
 				"PIN", "Reserverade platser", "Lediga platser", "Antal cyklar" };
 		StringBuilder sb = new StringBuilder("Användareinformation");

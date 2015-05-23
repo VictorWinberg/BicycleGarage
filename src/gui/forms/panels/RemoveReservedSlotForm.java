@@ -46,7 +46,7 @@ public class RemoveReservedSlotForm extends Form {
 			return false;
 		}
 		if (user.getFreeSlots() < spots) {
-			JOptionPane.showMessageDialog(null, "Användaren har inte så många lediga platser");
+			JOptionPane.showMessageDialog(null, "Användaren har endast "+user.getFreeSlots()+" lediga platser");
 			return false;
 		}
 		return true;
