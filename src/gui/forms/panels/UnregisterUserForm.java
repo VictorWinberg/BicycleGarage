@@ -35,12 +35,11 @@ public class UnregisterUserForm extends Form {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod", "Felmeddelande",
 					JOptionPane.WARNING_MESSAGE);
 			return false;
-		} 
-		else if (user.getReserverdSlots()!=0) {
+		} else if (user.getReserverdSlots()>0){
 			JOptionPane.showMessageDialog(null, "Användaren har reserverade platser", "Felmeddelande",
 					JOptionPane.WARNING_MESSAGE);
 			return false;
-		}
+		} 
 		return true;
 	}
 
