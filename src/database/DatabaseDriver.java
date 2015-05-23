@@ -494,6 +494,7 @@ public class DatabaseDriver implements Database {
 					} catch (SQLException e) {
 						System.out.println("inte borttagen. SQL Message: " + e.getMessage());
 					}
+					
 					cleared = true;
 				}
 			}
