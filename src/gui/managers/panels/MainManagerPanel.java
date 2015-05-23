@@ -6,10 +6,12 @@ import gui.misc.buttons.ExitButton;
 import gui.misc.buttons.MasterResetButton;
 import gui.misc.buttons.NumberOfAvailableSlotsButton;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.SoftBevelBorder;
 
 import main.BicycleGarageManager;
 
@@ -30,12 +32,15 @@ public class MainManagerPanel extends JPanel {
 	 *            cykelgaragemanager
 	 */
 	public MainManagerPanel(BicycleGarageManager manager) {
-		setLayout(new GridLayout(10, 1, 10, 10));
-		add(new RegisterUserButton(manager, 1.1));
-		add(new ClearInactiveUsersButton(manager, 1.1));
-		add(new NumberOfAvailableSlotsButton(manager, 1.1));
-		add(new JLabel(""));
-		add(new MasterResetButton(manager, 1.1));
-		add(new ExitButton(manager, 1.1));
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(8, 1, 1, 1));
+		panel.add(new RegisterUserButton(manager, 1.1));
+		panel.add(new ClearInactiveUsersButton(manager, 1.1));
+		panel.add(new NumberOfAvailableSlotsButton(manager, 1.1));
+		panel.add(new JLabel(""));
+		panel.add(new MasterResetButton(manager, 1.1));
+		panel.add(new ExitButton(manager, 1.1));
+		add(panel, BorderLayout.CENTER);
 	}
 }
