@@ -94,7 +94,14 @@ public class UserManagerPanel extends JPanel {
 				data[j][5] = users.getInt(9);
 				j++;
 			}
-			JTable table = new JTable(data, columnNames);
+			JTable table = new JTable(data, columnNames) {
+				
+			    @Override
+			    public boolean isCellEditable(int row, int column) {
+			        return false;
+			    }
+			};
+			table.getTableHeader().setReorderingAllowed(false);
 			add(table.getTableHeader(), BorderLayout.CENTER);
 			table.setCellSelectionEnabled(false);
 			table.setRowSelectionAllowed(true);
