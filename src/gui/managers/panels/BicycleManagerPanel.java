@@ -42,6 +42,7 @@ public class BicycleManagerPanel extends JPanel {
 	private JPanel westPanel;
 	private RegisterBicycleButton regBicBtn;
 	private ShowOwnerButton showOwnBtn;
+	private UnregisterBicycleButton unregBicBtn;
 
 	/**
 	 * Skapar en cykelmanagerpanel som hanterar cyklar
@@ -60,6 +61,8 @@ public class BicycleManagerPanel extends JPanel {
 		westPanel.add(new UnregisterBicycleButton(manager, 1.1));
 		showOwnBtn = new ShowOwnerButton(manager, 1.1);
 		westPanel.add(showOwnBtn);
+		unregBicBtn = new UnregisterBicycleButton(manager, 1.1);
+		westPanel.add(unregBicBtn);
 	}
 
 	public void update() {
@@ -93,11 +96,12 @@ public class BicycleManagerPanel extends JPanel {
 			cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent e) {
 					if (!e.getValueIsAdjusting()  && table.getSelectedRow() >= 0) {
-						String selectedData = (String) table.getValueAt(table.getSelectedRow(), 1);
-						User chosen = manager.getDB().getUser(selectedData);
-						
-						regBicBtn.changeUser(chosen);
-						showOwnBtn.changeUser(chosen);
+						Database db = manager.getDB();
+						String userData = (String) table.getValueAt(table.getSelectedRow(), 1);
+						regBicBtn.changeUser(db.getUser(userData));
+						showOwnBtn.changeUser(db.getUser(userData));
+						String bicycleData = (String) table.getValueAt(table.getSelectedRow(), 0);
+						unregBicBtn.changeBicycle(db.getBicycle(bicycleData));
 					}
 				}
 			});
