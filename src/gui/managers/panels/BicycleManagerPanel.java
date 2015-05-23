@@ -105,7 +105,7 @@ public class BicycleManagerPanel extends JPanel {
 			TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
 			table.setRowSorter(rowSorter);
 			
-			JTextField jtfFilter = new JTextField();
+			jtfFilter = new JTextField();
 			
 			JPanel panel = new JPanel(new BorderLayout());
 	        panel.add(new JLabel("Sök:"),
@@ -119,7 +119,7 @@ public class BicycleManagerPanel extends JPanel {
 	            @Override
 	            public void insertUpdate(DocumentEvent e) {
 	                String text = jtfFilter.getText();
-
+	                
 	                if (text.trim().length() == 0) {
 	                    rowSorter.setRowFilter(null);
 	                } else {
@@ -149,5 +149,10 @@ public class BicycleManagerPanel extends JPanel {
 			e.printStackTrace();
 		}
 
+	}
+	private JTextField jtfFilter;
+	public void setText(String text){
+		jtfFilter.setText(text);
+		
 	}
 }

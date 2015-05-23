@@ -220,4 +220,7 @@ public class BicycleGarageManager {
 			terminal.lightLED(PinCodeTerminal.RED_LED, 1);
 		}
 	}
+	public void setBicycleSearchTo(String personnr){
+		bicyclePanel.setText(personnr);
+	}
 }

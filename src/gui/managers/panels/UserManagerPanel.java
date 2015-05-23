@@ -5,6 +5,7 @@ import gui.forms.buttons.RegisterBicycleButton;
 import gui.forms.buttons.RegisterUserButton;
 import gui.forms.buttons.RemoveReservedSlotButton;
 import gui.forms.buttons.ReserveSlotButton;
+import gui.forms.buttons.ShowBicyclesButton;
 import gui.forms.buttons.ShowUserButton;
 import gui.forms.buttons.UnregisterUserButton;
 import interfaces.Database;
@@ -52,6 +53,7 @@ public class UserManagerPanel extends JPanel {
 	private RegisterBicycleButton regBicBtn;
 	private ReserveSlotButton resBtn;
 	private RemoveReservedSlotButton remResBtn;
+	private ShowBicyclesButton showBicBtn;
 
 	/**
 	 * Skapar en användarmanagerpanel som hanterar användare
@@ -74,13 +76,14 @@ public class UserManagerPanel extends JPanel {
 		westPanel.add(editBtn);
 		showBtn = new ShowUserButton(manager, 1.1);
 		westPanel.add(showBtn);
+		showBicBtn = new ShowBicyclesButton(manager, 1.1);
+		westPanel.add(showBicBtn);
 		regBicBtn = new RegisterBicycleButton(manager, 1.1);
 		westPanel.add(regBicBtn);
 		resBtn = new ReserveSlotButton(manager, 1.1);
 		westPanel.add(resBtn);
 		remResBtn = new RemoveReservedSlotButton(manager, 1.1);
 		westPanel.add(remResBtn);
-		
 	}
 
 	public void update() {
@@ -128,6 +131,7 @@ public class UserManagerPanel extends JPanel {
 						regBicBtn.changeUser(chosen);
 						resBtn.changeUser(chosen);
 						remResBtn.changeUser(chosen);
+						showBicBtn.changeUser(chosen);
 					}
 				}
 			});
