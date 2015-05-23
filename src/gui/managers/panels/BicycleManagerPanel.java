@@ -58,7 +58,6 @@ public class BicycleManagerPanel extends JPanel {
 		westPanel.setLayout(new GridLayout(10, 1, 1, 1));
 		regBicBtn = new RegisterBicycleButton(manager, 1.1);
 		westPanel.add(regBicBtn);
-		westPanel.add(new UnregisterBicycleButton(manager, 1.1));
 		showOwnBtn = new ShowOwnerButton(manager, 1.1);
 		westPanel.add(showOwnBtn);
 		unregBicBtn = new UnregisterBicycleButton(manager, 1.1);
