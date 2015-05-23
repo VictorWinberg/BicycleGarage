@@ -48,12 +48,12 @@ public class UserManagerPanel extends JPanel {
 			"Cyklar" };
 	private JPanel westPanel;
 	private BicycleGarageManager manager;
-	private UnregisterUserButton unregBtn = new UnregisterUserButton(manager, 1.1);
-	private EditUserButton editBtn = new EditUserButton(manager, 1.1);
-	private ShowUserButton showBtn = new ShowUserButton(manager, 1.1);
-	private RegisterBicycleButton regBicBtn = new RegisterBicycleButton(manager, 1.1);
-	private ReserveSlotButton resBtn = new ReserveSlotButton(manager, 1.1);
-	private RemoveReservedSlotButton remResBtn = new RemoveReservedSlotButton(manager, 1.1);
+	private UnregisterUserButton unregBtn;
+	private EditUserButton editBtn;
+	private ShowUserButton showBtn;
+	private RegisterBicycleButton regBicBtn;
+	private ReserveSlotButton resBtn;
+	private RemoveReservedSlotButton remResBtn;
 
 	/**
 	 * Skapar en användarmanagerpanel som hanterar användare
@@ -66,13 +66,21 @@ public class UserManagerPanel extends JPanel {
 		setBorder(new SoftBevelBorder(1));
 		setLayout(new BorderLayout());
 		westPanel = new JPanel();
+		
 		westPanel.add(new RegisterUserButton(manager, 1.1));
+		
 		westPanel.setLayout(new GridLayout(10, 1, 1, 1));
+		unregBtn = new UnregisterUserButton(manager, 1.1);
 		westPanel.add(unregBtn);
+		editBtn = new EditUserButton(manager, 1.1);
 		westPanel.add(editBtn);
+		showBtn = new ShowUserButton(manager, 1.1);
 		westPanel.add(showBtn);
+		regBicBtn = new RegisterBicycleButton(manager, 1.1);
 		westPanel.add(regBicBtn);
+		resBtn = new ReserveSlotButton(manager, 1.1);
 		westPanel.add(resBtn);
+		remResBtn = new RemoveReservedSlotButton(manager, 1.1);
 		westPanel.add(remResBtn);
 		
 	}
