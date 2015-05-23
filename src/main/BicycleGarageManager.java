@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import database.Bicycle;
 import database.DatabaseDriver;
@@ -220,4 +221,6 @@ public class BicycleGarageManager {
 	public void setBicycleSearchTo(String personnr){
 		bicyclePanel.setText(personnr);
 	}
-}
+	public void setOwnerSearchTo(String personnr){
+		userPanel.setText(personnr);
+}} 

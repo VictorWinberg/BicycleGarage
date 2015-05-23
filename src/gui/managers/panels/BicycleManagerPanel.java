@@ -1,6 +1,7 @@
 package gui.managers.panels;
 
 import gui.forms.buttons.RegisterBicycleButton;
+import gui.forms.buttons.ShowOwnerButton;
 import gui.forms.buttons.UnregisterBicycleButton;
 import interfaces.Database;
 
@@ -39,6 +40,7 @@ public class BicycleManagerPanel extends JPanel {
 	private BicycleGarageManager manager;
 	private JPanel westPanel;
 	private RegisterBicycleButton regBicBtn;
+	private ShowOwnerButton showOwnBtn;
 	private UnregisterBicycleButton unregBicBtn;
 
 	/**
@@ -55,9 +57,10 @@ public class BicycleManagerPanel extends JPanel {
 		westPanel.setLayout(new GridLayout(10, 1, 1, 1));
 		regBicBtn = new RegisterBicycleButton(manager, 1.1);
 		westPanel.add(regBicBtn);
+		showOwnBtn = new ShowOwnerButton(manager, 1.1);
+		westPanel.add(showOwnBtn);
 		unregBicBtn = new UnregisterBicycleButton(manager, 1.1);
 		westPanel.add(unregBicBtn);
-
 	}
 
 	public void update() {
@@ -94,6 +97,7 @@ public class BicycleManagerPanel extends JPanel {
 						Database db = manager.getDB();
 						String userData = (String) table.getValueAt(table.getSelectedRow(), 1);
 						regBicBtn.changeUser(db.getUser(userData));
+						showOwnBtn.changeUser(db.getUser(userData));
 						String bicycleData = (String) table.getValueAt(table.getSelectedRow(), 0);
 						unregBicBtn.changeBicycle(db.getBicycle(bicycleData));
 					}
