@@ -17,7 +17,6 @@ import testdrivers.PinCodeTerminalTestDriver;
  * 
  * @author Victor Winberg, Anton Göransson, Povel Larsson, Erik Danielsson, Emma
  *         Asklund, Tobias Olsson
- *
  */
 public class BicycleGarage {
 	/**

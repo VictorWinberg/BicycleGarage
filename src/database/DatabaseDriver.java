@@ -347,13 +347,17 @@ public class DatabaseDriver implements Database {
 			System.out.println("Cykeln med streckkod " + barcode + " inte borttagen, finns inte.");
 			return false;
 		}
-		System.out.print("Cykeln med användare " + bicycle.getOwner().getFirstName() + " ");
+		User user = bicycle.getOwner();
+		if(user == null)
+			System.out.print("Cykeln med streckkod " + bicycle.getBarcode() + " ");
+		else
+			System.out.print("Cykeln med streckkod " + bicycle.getBarcode() + " och användare " + user.getFirstName() + " ");
 		sql = "DELETE FROM bicycles WHERE barcode = '" + barcode + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("borttagen.");
-			User user = bicycle.getOwner();
-			user.removeBicycle();
+			if(user != null)
+				user.removeBicycle();
 			updateUser(user);
 			return true;
 		} catch (SQLException e) {
