@@ -29,7 +29,7 @@ public class RegisterUserForm extends Form {
 		return widths;
 	}
 
-	protected User user;
+	private User user;
 
 	@Override
 	public boolean check(String[] fields) {

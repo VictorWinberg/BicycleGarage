@@ -18,33 +18,24 @@ public class User {
 		this.nbrOfBicycles = nbrOfBicycles;
 	}
 
-	public String getPersonnr() {
-		return personnr;
-	}
+	public String getPersonnr() 	{ return personnr; }
+	public void setPersonnr(String personnr) { this.personnr = personnr; }
 
-	public String getFirstName() {
-		return first_name;
-	}
+	public String getFirstName() 	{ return first_name; }
+	public void setFirstName(String first_name) { this.first_name = first_name; }
+	
+	public String getLastName() 	{ return last_name; }
+	public void setLastName(String last_name) { this.last_name = last_name; }
+	
+	public String getMail() 		{ return mail; }
+	public void setMail(String mail) { this.mail = mail; }
 
-	public String getLastName() {
-		return last_name;
-	}
+	public String getPhonenr() 		{ return phonenr; }
+	public void setPhonenr(String phonenr){ this.phonenr = phonenr; }
 
-	public String getMail() {
-		return mail;
-	}
+	public String getPIN() 			{ return pin; }
 
-	public String getPhonenr() {
-		return phonenr;
-	}
-
-	public String getPIN() {
-		return pin;
-	}
-
-	public void addReserverdSlot(int slots) {
-		reservedSlots += slots;
-	}
+	public void addReserverdSlot(int slots) { reservedSlots += slots; }
 
 	public void removeReservedSlot(int slots) {
 		if (slots > reservedSlots) {
@@ -54,14 +45,9 @@ public class User {
 		reservedSlots -= slots;
 	}
 
-	public int getReserverdSlots() {
-		return reservedSlots;
-	}
+	public int getReserverdSlots() 	{ return reservedSlots; }
 
-	public void addFreeSlot(int slots) {
-		freeSlots += slots;
-		;
-	}
+	public void addFreeSlot(int slots) { freeSlots += slots; }
 
 	public void removeFreeSlot(int slots) {
 		if (slots > freeSlots) {
@@ -71,13 +57,9 @@ public class User {
 		freeSlots -= slots;
 	}
 
-	public int getFreeSlots() {
-		return freeSlots;
-	}
+	public int getFreeSlots() 	{ return freeSlots; }
 
-	public void addBicycle() {
-		nbrOfBicycles++;
-	}
+	public void addBicycle() 	{ nbrOfBicycles++; }
 
 	public void removeBicycle() {
 		if (nbrOfBicycles <= 0) {
@@ -86,9 +68,7 @@ public class User {
 		nbrOfBicycles--;
 	}
 
-	public int getNbrOfBicycles() {
-		return nbrOfBicycles;
-	}
+	public int getNbrOfBicycles() { return nbrOfBicycles; }
 
 	@Override
 	public String toString() {
