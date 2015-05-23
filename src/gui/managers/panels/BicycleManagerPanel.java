@@ -7,19 +7,25 @@ import interfaces.Database;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
-import database.User;
 import main.BicycleGarageManager;
+import database.User;
 
 /**
  * Denna panel öppnas när man klickar på knappen “Cyklar” i
@@ -60,7 +66,6 @@ public class BicycleManagerPanel extends JPanel {
 		Database db = manager.getDB();
 		try {
 			ResultSet bicycles = db.extractBicycles();
-			ResultSetMetaData rmsd = bicycles.getMetaData();
 			bicycles.last();
 			Object[][] data = new Object[bicycles.getRow()][8];
 			bicycles.beforeFirst();
@@ -78,6 +83,7 @@ public class BicycleManagerPanel extends JPanel {
 					return false;
 				}
 			};
+			table.getTableHeader().setReorderingAllowed(false);
 			
 			ListSelectionModel cellSelectionModel = table.getSelectionModel();
 			cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -92,13 +98,53 @@ public class BicycleManagerPanel extends JPanel {
 					}
 				}
 			});
-			
-			
-			
-			table.getTableHeader().setReorderingAllowed(false);
 
 			JScrollPane scrollPane = new JScrollPane(table);
 			add(scrollPane, BorderLayout.CENTER);
+			
+			TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
+			table.setRowSorter(rowSorter);
+			
+			JTextField jtfFilter = new JTextField();
+			
+			JPanel panel = new JPanel(new BorderLayout());
+	        panel.add(new JLabel("Sök:"),
+	                BorderLayout.WEST);
+	        panel.add(jtfFilter, BorderLayout.CENTER);
+			
+	        add(panel, BorderLayout.SOUTH);
+	        
+	        jtfFilter.getDocument().addDocumentListener(new DocumentListener(){
+
+	            @Override
+	            public void insertUpdate(DocumentEvent e) {
+	                String text = jtfFilter.getText();
+
+	                if (text.trim().length() == 0) {
+	                    rowSorter.setRowFilter(null);
+	                } else {
+	                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+	                }
+	            }
+
+	            @Override
+	            public void removeUpdate(DocumentEvent e) {
+	                String text = jtfFilter.getText();
+
+	                if (text.trim().length() == 0) {
+	                    rowSorter.setRowFilter(null);
+	                } else {
+	                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+	                }
+	            }
+
+	            @Override
+	            public void changedUpdate(DocumentEvent e) {
+	                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	            }
+
+	        });
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

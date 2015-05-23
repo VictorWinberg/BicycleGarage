@@ -6,7 +6,6 @@ import gui.forms.buttons.RegisterUserButton;
 import gui.forms.buttons.RemoveReservedSlotButton;
 import gui.forms.buttons.ReserveSlotButton;
 import gui.forms.buttons.ShowUserButton;
-import gui.forms.buttons.UnregisterBicycleButton;
 import gui.forms.buttons.UnregisterUserButton;
 import interfaces.Database;
 
@@ -15,7 +14,6 @@ import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -120,7 +118,7 @@ public class UserManagerPanel extends JPanel {
 			cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent e) {
-					if (!e.getValueIsAdjusting()) {
+					if (!e.getValueIsAdjusting() && table.getSelectedRow() >= 0) {
 						String selectedData = (String) table.getValueAt(table.getSelectedRow(), 0);
 						User chosen = manager.getDB().getUser(selectedData);
 						
@@ -141,7 +139,6 @@ public class UserManagerPanel extends JPanel {
 			table.setRowSorter(rowSorter);
 			
 			JTextField jtfFilter = new JTextField();
-			JButton jbtFilter = new JButton("Filter");
 			
 			JPanel panel = new JPanel(new BorderLayout());
 	        panel.add(new JLabel("Sök:"),

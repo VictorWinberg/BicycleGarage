@@ -11,7 +11,6 @@ import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.SoftBevelBorder;
 
 import main.BicycleGarageManager;
 
