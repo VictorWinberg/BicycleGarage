@@ -39,7 +39,13 @@ public class ReserveSlotForm extends Form {
 			JOptionPane.showMessageDialog(null, "Felaktig PIN-kod");
 			return false;
 		}
-		spots = Integer.parseInt(fields[1]);
+		try{
+			spots = Integer.parseInt(fields[1]);
+		}
+		catch (NumberFormatException n){
+			spots = 0;
+		}
+		
 		if (spots <= 0) {
 			JOptionPane.showMessageDialog(null,
 					"Felaktigt värde på antal platser som ska reserveras");
@@ -55,6 +61,7 @@ public class ReserveSlotForm extends Form {
 
 	@Override
 	public void action(String[] fields) {
+
 		db.reserveSlot(user, spots);
 		if(spots > 1)
 			JOptionPane.showMessageDialog(null, spots + " platser reserverades");
