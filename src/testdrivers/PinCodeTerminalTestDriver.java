@@ -154,6 +154,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 		if (sb.length() == 6) {
 			manager.entryPIN(sb.toString());
 			sb = new StringBuilder();
+			timer.stop();
 		}
 	}
 }
