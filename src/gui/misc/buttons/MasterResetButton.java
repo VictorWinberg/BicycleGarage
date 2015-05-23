@@ -35,7 +35,7 @@ public class MasterResetButton extends ModifiedButton implements ActionListener 
 			Database db = manager.getDB();
 			db.dropTables();
 			db.createTables();
-			JOptionPane.showMessageDialog(null, "Systemet är nu återställt",
+			JOptionPane.showMessageDialog(null, "Systemet är nu återställt.",
 						"Meddelande", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else {
