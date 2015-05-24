@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 import java.sql.SQLException;
 

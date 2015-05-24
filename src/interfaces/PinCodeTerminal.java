@@ -14,8 +14,8 @@ public interface PinCodeTerminal {
 	/**
 	 * Slå på LED i lightTime sekunder. 
 	 * @param lightTime tid LED ska vara påslagen
-	 * @param colour Färg = RED_LED = 0 => röd 
-	 * Färg = GREEN_LED = 1 => grön
+	 * @param colour Färg = RED_LED = 0 = röd 
+	 * Färg = GREEN_LED = 1 = grön
 	 */
 	public void lightLED(int colour, int lightTime);
 

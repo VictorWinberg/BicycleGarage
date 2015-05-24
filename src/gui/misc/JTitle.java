@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class JTitle extends JLabel {
@@ -23,12 +24,12 @@ public class JTitle extends JLabel {
 
 	@Override
 	public int getHorizontalAlignment() {
-		return JLabel.CENTER;
+		return SwingConstants.CENTER;
 	}
 
 	@Override
 	public int getVerticalAlignment() {
-		return JLabel.CENTER;
+		return SwingConstants.CENTER;
 	}
 
 	@Override

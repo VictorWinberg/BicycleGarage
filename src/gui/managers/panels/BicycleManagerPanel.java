@@ -92,6 +92,7 @@ public class BicycleManagerPanel extends JPanel {
 			ListSelectionModel cellSelectionModel = table.getSelectionModel();
 			cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+				@Override
 				public void valueChanged(ListSelectionEvent e) {
 					if (!e.getValueIsAdjusting()  && table.getSelectedRow() >= 0) {
 						Database db = manager.getDB();

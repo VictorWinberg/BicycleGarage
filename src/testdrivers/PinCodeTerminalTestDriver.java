@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 
 import main.BicycleGarageManager;
 
@@ -38,6 +39,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	 * @param manager
 	 *            cykelgarage manager
 	 */
+	@Override
 	public void register(BicycleGarageManager manager) {
 		this.manager = manager;
 	}
@@ -50,6 +52,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	 * @param lightTime
 	 *            Slå på LED i lightTime sekunder
 	 */
+	@Override
 	public void lightLED(int colour, int lightTime) {
 		try {
 			if (colour == RED_LED) {
@@ -73,7 +76,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	 */
 	public PinCodeTerminalTestDriver() {
 		JFrame frame = new JFrame("Pinkodsterminal");
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(240, 240));
 		frame.setLocation(java.awt.GraphicsEnvironment.
 				getLocalGraphicsEnvironment().getCenterPoint());
@@ -103,6 +106,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 		frame.pack();
 		frame.setVisible(true);
 		redTimer = new Timer(1000, new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) { // Inner class with
 															// code
 				redTimer.stop(); // to be executed when the timer
@@ -112,6 +116,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 		});
 		greenTimer = new Timer(1000, new ActionListener() { // Inner class as
 															// above
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						greenTimer.stop();
 						greenPanel.setBackground(new Color(238, 238, 238));
@@ -120,6 +125,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 				});
 		sb = new StringBuilder();
 		timer = new Timer(1000, new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) { // Inner class with
 															// code
 				sb = new StringBuilder(); // to be executed when the timer
@@ -136,6 +142,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	/**
 	 * Hanterar händelser när en knapp har tryckts.
 	 */
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		String theActionCommand = e.getActionCommand();
 		char c = theActionCommand.charAt(0);

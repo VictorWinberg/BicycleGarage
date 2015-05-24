@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import main.BicycleGarageManager;
 
@@ -36,6 +37,7 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionLi
 	 * @param manager
 	 *            Cykelgarage manager
 	 */
+	@Override
 	public void register(BicycleGarageManager manager) {
 		this.manager = manager;
 	}
@@ -48,7 +50,7 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionLi
 	 */
 	public BarcodeReaderTestDriver(String windowName) {
 		frame = new JFrame(windowName);
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(250, 90));
 		// make the window impossible to close
 		JPanel panel = new JPanel();
@@ -79,6 +81,7 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionLi
 	/**
 	 * Hanterar den händelse när "scan-knappen" trycks.
 	 */
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		String code = scannedCode.getText();
 		scannedCode.setText(null);

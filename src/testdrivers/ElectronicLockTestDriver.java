@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 
 /**
  * Denna klass simulerar ett elektroniskt lås. Den kan användas när
@@ -35,7 +36,7 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 	 */
 	public ElectronicLockTestDriver(String doorIdentifier) {
 		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(150, 90));
 		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getCenterPoint());
@@ -55,6 +56,7 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 		frame.setVisible(true);
 
 		timer = new Timer(1000, new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) { // Inner class with
 															// code
 				state.setText("LÅST"); // to be executed when the timer
@@ -70,6 +72,7 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 	 * @param timeOpen
 	 *            den tid det ska vara öppet (s)
 	 */
+	@Override
 	public void open(int timeOpen) {
 		state.setText("ÖPPET");
 		try {

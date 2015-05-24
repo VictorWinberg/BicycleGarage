@@ -158,6 +158,7 @@ public class User {
 				+ " | " + pin + " | " + reservedSlots + " | " + freeSlots + " | " + nbrOfBicycles;
 	}
 
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof User) {
 			return personnr.equals(((User) o).personnr);

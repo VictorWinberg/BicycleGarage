@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import main.BicycleGarageManager;
 import database.User;
@@ -33,7 +35,7 @@ public abstract class Form {
 		this.db = manager.getDB();
 		JFrame frame = new JFrame(title);
 		frame.setMinimumSize(new Dimension(300, 150));
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -63,7 +65,7 @@ public abstract class Form {
 			textfields[i] = new JTextField();
 			if (i < widths.length)
 				textfields[i].setColumns(widths[i]);
-			JLabel lab = new JLabel(labels[i], JLabel.RIGHT);
+			JLabel lab = new JLabel(labels[i], SwingConstants.RIGHT);
 			lab.setLabelFor(textfields[i]);
 			labelPanel.add(lab);
 			JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT));

@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 
 /**
  * Denna klass simulerar en streckkodsskrivare. Den kan användas när
@@ -26,7 +27,7 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 	 */
 	public BarcodePrinterTestDriver() {
 		frame = new JFrame("Streckkodsskrivare");
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(230, 350));
 		frame.setLocation(java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getCenterPoint());
@@ -48,9 +49,10 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 	 *            en sträng med 5 tecken, varje tecken kan vara '0', '1', ...
 	 *            "9".
 	 */
+	@Override
 	public void printBarcode(String bicycleID) {
 		if (bicycleID.length() != 5 || !bicycleID.matches("[0-9]+")) {
-			System.out.println(bicycleID);
+//			System.out.println(bicycleID);
 			throw new IllegalArgumentException("Streckkoden är inte giltlig");
 		}
 		textArea.append("Event " + ++serialNr + ": " + "Skriver ut " + bicycleID + "\n");

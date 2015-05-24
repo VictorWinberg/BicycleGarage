@@ -9,7 +9,11 @@ public class Bicycle {
 	private User user;
 	private boolean deposited;
 
-	/** Redan definierad cykel */
+	/** Redan definierad cykel 
+	 * @param barcode streckkod
+	 * @param user användare
+	 * @param deposited inlämnad
+	 */
 	public Bicycle(String barcode, User user, boolean deposited) {
 		this.barcode = barcode;
 		this.user = user;

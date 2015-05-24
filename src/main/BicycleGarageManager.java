@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import database.Bicycle;
 import database.DatabaseDriver;
@@ -44,7 +45,7 @@ public class BicycleGarageManager {
 
 	public BicycleGarageManager() {
 		frame = new JFrame("Operatörsgränssnittet");
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(800, 600));
 		frame.setLayout(new BorderLayout(0, 10));
 		frame.addWindowListener(new WindowAdapter() {
