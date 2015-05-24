@@ -74,7 +74,7 @@ public class UserManagerPanel extends JPanel {
 		westPanel.add(unregBtn);
 		editBtn = new EditUserButton(manager, 1.1);
 		westPanel.add(editBtn);
-		showBtn = new ShowUserButton(manager, 1.1);
+		showBtn = new ShowUserButton(1.1);
 		westPanel.add(showBtn);
 		showBicBtn = new ShowBicyclesButton(manager, 1.1);
 		westPanel.add(showBicBtn);

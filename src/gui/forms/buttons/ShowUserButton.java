@@ -7,16 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import main.BicycleGarageManager;
-
 @SuppressWarnings("serial")
 public class ShowUserButton extends ModifiedUserButton implements ActionListener {
 
-	private BicycleGarageManager manager;
-
-	public ShowUserButton(BicycleGarageManager manager, double sizeModifier) {
+	public ShowUserButton(double sizeModifier) {
 		super("Info", sizeModifier);
-		this.manager = manager;
 		addActionListener(this);
 	}
 
