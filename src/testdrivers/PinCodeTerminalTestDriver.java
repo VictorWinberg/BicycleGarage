@@ -48,7 +48,7 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 	 * Slå på LED i lightTime sekunder.
 	 * 
 	 * @param colour
-	 *            PinCodeTerminal.RED_LED eller PinCodeTerminal.GREEN_LED
+	 *            RED_LED eller GREEN_LED
 	 * @param lightTime
 	 *            Slå på LED i lightTime sekunder
 	 */

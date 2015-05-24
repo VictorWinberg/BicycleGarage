@@ -21,7 +21,7 @@ public class Bicycle {
 	}
 
 	/**
-	 * 
+	 * Ta reda på streckkoden
 	 * @return streckkoden i form av en string med 5 tecken
 	 */
 	public String getBarcode() {
@@ -29,7 +29,7 @@ public class Bicycle {
 	}
 
 	/**
-	 * 
+	 * Tar reda på användaren till cykeln
 	 * @return user som är kopplad till streckkoden
 	 */
 	public User getOwner() {
@@ -37,18 +37,18 @@ public class Bicycle {
 	}
 
 	/**
-	 * 
-	 * @return true om cykeln är registrerad som inlämnad, false om den inte är
-	 *         det
+	 * Ta reda på om cykeln är inlämnad eller inte
+	 * @return true om cykeln är registrerad som inlämnad, annars false 
 	 */
 	public boolean isDeposited() {
 		return deposited;
 	}
 
-	/**
-	 * Ger en string med "personnummer | streckkod | deposited"
-	 */
 	@Override
+	/**
+	 * Ta reda på all information om cykeln och gör det till en sträng
+	 * @retrun en sträng som innehåller användarens personnummer, streckkod mm.
+	 */
 	public String toString() {
 		return user.getPersonnr() + " | " + barcode + " | " + deposited;
 	}

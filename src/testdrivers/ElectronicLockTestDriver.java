@@ -28,7 +28,7 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 	private Timer timer;
 
 	/**
-	 * Skapa ett ElectronicLockTestDriver
+	 * Skapar en ElectronicLockTestDriver
 	 * 
 	 * @param doorIdentifier
 	 *            en sträng som identifierar dörren, t.ex. "entré" eller
@@ -82,9 +82,5 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 			System.err.println("ERROR: IllegalArgumentException i "
 					+ "open i ElectronicLockTestDriver");
 		}
-	}
-
-	public void main(String[] args) {
-		new ElectronicLockTestDriver("Entrélås");
 	}
 }

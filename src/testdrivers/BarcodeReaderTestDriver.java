@@ -34,8 +34,7 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionLi
 	 * Registrerar cykelgarage manager så att streckkodsläsaren vet vilken
 	 * manager som ska anropas när en användare har använt läsaren.
 	 * 
-	 * @param manager
-	 *            Cykelgarage manager
+	 * @param manager Cykelgarage manager
 	 */
 	@Override
 	public void register(BicycleGarageManager manager) {

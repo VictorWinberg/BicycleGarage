@@ -5,9 +5,7 @@ import interfaces.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -98,16 +96,6 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
-	/**
-	 * Skapar en ny användare utan reserverade platser, inlämnade cyklar
-	 * eller registrerade cyklar med given information	
-	 * @param personnummer	
-	 * @param Förnamn
-	 * @param	Efternamn
-	 * @param	Email
-	 * @param Telefonnummer
-	 * @return Om användaren skapats så returneras User objektet.
-	 */
 	public User createUser(String personnr, String first_name,
 			String last_name, String mail, String phonenr) throws Exception {
 		if (isPNRValid(personnr) && nameIsValid(first_name)
@@ -117,7 +105,6 @@ public class DatabaseDriver implements Database {
 			String pin = generatePIN();
 			return new User(personnr, first_name, last_name, mail, phonenr,
 					pin, 0, 0, 0);
-
 		} else {
 			StringBuilder sb = new StringBuilder("Felaktigt: ");
 			int length = sb.length();
@@ -153,11 +140,6 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
-	/**
-	 * Lägger till användaren user i databasen.
-	 * @param user
-	 * @return Returnerar true om användaren lagts till i databasen, annars returneras false.
-	 */
 	public boolean insertUser(User user) {
 		if (user == null) {
 //			System.out.println("Användare user som skulle läggas till är null.");
@@ -181,11 +163,6 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
-	/**
-	 * Tar bort användaren från databasen.
-	 * @param user
-	 * @return	Returnerar true om användaren tagits bort från databasen, annars false.
-	 */
 	public boolean deleteUser(User user) {
 		if (user == null) {
 //			System.out.println("Användare user som skulle tas bort är null.");
@@ -212,11 +189,6 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
-	/**
-	 * Laddar upp informationen som tillhör anvendaren user till databasen.
-	 * @param user
-	 * @return Returnerar true om användaren user har uppdaterats.
-	 */
 	public boolean updateUser(User user) {
 		if (user == null) {
 //			System.out.println("Användare user som skulle uppdateras är null.");
@@ -423,9 +395,8 @@ public class DatabaseDriver implements Database {
 
 	@Override
 	public boolean depositBicycle(Bicycle bc) {
-		if (bc == null) {
+		if (bc == null)
 			return false;
-		}
 		bc.deposit();
 		updateBicycle(bc);
 		return true;
@@ -433,9 +404,8 @@ public class DatabaseDriver implements Database {
 
 	@Override
 	public boolean withdrawBicycle(Bicycle bc) {
-		if (bc == null) {
+		if (bc == null)
 			return false;
-		}
 		bc.withdraw();
 		updateBicycle(bc);
 		return true;
@@ -443,20 +413,18 @@ public class DatabaseDriver implements Database {
 
 	@Override
 	public boolean removeFreeSlot(User user, int slots) {
-		if (user == null) {
+		if (user == null)
 			return false;
-		}
-		user.removeFreeSlot(slots);
+		user.removeFreeSlots(slots);
 		updateUser(user);
 		return true;
 	}
 
 	@Override
 	public boolean addFreeSlot(User user, int slots) {
-		if (user == null) {
+		if (user == null)
 			return false;
-		}
-		user.addFreeSlot(slots);
+		user.addFreeSlots(slots);
 		updateUser(user);
 		return true;
 	}
@@ -504,18 +472,17 @@ public class DatabaseDriver implements Database {
 			return false;
 		}
 		user.addReserverdSlot(slots);
-		user.addFreeSlot(slots);
+		user.addFreeSlots(slots);
 		updateUser(user);
 		return true;
 	}
 
 	@Override
 	public boolean removeReservedSlot(User user, int slots) {
-		if (user == null || slots < 0) {
+		if (user == null || slots < 0)
 			return false;
-		}
 		user.removeReservedSlot(slots);
-		user.removeFreeSlot(slots);
+		user.removeFreeSlots(slots);
 		updateUser(user);
 		return true;
 	}
@@ -604,7 +571,6 @@ public class DatabaseDriver implements Database {
 	}
 
 	private boolean nameIsValid(String name) {
-
 		if (name.matches("[A-ö-]{2,25}")) {
 			return true;
 		}
@@ -612,7 +578,7 @@ public class DatabaseDriver implements Database {
 
 	}
 
-	public String generatePIN() {
+	private String generatePIN() {
 		String chars = "0123456789";
 		while (true) {
 			StringBuilder sb = new StringBuilder();
@@ -624,64 +590,6 @@ public class DatabaseDriver implements Database {
 			if (getUserWithPIN(pin) == null) {
 				return pin;
 			}
-		}
-	}
-
-	public static void main(String[] args) {
-		DatabaseDriver db = null;
-		try {
-			db = new DatabaseDriver();
-		} catch (ClassNotFoundException e) {
-//			System.out.println("JDBC drivrutin hittades ej. SQL Message: "
-//					+ e.getMessage());
-		} catch (SQLException e) {
-//			System.out.println("Gick ej att ansluta till databas. SQL Message: "
-//							+ e.getMessage());
-		}
-
-		// db.dropTables();
-		// db.createTables();
-//
-		System.out.println();
-		print(db.extractUsers());
-//		System.out.println();
-		print(db.extractBicycles());
-//		System.out.println();
-//		System.out.println();
-//		System.out.println();
-//		System.out.println(db.getReservedSlots());
-	}
-
-	public static void print(ResultSet rs) {
-		if (rs == null)
-			return;
-		try {
-			ResultSetMetaData rsmd = rs.getMetaData();
-			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-				if (i > 1) {
-//					System.out.print(" | ");
-				}
-//				System.out.print(rsmd.getColumnName(i) + " "
-//						+ rsmd.getColumnTypeName(i));
-
-			}
-			rs.beforeFirst();
-			while (rs.next()) {
-//				System.out.println();
-				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					if (i > 1) {
-//						System.out.print(" | ");
-					}
-					int type = rsmd.getColumnType(i);
-					if (type == Types.VARCHAR || type == Types.CHAR) {
-//						System.out.print(rs.getString(i));
-					} else {
-//						System.out.print(rs.getLong(i));
-					}
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 }

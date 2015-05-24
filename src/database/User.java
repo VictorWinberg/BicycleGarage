@@ -33,66 +33,67 @@ public class User {
 		this.nbrOfBicycles = nbrOfBicycles;
 	}
 
+
 	/**
-	 * 
 	 * @return String med personnumret
 	 */
 	public String getPersonnr() 	{ return personnr; }
+
 	/**
-	 * 
 	 * @param personnr En string som personnumret ska ändras till 
 	 */
 	public void setPersonnr(String personnr) { this.personnr = personnr; }
+	
 	/**
-	 * 
 	 * @return En string med användarens förnamn
 	 */
 	public String getFirstName() 	{ return first_name; }
+
 	/**
-	 * 
 	 * @param first_name En string som användarens förnamn ska ändras till
 	 */
 	public void setFirstName(String first_name) { this.first_name = first_name; }
+
 	/**
-	 * 
 	 * @return En string med användarens efternamn
 	 */
 	public String getLastName() 	{ return last_name; }
+
 	/**
-	 * 
 	 * @param last_name En string som användarens efternamn ska ändras till
 	 */
 	public void setLastName(String last_name) { this.last_name = last_name; }
+
 	/**
-	 * 
 	 * @return En string med användarens mail
 	 */
 	public String getMail() 		{ return mail; }
+
 	/**
-	 * 
 	 * @param mail En string som användarens mail ska ändras till
 	 */
 	public void setMail(String mail) { this.mail = mail; }
+
 	/**
-	 * 
 	 * @return En string med användarens telefonnummer
 	 */
 	public String getPhonenr() 		{ return phonenr; }
+
 	/**
-	 * 
 	 * @param phonenr En string som användarens telefonnummer ska ändras till.
 	 */
 	public void setPhonenr(String phonenr){ this.phonenr = phonenr; }
+
 	/**
-	 * 
 	 * @return En string med användarens PIN
 	 */
 	public String getPIN() 			{ return pin; }
+
 	/**
-	 * 
 	 * @param slots En int med så många platser som användaren ska reservera
 	 */
 	public void addReserverdSlot(int slots) { reservedSlots += slots; }
+	
 	/**
 	 * Tar bort reserverade platser och kastar IllegalArgumentException om man försöker avreservera fler platser än man har reserverade.
 	 * @param slots En int med så många slots som användaren ska avreservera
@@ -104,30 +105,30 @@ public class User {
 		}
 		reservedSlots -= slots;
 	}
+
 	/**
-	 * 
 	 * @return En int med så många platser som användaren har reserverade
 	 */
 	public int getReserverdSlots() 	{ return reservedSlots; }
+
 	/**
-	 * 
 	 * @param slots En int med så många extra platser som användaren ska få lediga
 	 */
-	public void addFreeSlot(int slots) { freeSlots += slots; }
+	public void addFreeSlots(int slots) { freeSlots += slots; }
 	
 	/**
 	 * Minskar antalet lediga platser för användaren med slots. Kastar IllegalArgumentException om man försöker minska med fler än möjligt.
 	 * @param slots En int med så många extra platser som användaren ska få lediga
 	 */
-	public void removeFreeSlot(int slots) {
+	public void removeFreeSlots(int slots) {
 		if (slots > freeSlots) {
 			throw new IllegalArgumentException(
 					"Antalet platser du vill ta bort är större än antalet du har lediga");
 		}
 		freeSlots -= slots;
 	}
+
 	/**
-	 * 
 	 * @return En int med antalet lediga platser för användaren
 	 */
 	public int getFreeSlots() 	{ return freeSlots; }
@@ -146,19 +147,27 @@ public class User {
 		}
 		nbrOfBicycles--;
 	}
+
 	/**
-	 * 
 	 * @return Antalet cyklar användaren har
 	 */
 	public int getNbrOfBicycles() { return nbrOfBicycles; }
 
 	@Override
+	/**
+	 * Få en sträng med all information om användaren
+	 * @return Em sträng med all information som en användare kan innehålla
+	 */
 	public String toString() {
 		return personnr + " | " + first_name + " | " + last_name + " | " + mail + " | " + phonenr
 				+ " | " + pin + " | " + reservedSlots + " | " + freeSlots + " | " + nbrOfBicycles;
 	}
 
 	@Override
+	/**
+	 * Tar reda på om det är samma användare
+	 * @return true om det är samma användare, annars false
+	 */
 	public boolean equals(Object o) {
 		if (o instanceof User) {
 			return personnr.equals(((User) o).personnr);

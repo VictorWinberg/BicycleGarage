@@ -57,8 +57,4 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 		}
 		textArea.append("Event " + ++serialNr + ": " + "Skriver ut " + bicycleID + "\n");
 	}
-
-	public void main(String[] args) {
-		new BarcodePrinterTestDriver();
-	}
 }

@@ -42,7 +42,7 @@ public interface Database {
 	/** Uppdaterar en användare user
 	 * @param user Användare
 	 * @return true om användaren user uppdaterades, annars false */
-	boolean updateUser(User user);
+	public boolean updateUser(User user);
 
 	/** Hämtar en specifik användare med personnr
 	 * @param personnr Användarens personnummer
@@ -82,7 +82,7 @@ public interface Database {
 	/** Uppdaterar en cykel bicycle
 	 * @param bicycle uppdaterad cykel
 	 * @return true om cykeln bicycle uppdaterades, annars false */
-	boolean updateBicycle(Bicycle bicycle);
+	public boolean updateBicycle(Bicycle bicycle);
 
 	/** Hämtar en specifik cykel Bicycle med streckkod barcode
 	 * @param barcode streckkod
