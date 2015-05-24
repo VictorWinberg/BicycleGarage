@@ -114,12 +114,10 @@ public class DatabaseDriver implements Database {
 				&& nameIsValid(last_name)
 				&& EmailValidator.getInstance().isValid(mail)
 				&& phonenr.matches("[0-9]{10}")) {
-			while (true) {
-				String pin = generatePIN();
-				if (getUserWithPIN(pin) == null)
-					return new User(personnr, first_name, last_name, mail,
-							phonenr, pin, 0, 0, 0);
-			}
+			String pin = generatePIN();
+			return new User(personnr, first_name, last_name, mail, phonenr,
+					pin, 0, 0, 0);
+
 		} else {
 			StringBuilder sb = new StringBuilder("Felaktigt: ");
 			int length = sb.length();
@@ -619,14 +617,17 @@ public class DatabaseDriver implements Database {
 
 	public String generatePIN() {
 		String chars = "0123456789";
-
-		StringBuilder sb = new StringBuilder();
-		while (sb.length() < 6) {
-			int index = (int) (Math.random() * chars.length());
-			sb.append(chars.charAt(index));
+		while (true) {
+			StringBuilder sb = new StringBuilder();
+			while (sb.length() < 6) {
+				int index = (int) (Math.random() * chars.length());
+				sb.append(chars.charAt(index));
+			}
+			String pin = sb.toString();
+			if (getUserWithPIN(pin) == null) {
+				return pin;
+			}
 		}
-		String pin = sb.toString();
-		return pin;
 	}
 
 	public static void main(String[] args) {
