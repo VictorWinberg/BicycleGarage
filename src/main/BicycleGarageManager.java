@@ -124,9 +124,8 @@ public class BicycleGarageManager {
 		return db;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void enable(boolean b) {
-		frame.enable(b);
+		frame.setEnabled(b);
 	}
 
 	private BarcodePrinter printer;
