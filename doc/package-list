@@ -1,7 +1,12 @@
 database
-gui
-gui.buttons
-gui.panels
+gui.forms.buttons
+gui.forms.panels
+gui.managers
+gui.managers.buttons
+gui.managers.panels
+gui.misc
+gui.misc.buttons
+gui.misc.panels
 interfaces
 main
 testdrivers

@@ -136,6 +136,10 @@ public class BicycleGarageManager {
 	/**
 	 * Registrerar hårdvara så att BicycleGarageManager vet vilka drivrutiner
 	 * som är tillgängliga.
+	 * @param printer Streckkodsskrivare
+	 * @param entryLock Entrélås
+	 * @param exitLock Utgångslås
+	 * @param terminal Pinkodsterminal
 	 */
 	public void registerHardwareDrivers(BarcodePrinter printer, ElectronicLock entryLock,
 			ElectronicLock exitLock, PinCodeTerminal terminal) {
@@ -148,6 +152,7 @@ public class BicycleGarageManager {
 	/**
 	 * Kommer att kallas när operatören har registrerat en cykel. Cykel ID är en
 	 * sträng med 5 tecken, där varje tecken kan vara '0', '1', ... "9".
+	 * @param bicycleID Cykelstreckkod
 	 */
 	public void printBarcode(String bicycleID) {
 		try {
@@ -161,6 +166,7 @@ public class BicycleGarageManager {
 	 * Kommer att kallas när en användare har använt strecksläsaren vid
 	 * entrédörren. Cykel ID bör vara en sträng med 5 tecken, där varje tecken
 	 * kan vara '0', '1', ... "9".
+	 * @param bicycleID Cykelstreckkod
 	 */
 	public void entryBarcode(String bicycleID) {
 		Bicycle bc = db.getBicycle(bicycleID);
@@ -188,6 +194,7 @@ public class BicycleGarageManager {
 	 * Kommer att kallas när en användare har använt strecksläsaren vid
 	 * cykelutgången. bicycleID bör vara en sträng med 5 tecken, där varje
 	 * tecken kan vara '0', '1', ... "9".
+	 * @param bicycleID Cykelstreckkod
 	 */
 	public void exitBarcode(String bicycleID) {
 		Bicycle bc = db.getBicycle(bicycleID);
@@ -207,6 +214,7 @@ public class BicycleGarageManager {
 	 * Kommer att kallas när en användare har tryckt på en tangent på knappsats
 	 * på entrédörren. Följande tecken kan vara intryckta: "0", "1", ... "9",
 	 * "*", "#".
+	 * @param pin pinkod
 	 */
 	public void entryPIN(String pin) {
 		User user = db.getUserWithPIN(pin);
@@ -217,9 +225,19 @@ public class BicycleGarageManager {
 			terminal.lightLED(PinCodeTerminal.RED_LED, 1);
 		}
 	}
+	/**
+	 * Sätter Cykelpanelens sökning till personummert personnr
+	 * @param personnr Användarens personnummer
+	 */
 	public void setBicycleSearchTo(String personnr){
 		bicyclePanel.setText(personnr);
 	}
+	
+	/**
+	 * Sätter Användarpanelens sökning till användarens personnummer
+	 * @param personnr Användarens personnummer
+	 */
 	public void setOwnerSearchTo(String personnr){
 		userPanel.setText(personnr);
-}} 
+	}
+}

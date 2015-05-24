@@ -45,10 +45,12 @@ public interface Database {
 	boolean updateUser(User user);
 
 	/** Hämtar en specifik användare med personnr
+	 * @param personnr Användarens personnummer
 	 * @return User användare, annars null */
 	public User getUser(String personnr);
 
 	/** Hämtar en specifik användare med pin
+	 * @param pin Användarens pinkod
 	 * @return User användare, annars null */
 	public User getUserWithPIN(String pin);
 
@@ -62,7 +64,7 @@ public interface Database {
 	public ResultSet extractUsers();
 
 	/** Skapar en ny cykel
-	 * @param user
+	 * @param user Specifik användare
 	 * @return Ny cykel Bicycle, annars null
 	 * @throws Exception meddelande om användaren är felaktig */
 	public Bicycle createBicycle(User user) throws Exception;
@@ -73,12 +75,12 @@ public interface Database {
 	public boolean insertBicycle(Bicycle bicycle);
 
 	/** Tar bort cykeln bicycle
-	 * @param bicycle befintlig cykel bicycle
+	 * @param bicycle befintlig cykel
 	 * @return true ifall cykeln bicycle togs bort, annars false */
 	public boolean deleteBicycle(Bicycle bicycle);
 
 	/** Uppdaterar en cykel bicycle
-	 * @param Cykel bicycle
+	 * @param bicycle uppdaterad cykel
 	 * @return true om cykeln bicycle uppdaterades, annars false */
 	boolean updateBicycle(Bicycle bicycle);
 
@@ -93,9 +95,10 @@ public interface Database {
 
 	/** Rensar alla inaktiva användare
 	 * @return true om någon användare tagits bort, annars false */
-	boolean clearInactiveUsers();
+	public boolean clearInactiveUsers();
 
 	/** Kontrollerar om personnummert pnr är korrekt
+	 * @param pnr Kontrollerar användarens personnummer
 	 * @return true om personummert är korrekt, annars false */
 	public boolean isPNRValid(String pnr);
 

@@ -92,8 +92,18 @@ public class DatabaseDriver implements Database {
 		}
 		return dropped;
 	}
-
+	
 	@Override
+	/**
+	 * Skapar en ny användare utan reserverade platser, inlämnade cyklar
+	 * eller registrerade cyklar med given information	
+	 * @param personnummer	
+	 * @param Förnamn
+	 * @param	Efternamn
+	 * @param	Email
+	 * @param Telefonnummer
+	 * @return Om användaren skapats så returneras User objektet.
+	 */
 	public User createUser(String personnr, String first_name, String last_name, String mail,
 			String phonenr) throws Exception {
 		if (isPNRValid(personnr) && nameIsValid(first_name) && nameIsValid(last_name)
@@ -144,6 +154,11 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
+	/**
+	 * Lägger till användaren user i databasen.
+	 * @param user
+	 * @return Returnerar true om användaren lagts till i databasen, annars returneras false.
+	 */
 	public boolean insertUser(User user) {
 		if (user == null) {
 			System.out.println("Användare user som skulle läggas till är null.");
@@ -166,6 +181,11 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
+	/**
+	 * Tar bort användaren från databasen.
+	 * @param user
+	 * @return	Returnerar true om användaren tagits bort från databasen, annars false.
+	 */
 	public boolean deleteUser(User user) {
 		if (user == null) {
 			System.out.println("Användare user som skulle tas bort är null.");
@@ -190,6 +210,11 @@ public class DatabaseDriver implements Database {
 	}
 
 	@Override
+	/**
+	 * Laddar upp informationen som tillhör anvendaren user till databasen.
+	 * @param user
+	 * @return Returnerar true om användaren user har uppdaterats.
+	 */
 	public boolean updateUser(User user) {
 		if (user == null) {
 			System.out.println("Användare user som skulle uppdateras är null.");
@@ -347,17 +372,13 @@ public class DatabaseDriver implements Database {
 			System.out.println("Cykeln med streckkod " + barcode + " inte borttagen, finns inte.");
 			return false;
 		}
-		User user = bicycle.getOwner();
-		if(user == null)
-			System.out.print("Cykeln med streckkod " + bicycle.getBarcode() + " ");
-		else
-			System.out.print("Cykeln med streckkod " + bicycle.getBarcode() + " och användare " + user.getFirstName() + " ");
+		System.out.print("Cykeln med användare " + bicycle.getOwner().getFirstName() + " ");
 		sql = "DELETE FROM bicycles WHERE barcode = '" + barcode + "'";
 		try {
 			conn.createStatement().executeUpdate(sql);
 			System.out.println("borttagen.");
-			if(user != null)
-				user.removeBicycle();
+			User user = bicycle.getOwner();
+			user.removeBicycle();
 			updateUser(user);
 			return true;
 		} catch (SQLException e) {
