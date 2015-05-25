@@ -118,7 +118,7 @@ public class TextPrompt extends JLabel
 	 * Show.Focus_LOST - visa prompten när komponenten förlorar fokus
 	 * (och dölja prompt när fokus har getts)
 	 *
-	 * @param uppvisa giltig Visa enum
+	 * @param show Show-enum
 	 */
 	public void setShow(Show show)
 	{
