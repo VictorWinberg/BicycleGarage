@@ -22,8 +22,14 @@ public class RegisterBicycleForm extends Form {
 	}
 
 	@Override
+	public String[] getDefaultLabels() {
+		String[] labels = { "NNNNNN"};
+		return labels;
+	}
+
+	@Override
 	public int[] getWidths() {
-		int[] widths = { 4 };
+		int[] widths = { 7 };
 		return widths;
 	}
 

@@ -24,8 +24,14 @@ public class RegisterUserForm extends Form {
 	}
 
 	@Override
+	public String[] getDefaultLabels() {
+		String[] labels = { "YYMMDD-NNNN", "Per", "Holm", "Per.Holm@cs.lth.se", "070NNNNNNN" };
+		return labels;
+	}
+
+	@Override
 	public int[] getWidths() {
-		int[] widths = { 11, 15, 15, 15, 15 };
+		int[] widths = { 11, 15, 15, 15, 10 };
 		return widths;
 	}
 

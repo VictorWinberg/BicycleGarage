@@ -52,6 +52,7 @@ public abstract class Form {
 		});
 
 		String[] labels = getLabels();
+		String[] defaultLabels = getDefaultLabels();
 		int[] widths = getWidths();
 		JPanel labelPanel = new JPanel(new GridLayout(labels.length + 1, 1));
 		JPanel fieldPanel = new JPanel(new GridLayout(labels.length + 1, 1));
@@ -63,12 +64,15 @@ public abstract class Form {
 
 		for (int i = 0; i < labels.length; i++) {
 			textfields[i] = new JTextField();
+			TextPrompt textPrompt = new TextPrompt(defaultLabels[i], textfields[i]);
+			textPrompt.changeAlpha(128);
 			if (i < widths.length)
 				textfields[i].setColumns(widths[i]);
 			JLabel lab = new JLabel(labels[i], SwingConstants.RIGHT);
 			lab.setLabelFor(textfields[i]);
 			labelPanel.add(lab);
 			JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT));
+//			p.add(textPrompt);
 			p.add(textfields[i]);
 			fieldPanel.add(p);
 		}
@@ -105,6 +109,8 @@ public abstract class Form {
 
 	public abstract String[] getLabels();
 
+	public abstract String[] getDefaultLabels();
+	
 	public abstract int[] getWidths();
 
 	public abstract boolean check(String[] stringfields);

@@ -23,8 +23,14 @@ public class RemoveReservedSlotForm extends Form {
 	}
 
 	@Override
+	public String[] getDefaultLabels() {
+		String[] labels = { "NNNNNN", "NN" };
+		return labels;
+	}
+
+	@Override
 	public int[] getWidths() {
-		int[] widths = { 4, 5 };
+		int[] widths = { 7, 5 };
 		return widths;
 	}
 
