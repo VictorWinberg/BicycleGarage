@@ -16,10 +16,10 @@ import org.apache.commons.validator.routines.EmailValidator;
 public class DatabaseDriver implements Database {
 
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://sql4.freesqldatabase.com:3306/sql474777";
+	private static final String DB_URL = "jdbc:mysql://cvktne7b4wbj4ks1.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/nuljm59tfaklnbwy";
 
-	private static final String USER = "sql474777";
-	private static final String PASS = "cS9!pG3*";
+	private static final String USER = "egl4zc1c0szkb7jk";
+	private static final String PASS = "ypauxqfhowb4srut";
 
 	private Connection conn = null;
 	private String sql;
